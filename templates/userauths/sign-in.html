@@ -1,0 +1,28 @@
+{% extends 'navbar1.html' %}
+{% load static %}
+{% block content %}
+{% include 'social_icons.html' %}
+
+<div class="hero">
+    <div class="form-box">
+      <h2 style="text-align: center;">Login</h2>
+<!--           <div class="social-reg">
+            <img src="img/icons8-facebook.svg" alt="">
+            <img src="img/icons8-instagram.svg" alt="">
+           </div> -->   
+    <form id="login" method="post" class="input-group-form" action="">
+        {% csrf_token %}
+        <input type="email" name="email"class="input-field"  placeholder="Enter email" required>
+        <input type="password" name="password" class="input-field" placeholder="Enter password" required>
+        <p class="p-formlog">Dont have an account? <a href="{% url 'sign-up' %}">Sign up</a></p>
+        <p class="p-formlog"><a href="http://">Forgotten password?</a></p>      
+        <button type="submit" class="submit-btn">Login </button>
+    </form>
+    </div>
+
+</div>
+    <div style="height: 600px;"><img style="display: block; margin-left: auto;" src="{% static 'img/furniturestore-shop-pic1.webp' %}"  alt=""></div>
+
+
+{% include 'footer.html' %}
+{% endblock %}
