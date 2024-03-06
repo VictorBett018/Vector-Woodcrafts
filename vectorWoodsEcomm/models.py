@@ -2,6 +2,10 @@ from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauths.models import User
+from taggit.managers import TaggableManager
+
+
+
 
 STATUS_CHOICE = (
     ("processing", "Processing"),
@@ -26,8 +30,6 @@ RATING = (
     (5, "⭐⭐⭐⭐⭐"),
 )
 
-class Tags(models.Model):
-    pass
 
 # Create your models here.
 class Category(models.Model):
@@ -48,7 +50,7 @@ class Product(models.Model):
     pid = ShortUUIDField(unique=True,length = 10, max_length = 20, alphabet = "abcdefghijk123456789")
     title = models.CharField(max_length=100)  
 
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category")
     image = models.ImageField(upload_to = "products")
     description = models.TextField(null=True, blank=True, default="This is the product")
 
@@ -56,7 +58,7 @@ class Product(models.Model):
     product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="processing")
     price = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
     old_price = models.DecimalField(max_digits=999999, decimal_places=2, default="199.99")
-    #tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    tags = TaggableManager(blank=True)
     in_stock = models.BooleanField(default=True)
     featured = models.BooleanField(default=True)
     sku = ShortUUIDField(unique=True,length = 10, max_length = 20,prefix="sku", alphabet = "0123456789")
@@ -72,12 +74,12 @@ class Product(models.Model):
         return self.title 
 
     def get_percentage(self):
-        new_price = (self.price/self.old_price) * 100
+        new_price = ((self.old_price-self.price)/self.price) * 100
         return new_price
 
 class ProductImages(models.Model):
     images = models.ImageField(upload_to="product-images")
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, related_name="p_images", on_delete=models.SET_NULL, null=True)
     date = models.DateField(auto_now_add=True)
 
     class Meta:

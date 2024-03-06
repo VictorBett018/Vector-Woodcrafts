@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'crispy_bootstrap5',
+
+    #Third party Apps
     'popup_field',
+    'taggit',
     #custom Apps
     'vectorWoodsEcomm',
     'userauths',
@@ -65,6 +66,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'vectorWoodsEcomm.context_processor.default',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -126,7 +128,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
@@ -140,7 +142,6 @@ JAZZMIN_SETTINGS = {
     'copyright' : "vectorwoodcrafts.co.ke",
 }
 AUTH_USER_MODEL = 'userauths.User'
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 LOGOUT_REDIRECT_URL = 'index'
