@@ -1,0 +1,29 @@
+[ERROR] [UID:3909][2357294] wsgiAppHandler pApp->start_response() return NULL.
+TypeError: __call__() missing 1 required positional argument: 'send'
+[ERROR] [UID:3909][2357294] wsgiAppHandler pApp->start_response() return NULL.
+TypeError: __call__() missing 1 required positional argument: 'send'
+Invalid HTTP_HOST header: 'vectorwoodcrafts.co.ke'. You may need to add 'vectorwoodcrafts.co.ke' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'vectorwoodcrafts.co.ke'. You may need to add 'vectorwoodcrafts.co.ke' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: 'vectorwoodcrafts.co.ke'. You may need to add 'vectorwoodcrafts.co.ke' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/vectorwo/virtualenv/WoodCrafts/3.8/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'vectorwoodcrafts.co.ke'. You may need to add 'vectorwoodcrafts.co.ke' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+Not Found: /favicon.ico
