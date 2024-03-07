@@ -7,9 +7,11 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 def index(request):
     categories = Category.objects.all()
+    products = Product.objects.filter(featured=True)
 
     context = {
-            "categories" : categories 
+            "categories" : categories,
+            "products":products
     }
     return render(request, 'index.html', context)
 

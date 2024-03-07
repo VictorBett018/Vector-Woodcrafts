@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-0+x85d0$j^7nzr#fb1*#wyf1!=$g36k1e!v!d5mw#85++n+qq#
 DEBUG = True
 
 ALLOWED_HOSTS = ['vectorwoodcrafts.co.ke','localhost']
+# ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
