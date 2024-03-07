@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    .map-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (divide height by width) */
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
     <!-- main content -->
     <div class="main-content">
         <div id="wrapper-site">
@@ -91,7 +106,11 @@
                                 </div>
                                 <br>
                                 <br>
-                                <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7842700237743!2d36.836051299999994!3d-1.3044916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f110f8174bf61%3A0x9df657d89b04af84!2s16%20Butere%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1709817370596!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                              
+                                <div class="map-container">
+                                    
+                                 <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7842700237743!2d36.836051299999994!3d-1.3044916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f110f8174bf61%3A0x9df657d89b04af84!2s16%20Butere%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1709817370596!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                              
+
+                                </div>
                                 <br>
                                 <br>                        
                                 <div class="input-contact">
