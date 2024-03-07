@@ -5,8 +5,9 @@ from django.conf.urls.static import static
 from vectorWoodsEcomm import views
 urlpatterns = [
     path('', views.index,name='index'),
+    path('contact/', views.contact_view, name='contact'),
+    path('about/', views.about_view, name='about'),
     path('products', views.products_view,name='products'),
-
     path('product/<pid>/', views.product_detail_view, name='product_details'),
     path('category/<cid>/', views.category_view,name='category'),
 

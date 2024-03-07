@@ -62,3 +62,9 @@ def tag_list(request, tag_slug=None):
     }
 
     return render(request, 'tag.html', context)
+
+def contact_view(request):
+    return render(request, 'contact.html')
+
+def about_view(request):
+    return render(request, 'about.html')

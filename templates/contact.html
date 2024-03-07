@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <!-- main content -->
+    <div class="main-content">
+        <div id="wrapper-site">
+            <div id="content-wrapper">
+
+                <!-- breadcrumb -->
+                <nav class="breadcrumb-bg">
+                    <div class="container no-index">
+                        <div class="breadcrumb">
+                            <ol>
+                                <li>
+                                    <a href="{% url 'index' %}">
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{%  url 'contact' %}">
+                                        <span>Contact</span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </nav>
+                <div id="main">
+                    <div class="page-home">
+                        <div class="container">
+                            
+                            <h1 class="text-center title-page">Contact Us</h1>
+                            <div class="row-inhert">
+                                <div class="header-contact">
+                                    <div class="row">
+                                        
+                                        <div class="col-xs-12 col-sm-4 col-md-4">
+                                            <div class="item d-flex">
+                                                <div class="item-left">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-email"></i>
+                                                    </div>
+                                                </div>
+                                                <div style="margin-left: 10px;" class="item-right d-flex">
+                                                    <div class="title"></div>
+                                                    <div class="contact-content">
+                                                        <a href="mailto:support@domain.com">support@vectorwoodcrafts.co.ke</a>
+                                                        <br>
+                                                        <a href="mailto:contact@domain.com">sales@vectorwoodcrafts.co.ke</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4">
+                                            <div class="item d-flex">
+                                                <div class="item-left">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-home"></i>
+                                                    </div>
+                                                </div>
+                                                <div style="margin-left: 10px;" class="item-right d-flex">
+                                                    <div class="title"></div>
+                                                    <div class="contact-content">
+                                                        Butere RD, No 16 
+                                                        <br>Industrial Area, Nairobi, 00610 Nrb.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-4 col-md-4">
+                                            <div class="item d-flex">
+                                                <div class="item-left">
+                                                    <div class="icon">
+                                                        <i class="zmdi zmdi-phone"></i>
+                                                    </div>
+                                                </div>
+                                                <div style="margin-left: 10px;" class="item-right d-flex">
+                                                    <div class="title"></div>
+                                                    <div class="contact-content">
+                                                        +254-719-623-082
+                                                        <br>+254-700-116-789
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+
+                                        
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7842700237743!2d36.836051299999994!3d-1.3044916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f110f8174bf61%3A0x9df657d89b04af84!2s16%20Butere%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1709817370596!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                              
+                                <br>
+                                <br>                        
+                                <div class="input-contact">
+                                    <p class="text-intro text-center">
+                                        "Got a question or need assistance? We're here to help! Reach out to our dedicated team via phone, email, or visit our showroom for personalized assistance.
+                                         Whether you're seeking advice on furniture selection, tracking an order, or simply want to share your feedback, we're committed to providing prompt and friendly support.
+                                         Your satisfaction is our priority, so don't hesitate to get in touch. We look forward to hearing from you!"
+                                    </p>
+									
+                                    <p class="icon text-center">
+                                        <a href="#">
+                                            <img src="{% static 'img/other/contact_mess.png' %}" alt="img">
+                                        </a>
+                                    </p>
+
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="contact-form">
+                                                <form action="#" method="post" enctype="multipart/form-data">
+                                                    <div class="form-fields">
+                                                        <div class="form-group row">
+                                                            <div class="col-md-6">
+                                                                <input class="form-control" name="name" placeholder="Your name">
+                                                            </div>
+                                                            <div class="col-md-6 margin-bottom-mobie">
+                                                                <input class="form-control" name="from" type="email" value="" placeholder="Your email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-12 margin-bottom-mobie">
+                                                                <input class="form-control" name="from" type="email" value="" placeholder="Subject">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-12">
+                                                                <textarea class="form-control" name="message" placeholder="Message" rows="8"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button style="margin: auto;" class="btn" type="submit" name="submitMessage">
+                                                            <img class="img-fl" src="{% static 'img/other/contact_email.png' %}" alt="img">Send message
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock %}
