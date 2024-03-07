@@ -228,10 +228,11 @@
     
       .menu {
         display: none;
-        position: relative;
-        top: auto;
+        position: absolute;
+        top: 87px;
         left: 0;
         width: 100vw;
+        z-index: 100;
       }
     
       .menu-bar li:first-child ul:nth-child(1) {
@@ -339,8 +340,7 @@
                 id="hamburger"
                 aria-label="hamburger"
                 aria-haspopup="true"
-                aria-expanded="false"
-              >
+                aria-expanded="false">
                 <i class="bx bx-menu" aria-hidden="true"></i>
               </button>
             </div>
