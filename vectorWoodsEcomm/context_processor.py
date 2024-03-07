@@ -3,6 +3,10 @@ from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder,
 
 def default(request):
     categories = Category.objects.all()
+    product = Product.objects.all()
+
     return {
-        'categories':categories
+        'categories':categories,
+        'product':product
+
     }
