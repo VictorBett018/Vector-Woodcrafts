@@ -4,6 +4,8 @@ from userauths.models import User
 
 
 class UserRegisterForm(UserCreationForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"form-control", "placeholder": "Enter firstname"} ))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"form-control", "placeholder": "Enter lastname"} ))
     username = forms.CharField(widget=forms.TextInput(attrs={ "class":"form-control", "placeholder": "Enter username"} ))
     email = forms.CharField(widget=forms.EmailInput(attrs={"class":"form-control","placeholder": "Enter email"}))
     phone_no = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder": "Enter phone no"}))
@@ -13,4 +15,4 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email','phone_no']
+        fields = ['first_name', 'last_name','username', 'email','phone_no']

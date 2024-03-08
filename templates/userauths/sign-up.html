@@ -45,7 +45,16 @@
                                 <h1 class="text-center title-page">Create Account</h1>
                                 <form action="#" style="width: 30%; margin: auto;" id="customer-form" class="js-customer-form" method="post">
                                     {% csrf_token %}
-                                    
+                                    <div class="form-group">
+                                        <div>
+                                        {{ form.first_name }} 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                        {{ form.last_name }} 
+                                        </div>
+                                    </div>
                                         <div class="form-group">
                                             <div>
                                             {{ form.username }} 

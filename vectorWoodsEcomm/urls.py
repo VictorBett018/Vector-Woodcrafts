@@ -12,7 +12,14 @@ urlpatterns = [
     path('category/<cid>/', views.category_view,name='category'),
 
     #Tags
-    path("products/tag/<slug:tag_slug>/", views.tag_list, name='tags')
+    path("products/tag/<slug:tag_slug>/", views.tag_list, name='tags'),
+    #add review
+    path('ajax-add-review/<pid>/', views.ajax_add_review, name = 'ajax-add-review'),
+    
+    path('add-to-cart/', views.add_to_cart, name = 'add-to-cart'),
+
+
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

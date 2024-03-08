@@ -105,7 +105,7 @@
                                                 <div class="product-info col-xs-12 col-md-7 col-sm-7">
                                                     <div class="detail-description">
                                                         <div class="price-del">
-                                                            <span style="color: red; font-weight: bold;" class="price">Price Ksh {{ product.price }}</span>
+                                                           <span style="color: red; font-weight: bold;">Price Ksh </span> <span style="color: red; font-weight: bold;" class="price" id="current-price">{{ product.price }}</span>
                                                             <span class="float-right">
                                                                 <span class="availb">Availability: </span>
                                                                 <span style="color: green;" class="check">
@@ -136,30 +136,30 @@
                                                             </div>
                                                         </div>
                                                        
-                                                        <div style=" margin-top: 20px; margin-bottom: 20px;" class="has-border cart-area">
+                                                        <div class="has-border cart-area">
                                                             <div class="product-quantity">
                                                                 <div class="qty">
                                                                     <div class="input-group">
                                                                         <div class="quantity">
                                                                             <span class="control-label">QTY : </span>
-                                                                            <input type="text" name="qty" id="quantity_wanted" value="1" class="input-group form-control">
-
-                                                                            <span class="input-group-btn-vertical">
-                                                                                <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
-                                                                                    +
-                                                                                </button>
-                                                                                <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-down" type="button">
-                                                                                    -
-                                                                                </button>
-                                                                            </span>
+                                                                            <input type="number" name="qty" id="quantity_wanted" value="1" class="input-group form-control">
                                                                         </div>
                                                                         <span class="add">
-                                                                            <button style="margin: 10px; border-radius: 30px; cursor: pointer; " type="submit">
-                                                                                <i style="padding: 3px;" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                                                <span style="padding: 3px;">Add to cart</span>
+                                                                            <!-- <input type="hidden" value=" {{product.id}} " class="product-id" name="" id="">
+                                                                            <input type="hidden" value=" {{product.title}} " class="product-title" name="" id=""> -->
+                                                                            <input type="hidden" value="1" id="product-quantity" class="quantity-wanted-{{product.id}}">
+                                                                            <input type="hidden" class="product-pid-{{product.id}}" value="{{product.pid}}">
+                                                                            <input type="hidden" class="product-image-{{product.id}}" value="{{product.image.url}}" >
+                                                                            <input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}" >
+                                                                            <input type="hidden" class="product-title-{{product.id}}" value="{{product.title}}" >
+                                                                            
+                                                                            <button class="add-to-cart-btn" data-index="{{product.id}}" style="margin: 10px; border: none; cursor: pointer;  " id="add-to-cart-btn" type="submit">
+                                                                                <i style="padding: 3px; " class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                                                <span style="padding: 3px;"></span>
+                                                                                
                                                                             </button>
                                                                             <a class="addToWishlist" href="#">
-                                                                                <i class="fa fa-heart" aria-hidden="true"></i> Add to wishlist
+                                                                                <i class="fa fa-heart" aria-hidden="true"></i> 
                                                                             </a>
                                                                         </span>
                                                                     </div>
@@ -169,7 +169,9 @@
                                                             <p class="product-minimal-quantity">
                                                             </p>
                                                         </div>
-                                                        <div style=" margin-top: 20px; margin-bottom: 20px;"  class="d-flex2 has-border">
+
+                                                        <br>
+                                                        <div  class="d-flex2 has-border">
                                                             <div class="btn-group">
                                                                 <a href="#">
                                                                     <i class="zmdi zmdi-share"></i>
@@ -185,32 +187,7 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <div style=" margin-top: 20px; margin-bottom: 20px;" class="rating-comment has-border d-flex">
-                                                            <div style="margin: 10px;"  class="review-description d-flex">
-                                                                <span>REVIEW :</span>
-                                                                <div  class="rating">
-                                                                    <div class="star-content">
-                                                                        <div class="star"></div>
-                                                                        <div class="star"></div>
-                                                                        <div class="star"></div>
-                                                                        <div class="star"></div>
-                                                                        <div class="star"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div style="margin: 10px;" class="read after-has-border">
-                                                                <a href="#review">
-                                                                    <i class="fa fa-commenting-o color" aria-hidden="true"></i>
-                                                                    <span>READ REVIEWS (3)</span>
-                                                                </a>
-                                                            </div>
-                                                            <div style="margin: 10px;" class="apen after-has-border">
-                                                                <a href="#review">
-                                                                    <i class="fa fa-pencil color" aria-hidden="true"></i>
-                                                                    <span>WRITE A REVIEW</span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                                        <br>
                                                         <div class="content">
                                                             <p>SKU :
                                                                 <span class="content2">
@@ -221,7 +198,7 @@
                                                             <p>  Tags : 
                                                                 <span class="content2">
                                                                     {% for tag in product.tags.all %} 
-                                                                    <a href="{% url 'tags' tag.name %}">#{{tag.name}}</a>,
+                                                                    <a href="{% url 'tags' tag.slug %}">#{{tag.slug}}</a>,
                                                                     {% endfor %}                                                                </span>
                                                             </p>
                                                         </div>
@@ -239,16 +216,14 @@
                                                         <a data-toggle="tab" href="#tag">Product Tags</a>
                                                     </li>
                                                     <li style="margin-right: 20px;">
-                                                        <a data-toggle="tab" href="#review">Reviews (2)</a>
+                                                        <a data-toggle="tab" href="#review">Reviews ( {{reviews.count}} )</a>
                                                     </li>
                                                 </ul>
 												<br>
                                                 <div class="tab-content">
                                                     <div id="description" class="tab-pane fade in active show">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-                                                            ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                            tempor incididunt ut labore et dolore magna aliqua.
+                                                        <p>
+                                                            {{product.description}}
                                                         </p>
 
                                                     </div>
@@ -256,59 +231,49 @@
                                                     <div id="review" class="tab-pane fade">
                                                         <div class="spr-form">
                                                             <div class="user-comment">
+                                                                {% for r in reviews %}
                                                                 <div class="spr-review">
                                                                     <div class="spr-review-header">
                                                                         <span class="spr-review-header-byline">
-                                                                            <strong>Peter Capidal</strong> -
-                                                                            <span>Apr 14, 2018</span>
+                                                                            <strong> {{r.user.username}} </strong> -
+                                                                            <span>{{r.date|date:"D M, Y"}}</span>
                                                                         </span>
-                                                                        <div class="rating">
-                                                                            <div class="star-content">
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                            </div>
+                                                                        <div class="rating"> 
+                                                                            {% for s in r.rating|ljust:r.rating %}
+                                                                            <i class="fa fa-star text-warning" aria-hidden="true "></i>
+                                                                            {% endfor %}
                                                                         </div>
                                                                     </div>
                                                                     <div class="spr-review-content">
-                                                                        <p class="spr-review-content-body">In feugiat venenatis enim, non finibus metus bibendum
-                                                                            eu. Proin massa justo, eleifend fermentum varius
-                                                                            quis, semper gravida quam. Cras nec enim sed
-                                                                            lacus viverra luctus. Nunc quis accumsan mauris.
-                                                                            Aliquam fermentum sit amet est id scelerisque.
-                                                                            Nam porta risus metus.</p>
+                                                                        <p class="spr-review-content-body">{{ r.review }}</p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="spr-review preview2">
-                                                                    <div class="spr-review-header">
-                                                                        <span class="spr-review-header-byline">
-                                                                            <strong>David James</strong> -
-                                                                            <span>Apr 13, 2018</span>
-                                                                        </span>
-                                                                        <div class="rating">
-                                                                            <div class="star-content">
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                                <div class="star"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="spr-review-content">
-                                                                        <p class="spr-review-content-body">In feugiat venenatis enim, non finibus metus bibendum
-                                                                            eu. Proin massa justo, eleifend fermentum varius
-                                                                            quis, semper gravida quam. Cras nec enim sed
-                                                                            lacus viverra luctus. Nunc quis accumsan mauris.
-                                                                            Aliquam fermentum sit amet est id scelerisque.
-                                                                            Nam porta risus metus.</p>
-                                                                    </div>
-                                                                </div>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
-                                                        <form method="post" action="#" class="new-review-form">
+                                                        <strong id="review-res" class="text-success"></strong>
+                                                        {% if make_review == True %}
+                                                        {% if request.user.is_authenticated %}
+                                                        <form method="post"  action="{% url 'ajax-add-review' product.pid %}" class="new-review-form review-hide-form" id="review-form">
+                                                          {% csrf_token %}
+                                                         <div class="spr-form-review-body">
+                                                            <div class="spr-form-input">
+                                                              {{review_form.review}}  
+                                                            </div>
+                                                        </div> 
+                                                        <br>
+                                                         <div class="spr-form-review-rating">
+                                                            {{review_form.rating}}  
+                                                        </div>
+                                                        <br>
+                                                        <div class="submit">
+                                                            <input type="submit" name="addComment" id="submitComment" class="btn btn-default" value="Submit Review">
+                                                        </div>
+                                                        </form>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                       
+                                                        <!-- <form method="post" action="#" class="new-review-form">
                                                             <input type="hidden" name="review[rating]" value="3">
                                                             <input type="hidden" name="product_id">
                                                             <h3 class="spr-form-title">Write a review</h3>
@@ -352,19 +317,13 @@
                                                             <div class="submit">
                                                                 <input type="submit" name="addComment" id="submitComment" class="btn btn-default" value="Submit Review">
                                                             </div>
-                                                        </form>
+                                                        </form> -->
                                                     </div>
+
                                                     <div id="tag" class="tab-pane fade in">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-                                                            ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                            tempor incididunt ut labore et dolore magna aliqua.
-                                                        </p>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem
-                                                            ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                            tempor incididunt ut labore et dolore magna aliqua.
-                                                        </p>
+                                                        {% for tag in product.tags.all %} 
+                                                        <a href="{% url 'tags' tag.slug %}">#{{tag.slug}}</a>,
+                                                        {% endfor %} 
                                                     </div>
                                                 </div>
                                             </div>
