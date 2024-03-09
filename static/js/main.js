@@ -1,7 +1,23 @@
+const swiper = new Swiper(".swiper", {
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+  
+  function toggleMenu() {
+    var menuElement = document.getElementById("header-right-menu");
+    if (menuElement.style.display === "block") {
+      menuElement.style.display = "none";
+    } else {
+      menuElement.style.display = "block";
+    }
+  }
+
 console.log("working fine");
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-$("#review-form").submit(function(e){
+$(".review-form").submit(function(e){
     e.preventDefault();
 
     let date = new Date();

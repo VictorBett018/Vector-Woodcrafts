@@ -17,6 +17,8 @@ urlpatterns = [
     path('ajax-add-review/<pid>/', views.ajax_add_review, name = 'ajax-add-review'),
     
     path('add-to-cart/', views.add_to_cart, name = 'add-to-cart'),
+    path('cart/', views.cart_view, name = 'cart'),
+
 
 
 

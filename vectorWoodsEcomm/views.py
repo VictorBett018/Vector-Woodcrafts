@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address
 from taggit.models import Tag
 from django.shortcuts import get_object_or_404
 from vectorWoodsEcomm.forms import ProductReviewForm
 from django.http import JsonResponse
+from django.contrib import messages
 
 
 # Create your views here.
@@ -139,4 +140,18 @@ def add_to_cart(request):
 
     return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
 
+def cart_view(request):
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+
+
+        return render(request, 'cart.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+
+    else:
+        messages.warning(request, 'Your cart is empty')
+        return redirect('index')
 

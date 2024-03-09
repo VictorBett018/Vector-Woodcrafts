@@ -1,158 +1,101 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-		<!-- main content -->
-		<div class="main-content">
-			<div id="wrapper-site">
-				<div id="content-wrapper">
-					
-					<!-- breadcrumb -->
-					<nav class="breadcrumb-bg">
-						<div class="container no-index">
-							<div class="breadcrumb">
-								<ol>
-									<li>
-										<a href="{% url 'index' %}">
-											<span>Home</span>
-										</a>
-									</li>
-									<li>
-										<a href="{% url 'about' %}">
-											<span>About us</span>
-										</a>
-									</li>
-								</ol>
-							</div>
-						</div>
-					</nav>
-					<div id="main">
-						<div class="page-home">
-							<div class="container">
-								<div class="about-us-content">
-									
-									<h1 class="title-page">About Us</h1>
-									<div class="row">
-										<div class="col-lg-6 col-md-6 col-sm-6 right">
-											<a href="#">
-												<img class="img-fluid" src="{% static 'img/other/1.jpg' %}" alt="#" />
-											</a>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 left">
-											<div class="cms-block f-right">
-												<h3 class="page-subheading">WHO WE ARE</h3>
-												<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem quis biben
-													dum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis
-													sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit
-												amet nibh vultate cursus a sit amet mauris.</p>
-												<p>Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis
-													sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit
-												amet nibh vultate cursus a sit amet mauris.</p>
-												<a>
-													<img class="img-fluid" src="{% static 'img/other/4.png' %}" alt="#" />
-													<span>Mr. kwang shang - CEO</span>
-												</a>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 right">
-											<div class="cms-block f-left">
-												<h3 class="page-subheading">WHAT WE DO</h3>
-												<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem quis biben
-													dum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis
-													sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit
-												amet nibh vultate cursus a sit amet mauris.</p>
-												<p>Proin gravida nibh vel velit auctor aliquet, nec sagittis sem nibh id elit. Duis
-													sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit
-												amet nibh vultate cursus a sit amet mauris.</p>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 left">
-											<a href="#">
-												<img class="img-fluid" src="{% static 'img/other/2.jpg' %}" alt="#" />
-											</a>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 right">
-											<a href="#">
-												<img class="img-fluid" src="{% static 'img/other/3.jpg' %}" alt="#" />
-											</a>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 left">
-											<div class="cms-block f-right">
-												<h3 class="page-subheading no-before">MEET OUR TEAM</h3>
-												<div class="testimonials owl-carousel owl-theme owl-loaded owl-drag">
-													<div class="item">
-														<div class="name">William James</div>
-														<div class="position">Designer - Stylish</div>
-														<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem
-															quis biben dum auctor, nisi elit consequat ipsum, nec sagittis sem
-															nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet
-															mauris. Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin,
-															lorem quis bibendum auctor, nisi elit conse quat ipsum
-														</p>
-													</div>
-													<div class="item">
-														<div class="name">Seller Smith</div>
-														<div class="position">Web developer</div>
-														<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem
-															quis biben dum auctor, nisi elit consequat ipsum, nec sagittis sem
-															nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet
-															mauris.
-														</p>
-													</div>
-													<div class="item">
-														<div class="name">Peter Capidal</div>
-														<div class="position">Front-end Developer</div>
-														<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem
-															quis biben dum auctor, nisi elit consequat ipsum, nec sagittis sem
-															nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet
-															mauris. Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin,
-															lorem quis bibendum auctor, nisi elit conse quat ipsum
-														</p>
-													</div>
-													<div class="item">
-														<div class="name">David James</div>
-														<div class="position">Developer</div>
-														<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin, lorem
-															quis biben dum auctor, nisi elit consequat ipsum, nec sagittis sem
-															nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet
-															mauris.Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin,
-															lorem quis bibendum auctor, nisi elit conse quat ipsum
-														</p>
-													</div>
-												</div>
-												<div class="social-content">
-													<div class="social">
-														<ul class="list-inline mb-0 justify-content-end">
-															<li class="list-inline-item mb-0">
-																<a href="#" target="_blank">
-																	<i class="fa fa-facebook"></i>
-																</a>
-															</li>
-															<li class="list-inline-item mb-0">
-																<a href="#" target="_blank">
-																	<i class="fa fa-twitter"></i>
-																</a>
-															</li>
-															<li class="list-inline-item mb-0">
-																<a href="#" target="_blank">
-																	<i class="fa fa-google"></i>
-																</a>
-															</li>
-															<li class="list-inline-item mb-0">
-																<a href="#" target="_blank">
-																	<i class="fa fa-instagram"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
+<main >
+	<div class="about_container">
+		<h2>Our Story</h2>
+		<p>We founded XYZ Furniture with a passion for craftsmanship and design. Our journey began in [year], when [founder's name] set out to create high-quality furniture that combines elegance, comfort, and sustainability.</p>
+		
+		<h2>Our Team</h2>
+		<div class="team-member">
+			<div>
+			<img src="{% static 'img/profile-pic-1.jpg' %}" alt="John Doe">
+			<p><strong>John Doe</strong><br>Founder & CEO</p>
 			</div>
+	 
+	   <div>
+		<img src="{% static 'img/profile-pic-2.jpg' %}" alt="Jane Smith">
+		<p><strong>Jane Smith</strong><br>Head of Design</p>
+	   </div>
+
 		</div>
-        {% endblock %}
+		
+		<h2>Our Philosophy</h2>
+		<p>At XYZ Furniture, we believe that great design should be accessible to everyone. That's why we focus on creating timeless pieces that elevate any space, while also being mindful of our environmental impact. We're committed to using sustainable materials and ethical manufacturing practices.</p>
+		
+
+		<section class="section__container testimonial__container" id="testimonial">
+			<h2 class="section__header">Testimonials</h2>
+			<!-- Slider main container -->
+			<div class="swiper">
+			  <!-- Additional required wrapper -->
+			  <div class="swiper-wrapper">
+				<!-- Slides -->
+				<div class="swiper-slide">
+				  <div class="testimonial__card">
+					<p>
+					  Working with them was an absolute pleasure! Their modern design
+					  expertise completely transformed my home into a contemporary
+					  haven. I now have a space that not only looks stunning but also
+					  feels incredibly comfortable. I couldn't be happier with the
+					  results
+					</p>
+					<img src="{% static 'img/profile-pic-1.jpg' %}" alt="testimonial" />
+					<h4>Sam William</h4>
+					<h5>CEO, Co-Founder</h5>
+				  </div>
+				</div>
+				<div class="swiper-slide">
+				  <div class="testimonial__card">
+					<p>
+					  I hired them to revamp our office space, and the results
+					  exceeded my expectations. Their innovative design concepts
+					  breathed new life into our workplace, making it both functional
+					  and stylish. The team's attention to detail and commitment to
+					  quality are truly commendable.
+					</p>
+					<img src="{% static 'img/profile-pic-2.jpg' %}" alt="testimonial" />
+					<h4>Michelle Anna</h4>
+					<h5>Office Renovator</h5>
+				  </div>
+				</div>
+				<div class="swiper-slide">
+				  <div class="testimonial__card">
+					<p>
+					  I had a vision of a minimalist-inspired home, and they brought
+					  it to life flawlessly. Their designers understood my aesthetic
+					  and incorporated sleek, clean lines, and a neutral color palette
+					  to create a serene oasis. I'm in love with my modern,
+					  clutter-free space!
+					</p>
+					<img src="{% static 'img/profile-pic-3.jpg' %}" alt="testimonial" />
+					<h4>John D'souza</h4>
+					<h5>Banker</h5>
+				  </div>
+				</div>
+				<div class="swiper-slide">
+				  <div class="testimonial__card">
+					<p>
+					  What sets them apart is their professionalism and efficiency.
+					  They made the entire design process hassle-free, from the
+					  initial consultation to the final installation. Their team
+					  handled everything, leaving me with a beautifully designed
+					  modern interior
+					</p>
+					<img src="{% static 'img/profile-pic-4.jpg' %}" alt="testimonial" />
+					<h4>David Laid</h4>
+					<h5>Businessman</h5>
+				  </div>
+				</div>
+			  </div>
+			  <!-- If we need pagination -->
+			  <div class="swiper-pagination"></div>
+			</div>
+		  </section>
+	  
+	</div>
+</main>
+
+
+{% endblock %}
