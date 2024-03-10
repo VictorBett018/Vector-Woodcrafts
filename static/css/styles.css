@@ -29,6 +29,7 @@
     border-radius: 30px;
     outline: none;
  }
+ 
   
   html,
   body {
@@ -202,6 +203,7 @@ header {
 .socials_sticky li p a:hover{
   color: #00c3ff;
 }
+
 
 
 .shop-now-container1 {
@@ -718,6 +720,7 @@ header {
   .product img {
     width: 200px;
     height: 200px;
+    object-fit: contain;
   }
   
   .description {

@@ -13,15 +13,7 @@ STATUS_CHOICE = (
     ("delivered", "Delivered"),
 )
 
-DIMENSION = (
-    ("dim1", "(L x W x H) 4 x 5 x 6"),
-    ("dim2", "(L x W x H) 4 x 5 x 6"),
-)
-FINISH = (
-    ("white", "White"),
-    ("black", "Black"),
-    ("red", "Red"),
-)
+
 RATING = (
     (1, "⭐✰✰✰✰"),
     (2, "⭐⭐✰✰✰"),
@@ -49,12 +41,9 @@ class Category(models.Model):
 class Product(models.Model):
     pid = ShortUUIDField(unique=True,length = 10, max_length = 20, alphabet = "abcdefghijk123456789")
     title = models.CharField(max_length=100)  
-
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category")
     image = models.ImageField(upload_to = "products")
     description = models.TextField(null=True, blank=True, default="This is the product")
-
-
     product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="processing")
     price = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
     old_price = models.DecimalField(max_digits=999999, decimal_places=2, default="199.99")
@@ -64,6 +53,17 @@ class Product(models.Model):
     sku = ShortUUIDField(unique=True,length = 10, max_length = 20,prefix="sku", alphabet = "0123456789")
     date = models.DateField(auto_now_add=True)
     updated = models.DateField(null=True, blank= True)
+    dim1 = models.CharField(max_length=100, null = True, default="L * W * H")
+    dim2 = models.CharField(max_length=100, null = True, default="L * W * H")
+    color1 = models.CharField(max_length=100, null = True, default="Brown")
+    color2 = models.CharField(max_length=100, null = True, default="White")
+    color3 = models.CharField(max_length=100, null = True, default="Gray")
+    color4 = models.CharField(max_length=100, null = True, default="Black")
+    woodtype1 = models.CharField(max_length=100, null = True, default="Mahogany")
+    woodtype2 = models.CharField(max_length=100, null = True, default="Oak")
+    woodtype3 = models.CharField(max_length=100, null = True, default="Maple")
+    woodtype4 = models.CharField(max_length=100, null = True, default="Cherry")
+
     class Meta:
         verbose_name_plural = "Products"
 
@@ -87,8 +87,6 @@ class ProductImages(models.Model):
 
 class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    dimension = models.CharField(choices=DIMENSION,max_length=30, default="dim1")
-    finish = models.CharField(choices=FINISH,max_length=30, default="black")
     price = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
     paid_status = models.BooleanField(default=False)
     order_date = models.DateField(auto_now_add=True)
@@ -152,10 +150,3 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Address"
-
-
-
-
-      
-
-

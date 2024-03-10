@@ -65,7 +65,6 @@
     }
 
     .actions {
-        margin-top: 10px;
         display: flex;
         align-items: center;
     }
@@ -125,15 +124,18 @@
 
 <div class="cart_container">
     <div class="cart-items">
-        <h1>Your Shopping Cart</h1>
+        <h1>Your Shopping Cart</h1><br>
+        <br>
         {% for product_id, item in cart_data.items %}
         <div class="cart-item">
+            
             <img src="{{item.image}}" alt="Product Image">
             <div class="product-details">
-                <div class="product-name">{{item.title}}</div>
-                <div class="product-price">Ksh {% widthratio item.price 1 item.qty %}</div>
-                <span style="margin: 10px;">Qty: <input type="number" class="quantity-input" value="1"> </span>
-                
+
+                <div class="product-name"><a href="">{{item.title}}</a> </div>
+                <div class="product-price">Ksh {{item.price}}</div>
+                <span style="margin: 10px;">Qty: <input type="number" class="quantity-input" value="{{item.qty}}"> </span>
+                <span style="margin: 10px;">Subtotal: <span style="color: #007bff;">Ksh {% widthratio item.price 1 item.qty %}</span> </span>
             </div>
             <div class="actions">
                 <i class="action-icon ri-delete-bin-line" title="Delete"></i>

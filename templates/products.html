@@ -7,7 +7,9 @@
     <div class="container">
     {% for p in products %}
         <div class="product">
-          <img src="{{p.image.url}}" alt="Product 1">
+           <img src="{{p.image.url}}" alt="Product 1">  
+          
+         
           <a style="text-decoration: none;" href="{% url 'product_details' p.pid %}"><h2>{{ p.title }}</h2></a>
           <p class="description">{{p.description|truncatechars:50}}</p>
           <div class="price-container">

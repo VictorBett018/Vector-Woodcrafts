@@ -1,3 +1,5 @@
+
+
 const swiper = new Swiper(".swiper", {
     loop: true,
     pagination: {
@@ -37,26 +39,21 @@ $(".review-form").submit(function(e){
                 $("#review-res").html("Review Added!")
                 $(".review-hide-form").hide()
 
-                let _html = '<div class="spr-review">'
-                    _html += '<div class="spr-review-header">'
-                    _html += '<span class="spr-review-header-byline">'
-                    _html += '<strong> '+ response.context.user +' </strong>' 
-
+                let _html = '<div style="padding-left: 20px;">'
+                    _html += '<span  id="reviews" class="spr-review-header-byline">'
+                    _html += '<strong> '+ response.context.user +' </strong> - ' 
                     _html += '<span> '+ time +' </span>'
                     _html += '</span>'
-
-                    _html += '<div class="rating"></div>'
+                    _html += '<br>'
 
                     for(let i= 1; i <= response.context.rating; i++){
-                        _html += '<i class="fa fa-star text-warning" aria-hidden="true "></i>'
+                    _html += '<i style="color: orange;" class="ri-star-fill text-warning"></i>'
                     }
+                    _html += '<br>'
+                    _html += '<span > '+ response.context.review +'</span>'
                     _html += '</div>'
-
-                    _html += '<div class="spr-review-content">'
-                    _html += '<p class="spr-review-content-body">'+ response.context.review +'</p>'
-                    _html += '</div>'
-                    _html += '</div>'
-                    $(".user-comment").prepend(_html)
+                    _html += '<br>'
+                    $(".c-btn").prepend(_html)
             }
             
 

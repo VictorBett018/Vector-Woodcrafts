@@ -23,7 +23,8 @@
     .product-image img {
         width: 100%;
         max-width: 400px;
-        height: auto;
+        height: 400px;
+        object-fit: contain;
     }
 
     .small-images {
@@ -93,6 +94,7 @@
 
     .product-description {
         margin-top: 20px;
+        
     }
 
     .reviews {
@@ -129,6 +131,22 @@
         color: #007bff;
         margin-top: 5px;
     }
+    .c-btn{
+    padding: 5px ;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    outline: none;
+    }
+    .review-hide-form{
+        height: 50px;
+        width: 280px;
+        margin: auto;
+    }
 </style>
 </head>
 <body>
@@ -150,7 +168,36 @@
             <span>{{product.description|truncatechars:100}}</span>
         </div>
         <br>
-        <div class="product-price">Ksh {{product.price}} </div>
+        <div class="product-price"><span>Ksh</span><span id="current-price-{{product.id}}">{{product.price}} </span>  </div>
+        <br>
+        <div>
+            <span>Dimension:</span>
+            <select name="dimension" id="dimension">
+                <option value="1">{{product.dim1}}</option>
+                <option value="2">{{product.dim2}}</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <span>Finish:</span> 
+            <select name="finish" id="finish">
+                <option value="1">{{product.color1}}</option>
+                <option value="2">{{product.color2}}</option>
+                <option value="1">{{product.color3}}</option>
+                <option value="2">{{product.color4}}</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <span>Woodtype:</span> 
+            <select name="finish" id="finish">
+                <option value="1">{{product.woodtype1}}</option>
+                <option value="2">{{product.woodtype2}}</option>
+                <option value="1">{{product.woodtype3}}</option>
+                <option value="2">{{product.woodtype4}}</option>
+            </select>
+        </div>
+        <br>
         <div class="quantity">
             <span>QTY : </span>
             <input style="height: 25px; width: 50px;" type="number" name="qty" id="quantity_wanted" value="1" class="quantity-wanted-{{product.id}}">
@@ -169,58 +216,59 @@
     </div>
 
 
-<section style="margin: 30px;" >
-    <section style="display: flex;">
-        <div id="description" class="product-description">
-            <a href="#description"> <h2>Description</h2></a> 
-              <p>{{product.description}}</p>
-          </div>
-          <div id="reviews" style="margin-left: 30px;" class="reviews">
-              <a href="#reviews"><h2>Reviews</h2> </a>
-              {% for r in reviews %}
-              <div>
-              <span class="spr-review-header-byline">
-                  <strong> {{r.user.username}} </strong> -
-                  <span>{{r.date|date:"D M, Y"}}</span>
-              </span> 
-              <br> 
-              <div class="rating"> 
-                  {% for s in r.rating|ljust:r.rating %}
-                  <i class="fa fa-star text-warning" aria-hidden="true "></i>
-                  {% endfor %}
-              </div> 
-              {{ r.review }}
-              </div>
-                <br>                                                     
-              {% endfor %}
-    </section>
-                                                   
-        <!-- Reviews section can be added here -->
-        <div>
-           <strong id="review-res" class="text-success"></strong>
-        {% if make_review == True %}
-      {% if request.user.is_authenticated %}
-        <form method="post"  action="{% url 'ajax-add-review' product.pid %}" class="review-form review-hide-form" id="review-form">
-          {% csrf_token %}
-         <div>
-            <div>
-              {{review_form.review}}  
+
+
+    <section style="display: flex; padding: 30px; border: 1px solid #ddd; border-radius: 10px;">
+        <div style="margin-left: 30px; border: 1px solid #ddd; height: 400px; width: 400px;" id="description" class="product-description" >
+            <button class="c-btn"> <h2>Description</h2></button> 
+            <p>{{product.description}}</p>
+        </div>
+        <div style="margin-left: 30px; border: 1px solid #ddd; height: 400px; width: 400px;" class="reviews" >
+            <button class="c-btn"> <h2>Reviews</h2></button> 
+            <strong id="review-res" class="text-success"></strong>
+            {% for r in reviews %}
+            <div style="padding-left: 20px;">
+                <span  id="reviews" class="spr-review-header-byline">
+                    <strong> {{r.user.username}} </strong> -
+                    <span>{{r.date|date:"D M, Y"}}</span>
+                </span> 
+                <br> 
+                    {% for s in r.rating|ljust:r.rating %}
+                    <i style="color: orange;" class="ri-star-fill text-warning"></i>                  
+                    {% endfor %}
+                    <br>
+                <span > {{ r.review }}</span>
             </div>
-        </div> 
-        <br>
-         <div>
-            {{review_form.rating}}  
+            <br> 
+            {% endfor %} 
+
+            <div>
+              {% if make_review == True %}
+             {% if request.user.is_authenticated %}
+             <form method="post"  action="{% url 'ajax-add-review' product.pid %}" class="review-hide-form" id="review-form">
+               {% csrf_token %}
+              <div class="spr-form-review-body">
+                 <div class="spr-form-input">
+                   {{review_form.review}}  
+                 </div>
+             </div> 
+             <br>
+              <div class="spr-form-review-rating">
+                 {{review_form.rating}}  
+             </div>
+             <br>
+             <div class="submit">
+                 <input type="submit" name="addComment" id="submitComment" class="btn btn-default" value="Submit Review">
+             </div>
+             </form>
+             {% endif %}
+             {% endif %}                                                   
+               
+            </div>
+            
         </div>
-        <br>
-        <div class="submit">
-            <input type="submit" name="addComment" id="submitComment" class=" btn-default" value="Submit Review">
-        </div>
-        </form>
-          {% endif %}
-        {% endif %} 
-        </div>
-        
-</section>
+    </section>
+    
 <section>
  <div class="container">
     <h2>Related Products</h2>
