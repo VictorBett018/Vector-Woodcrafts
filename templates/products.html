@@ -24,7 +24,7 @@
             <input type="hidden" class="product-id-{{p.id}}" value="{{p.id}}" >
             <input type="hidden" class="product-title-{{p.id}}" value="{{p.title}}" >
                                                                                
-            <button class="cart-btn add-to-cart-btn" data-index="{{p.id}}"><i class="ri-shopping-cart-2-fill"></i></button>
+            <a href="{% url 'product_details' p.pid %}"><button class="cart-btn add-to-cart-btn" data-index="{{p.id}}"><i class="ri-shopping-cart-2-fill"></i></button></a>
           
    
           <button class="view-btn"><i class="ri-eye-line"></i></button>

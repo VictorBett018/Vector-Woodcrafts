@@ -2,61 +2,78 @@
 {% load static %}
 {% block content %}
 
-
 <style>
-  
+    .cart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 40px;
+}
 
-    .cart_container {
-        max-width: 1200px;
-        margin: 20px auto;
-        padding: 0 20px;
-        display: flex;
-        justify-content: space-between;
-    }
+.cart-products {
+    flex-grow: 1;
+    margin-right: 20px;
+}
 
-    .cart-items {
-        flex: 1;
-        margin-right: 20px;
-    }
+.cart-summary {
+    margin-top: 80px;
+    width: 250px;
+    background-color: #ddd;
+    padding: 20px;
+    border-radius: 3px;
+}
+.cart-summary p{
+    text-align: start;
+}
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-    .cart-summary {
-        width: 300px;
-        border: 1px solid #ddd;
-        padding: 20px;
-        box-sizing: border-box;
-    }
+.cart-table th, .cart-table td {
+    padding: 10px;
+}
 
-    h1 {
-        text-align: center;
-    }
+.cart-table th {
+    text-align: left;
+}
 
-    .cart-item {
-        border-bottom: 1px solid #ddd;
-        padding: 20px 0;
-        display: flex;
-        align-items: center;
-    }
+.cart-summary .summary-details {
+    margin-bottom: 20px;
+}
 
-    .cart-item img {
+.cart-summary .checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.cart-summary .checkout-btn:hover {
+    background-color: #45a049;
+}
+.cart-item img {
         width: 100px;
         height: auto;
-        margin-right: 20px;
     }
-
-    .product-details {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-    }
+    
 
     .product-name {
         font-weight: bold;
-        margin: 10px;
+
+    }
+    .product-name a{
+        text-decoration: none;
+
     }
 
     .product-price {
         color: #007bff;
-        margin: 10px;
     }
 
     .quantity-input {
@@ -64,245 +81,84 @@
         text-align: center;
     }
 
-    .actions {
-        display: flex;
-        align-items: center;
-    }
 
     .action-icon {
-        margin-right: 10px;
         color: #007bff;
         cursor: pointer;
     }
 
-    .subtotal {
-        font-weight: bold;
-        margin-top: 10px;
-        text-align: right;
-    }
 
-    .total-summary p {
-        margin: 5px 0;
-    }
-
-    .c-btn {
-        display: inline-block;
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        margin-top: 10px;
-        display: block;
-        width: 100%;
-        text-align: center;
-    }
-
-    .continue-shopping {
-        background-color: #007bff;
-    }
-
-    .proceed-to-checkout {
-        background-color: #28a745;
-    }
-
-    /* Media Query for Responsive Design */
-    @media screen and (max-width: 768px) {
-        .container {
-            flex-direction: column;
-        }
-
-        .cart-summary {
-            width: 100%;
-            margin-top: 20px;
-        }
-    }
 </style>
 
+<div class="cart-container">
+    <div class="cart-products">
+        <h2>You have {{totalcartitems}} item(s) in your Cart</h2>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Finish</th>
+                    <th>Dimension</th>
+                    <th>Woodtype</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            {% for product_id, item in cart_data.items %} 
 
-<div class="cart_container">
-    <div class="cart-items">
-        <h1>Your Shopping Cart</h1><br>
-        <br>
-        {% for product_id, item in cart_data.items %}
-        <div class="cart-item">
-            
-            <img src="{{item.image}}" alt="Product Image">
-            <div class="product-details">
-
-                <div class="product-name"><a href="">{{item.title}}</a> </div>
-                <div class="product-price">Ksh {{item.price}}</div>
-                <span style="margin: 10px;">Qty: <input type="number" class="quantity-input" value="{{item.qty}}"> </span>
-                <span style="margin: 10px;">Subtotal: <span style="color: #007bff;">Ksh {% widthratio item.price 1 item.qty %}</span> </span>
-            </div>
-            <div class="actions">
-                <i class="action-icon ri-delete-bin-line" title="Delete"></i>
-                <i class="action-icon ri-refresh-line" title="Refresh"></i>
-            </div>
-        </div>
-       {% endfor %}
+            <tbody>
+                <td>
+                    <div class="cart-item">
+                        <img src="{{item.image}}" alt="Product Image">
+                    </div>
+                </td>
+                <td>
+                    <div class="product-name"><a href="">{{item.title}}</a> </div>
+                </td>
+                <td>
+                    <div class="product-price">Ksh {{item.price}}</div>   
+                </td>
+                <td>
+                    <span style="margin: 10px;">{{item.color}} </span>
+                </td>
+                <td>
+                    <span style="margin: 10px;">{{item.dimension}} </span> 
+                </td>
+                <td>
+                    <span style="margin: 10px;">{{item.woodtype}} </span> 
+                </td>
+                <td>
+                <span style="margin: 10px;"><input type="number" class="quantity-input" value="{{item.qty}}"> </span>
+                </td>
+                <td>
+                    <span style="margin: 10px;"><span style="color: #007bff;">Ksh {% widthratio item.price 1 item.qty %}</span> </span>
+                </td>
+                <td>
+                <div class="actions">
+                    <i class="action-icon ri-delete-bin-line" title="Delete"></i>
+                    <i class="action-icon ri-refresh-line" title="Refresh"></i>
+                </div>
+                </td>
+            </tbody>
+            {% endfor %}
+        </table>
+        
     </div>
-
     <div class="cart-summary">
-        <div class="total-summary">
-            <p>Total Items: {{totalcartitems}}</p>
+        <h2>Cart Summary</h2>
+        <div class="summary-details">
+            <p><strong>Sub Total:</strong> Ksh {{cart_total_amount|floatformat:2}}</p>
+            <p><strong>Vat 16%:</strong> Ksh {{vat|floatformat:2}}</p>
+            <hr>
             <br>
-            <p>Subtotal: Ksh {{cart_total_amount|floatformat:2}} </p>
-            <br>
-            <p>VAT 16%: Ksh {{vat|floatformat:2}}</p>
-            <br>
-            <p><strong>Total: Ksh {{total|floatformat:2}}</strong></p>
-            <br>
-            <a href="{% url 'products' %}" class="c-btn continue-shopping">Continue Shopping</a>
-            <a href="#" class="c-btn proceed-to-checkout">Proceed to Checkout</a>
+            <p><strong>Total:</strong> Ksh {{total|floatformat:2}}</p>
+            <hr>
         </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
     </div>
 </div>
 
-
-
-
-    <!-- main content -->
-    <!-- <div class="main-content" id="cart">
-
-        <div id="wrapper-site">
-
-            <nav class="breadcrumb-bg">
-                <div class="container no-index">
-                    <div class="breadcrumb">
-                        <ol>
-                            <li>
-                                <a href="{% url 'index' %}">
-                                    <span>Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'cart' %}">
-                                    <span>Shopping Cart</span>
-                                </a>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </nav>
-            <div class="container">
-                <div class="row">
-                    <div id="content-wrapper" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 onecol">
-                        <section id="main">
-                            <div class="cart-grid row">
-                                <div class="col-md-9 col-xs-12 check-info">
-                                    <h1 class="title-page">Shopping Cart</h1>
-                                    <div class="cart-container">
-                                        <div class="cart-overview js-cart">
-                                            <ul class="cart-items">
-                                                {% for product_id, item in cart_data.items %}
-                                                <li class="cart-item">
-                                                    <div class="product-line-grid row justify-content-between">
-
-                                                        <div class="product-line-grid-left col-md-2">
-                                                            <span class="product-image media-middle">
-                                                                <a href="product-detail.html">
-                                                                    <img class="img-fluid" src="{{item.image}}" alt="Organic Strawberry Fruits">
-                                                                </a>
-                                                            </span>
-                                                        </div>
-                                                        <div class="product-line-grid-body col-md-6">
-                                                            <div class="product-line-info">
-                                                                <a class="label" href=" {% url 'product_details' item.pid %} " data-id_customization="0"> {{item.title}} </a>
-                                                            </div>
-                                                            <div class="product-line-info product-price">
-                                                                <span class="value">{{item.price|floatformat:2}}</span>
-                                                            </div>
-                                                            <div class="product-line-info">
-                                                                <span class="label-atrr">Size:</span>
-                                                                <span class="value">S</span>
-                                                            </div>
-                                                            <div class="product-line-info">
-                                                                <span class="label-atrr">Color:</span>
-                                                                <span class="value">Blue</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product-line-grid-right text-center product-line-actions col-md-4">
-                                                            <div class="row">
-                                                                <div class="col-md-5 col qty">
-                                                                    <div class="label">Qty:</div>
-                                                                    <div class="quantity">
-                                                                        <input type="number" name="qty" value="{{item.qty}}" class="input-group form-control">
-
-                                                  
-                                                                    </div>
-                                                                </div>
-                                                                <div style="margin: auto;" class="col-md-5 col price">
-                                                                    <div class="label">Sub-total:</div>
-                                                                    <div class="product-price total">
-                                                                        Ksh {% widthratio item.price 1 item.qty %}
-                                                                    </div>
-                                                                </div>
-                                                                <div style="margin: auto;" class="col-md-2 col text-xs-right align-self-end">
-                                                                    <div class="cart-line-product-actions ">
-                                                                        <a class="remove-from-cart" rel="nofollow" href="#" data-link-action="delete-from-cart" data-id-product="1">
-                                                                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                                        </a>
-                                                                        <a class="remove-from-cart" rel="nofollow" href="#" data-link-action="delete-from-cart" data-id-product="1">
-                                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <a href="product-checkout.html" class="continue btn  btn-primary pull-xs-right">
-                                        Continue
-                                    </a>
-                                </div>
-
-                                <div style="margin-top: 80px;" class="cart-grid-right col-xs-12 col-lg-3">
-                                    <div class="cart-summary">
-                                        <div class="cart-detailed-totals">
-                                            <div class="cart-summary-products">
-                                                <div class="summary-label">There are {{totalcartitems}} items in your cart</div>
-                                            </div>
-                                            <br>
-                                            <div class="cart-summary-line" id="cart-subtotal-products">
-                                                <span class="label js-subtotal">
-                                                    Total Amount:
-                                                </span>
-                                                <span class="value">Ksh {{cart_total_amount|floatformat:2}} </span>
-                                            </div>
-                                            <br>
-                                            <div class="cart-summary-line" id="cart-subtotal-shipping">
-                                                <span class="label">
-                                                    VAT 16%:
-                                                </span>
-                                                <span class="value">Ksh {{vat|floatformat:2}} </span>
-                                                <div>
-                                                    <small class="value"></small>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="cart-summary-line cart-total">
-                                                <span class="label">Total:</span>
-                                                <span class="value">Ksh {{total|floatformat:2}} (tax incl.)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<br> -->
-    {% endblock content %}
+  {% endblock %}

@@ -65,7 +65,8 @@
 
     .product-price {
         font-size: 20px;
-        color: #007bff;
+        font-weight: bold;
+        color: red;
         margin-bottom: 10px;
     }
 
@@ -147,6 +148,10 @@
         width: 280px;
         margin: auto;
     }
+    #finish, #woodtype,#dimension, option{
+        border-radius:3px;
+        background-color: #ddd;
+    }
 </style>
 </head>
 <body>
@@ -164,38 +169,38 @@
     <div class="product-details">
         <div class="product-name">{{product.title}}</div>
         <div class="">
-            <span><h3>Description</h3> </span><br>
+            <span> <strong>Description:</strong></span>
             <span>{{product.description|truncatechars:100}}</span>
         </div>
         <br>
-        <div class="product-price"><span>Ksh</span><span id="current-price-{{product.id}}">{{product.price}} </span>  </div>
+        <div class="product-price"><span>Ksh  </span><span id="current-price-{{product.id}}">{{product.price}} </span>  </div>
         <br>
-        <div>
-            <span>Dimension:</span>
-            <select name="dimension" id="dimension">
-                <option value="1">{{product.dim1}}</option>
-                <option value="2">{{product.dim2}}</option>
-            </select>
-        </div>
-        <br>
-        <div>
-            <span>Finish:</span> 
-            <select name="finish" id="finish">
-                <option value="1">{{product.color1}}</option>
-                <option value="2">{{product.color2}}</option>
-                <option value="1">{{product.color3}}</option>
-                <option value="2">{{product.color4}}</option>
-            </select>
-        </div>
-        <br>
-        <div>
-            <span>Woodtype:</span> 
-            <select name="finish" id="finish">
-                <option value="1">{{product.woodtype1}}</option>
-                <option value="2">{{product.woodtype2}}</option>
-                <option value="1">{{product.woodtype3}}</option>
-                <option value="2">{{product.woodtype4}}</option>
-            </select>
+        <div style="display: flex; justify-content: space-between; margin-right: 100px;">
+            <div>
+                <span>Dimension:</span>
+                <select class="product-dimension-{{product.id}}" name="dimension" id="dimension">
+                    <option value="{{product.dim1}}">{{product.dim1}}</option>
+                    <option value="{{product.dim2}}">{{product.dim2}}</option>
+                </select>
+            </div>
+            <div>
+                <span>Finish:</span> 
+                <select class="product-color-{{product.id}}" name="color" id="finish">
+                    <option value="{{product.color1}}">{{product.color1}}</option>
+                    <option value="{{product.color2}}">{{product.color2}}</option>
+                    <option value="{{product.color3}}">{{product.color3}}</option>
+                    <option value="{{product.color4}}">{{product.color4}}</option>
+                </select>
+            </div>
+            <div>
+                <span>Woodtype:</span> 
+                <select class="product-woodtype-{{product.id}}" name="woodtype" id="woodtype">
+                    <option value="{{product.woodtype1}}">{{product.woodtype1}}</option>
+                    <option value="{{product.woodtype2}}">{{product.woodtype2}}</option>
+                    <option value="{{product.woodtype3}}">{{product.woodtype3}}</option>
+                    <option value="{{product.woodtype4}}">{{product.woodtype4}}</option>
+                </select>
+            </div>
         </div>
         <br>
         <div class="quantity">

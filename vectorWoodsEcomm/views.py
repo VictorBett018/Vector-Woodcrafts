@@ -118,6 +118,9 @@ def add_to_cart(request):
     cart_product[str(request.GET['id'])] = {
         'title':request.GET['title'],
         'qty':request.GET['qty'],
+        'color':request.GET['color'],
+        'woodtype':request.GET['woodtype'],
+        'dimension':request.GET['dimension'],
         'price':request.GET['price'],
         'image':request.GET['image'],
         'pid' : request.GET['pid']

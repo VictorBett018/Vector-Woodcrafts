@@ -63,6 +63,8 @@ $(".review-form").submit(function(e){
 })
 
 
+//product properties
+
 
 // add to cart functionality
 $(".add-to-cart-btn").on("click", function(){
@@ -76,6 +78,10 @@ $(".add-to-cart-btn").on("click", function(){
     let product_price = $("#current-price-" + index).text()
     let product_pid = $(".product-pid-" + index).val()
     let product_image = $(".product-image-" + index).val()
+    let product_color = $(".product-color-" + index).val()
+    let product_woodtype = $(".product-woodtype-" + index).val()
+    let product_dimension = $(".product-dimension-" + index).val()
+
     
 
     console.log("Qty:", quantity);
@@ -84,6 +90,9 @@ $(".add-to-cart-btn").on("click", function(){
     console.log("PID:", product_pid);
     console.log("Image:", product_image);
     console.log("Price:", product_price);
+    console.log("Finish", product_color);
+    console.log("Finish", product_woodtype);
+    console.log("Finish", product_dimension);
     console.log("Index:", index);
 
     console.log("Current element:", this_val);
@@ -97,6 +106,9 @@ $(".add-to-cart-btn").on("click", function(){
             'qty': quantity,
             'title': product_title,
             'price': product_price,
+            'color':product_color,
+            'woodtype':product_woodtype,
+            'dimension':product_dimension,
 
         },
         datatype: 'json',
