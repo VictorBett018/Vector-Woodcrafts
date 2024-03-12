@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<title>Checkout</title>
+<style>
+    /* Your existing styles */
+    .checkout-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 20px;
+    }
+
+    .checkout-form {
+        width: 60%;
+        max-width: 500px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-left: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+
+    .form-group button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .form-group button:hover {
+        background-color: #45a049;
+    }
+
+    .cart-items {
+        width: 400px;
+        height: auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .cart-item {
+        margin-bottom: 10px;
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: auto;
+        margin-right: 10px;
+    }
+
+    .cart-item-details {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 768px) {
+        .checkout-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cart-items {
+            width: 100%;
+        }
+
+        .checkout-form {
+            width: 100%;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <div class="cart-items">
+        <h2>Your Cart Items</h2>
+        <!-- Here you can dynamically generate cart items using your backend data -->
+        <div class="cart-item">
+            {% for product_id, item in cart_data.items %}
+            <img src="{{item.image}}" alt="Product Image">
+            <div class="cart-item-details">
+                <div>Name: {{item.title}}</div>
+                <br>
+                <div>Qty: {{item.qty}}</div>
+                <br>
+                <div>Sub-total: Ksh {% widthratio item.price 1 item.qty %}</div>
+            </div>
+            <hr>
+            <br>
+            {% endfor %}
+            <div><strong>Total (Tax Inc): <span style="color: red;">Ksh {{total}}</span> </strong></div>
+        </div>
+ 
+        <!-- Repeat the above structure for each item in the cart -->
+    </div>
+    <form class="checkout-form">
+        <h2>Checkout</h2>
+        <div style="display: flex; justify-content: space-between;" class="form-group">
+            <div>
+                <label for="name">First name:</label>
+            <input type="text" id="name" name="name" required></div>
+            <div>
+                <label for="name">Last name:</label>
+            <input type="text" id="name" name="name" required></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+        </div>
+        <div class="form-group">
+            <label for="card">Appartment, Suite, etc.</label>
+            <input type="text" id="card" name="card" required>
+        </div>
+        <div style="display: flex; justify-content: space-between;" class="form-group">
+            <div>
+                <label for="name">City</label>
+            <input type="text" id="name" name="name" required></div>
+            <div>
+                <label for="name">Postal code</label>
+            <input type="text" id="name" name="name" required></div>
+        </div>
+        <div class="form-group">
+            <label for="cvv">Phone no:</label>
+            <input type="tel" id="contact" name="contact" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Place Order</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+{% endblock %}

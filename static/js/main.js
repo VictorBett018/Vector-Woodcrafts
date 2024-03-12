@@ -125,3 +125,58 @@ $(".add-to-cart-btn").on("click", function(){
 
 })
 
+//delete product
+$(".delete-product").on("click", function(){
+    let product_id = $(this).attr("data-product")
+    let this_val = $(this)
+
+    console.log("Product Id:", product_id);
+    $.ajax({
+      url: "/delete-from-cart",
+      data: {
+        "id": product_id
+      },
+      beforeSend: function(){
+        this_val.hide()
+      },
+      success: function(response){
+        
+        this_val.show()
+        $(".cart-products-count").text(response.totalcartitems)
+        $("#cart-list").html(response.data)
+        location.reload()
+      }
+
+    })
+
+})
+
+$(".update-product").on("click", function(){
+  let product_id = $(this).attr("data-product")
+  let this_val = $(this)
+  let product_quantity = $(".product-qty-" + product_id).val()
+
+  console.log("Product Id:", product_id);
+  console.log("Product QTY:", product_quantity);
+
+  $.ajax({
+    url: "/update-cart",
+    data: {
+      "id": product_id,
+      "qty": product_quantity
+    },
+    beforeSend: function(){
+      this_val.hide()
+    },
+    success: function(response){
+      
+      this_val.show()
+      $(".cart-products-count").text(response.totalcartitems)
+      $("#cart-list").html(response.data)
+      location.reload()
+    }
+
+  })
+
+})
+

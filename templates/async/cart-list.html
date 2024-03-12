@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+
 
 <style>
     /* Your existing styles */
@@ -165,15 +163,15 @@
                     <span style="margin: 10px;">{{item.woodtype}} </span> 
                 </td>
                 <td>
-                <span ><input style="margin: 10px; width: 50px; height: 30px;" type="number" class="product-qty-{{product_id}}" value="{{item.qty}}"> </span>
+                <span style="margin: 10px;"><input type="number" class="quantity-input" value="{{item.qty}}"> </span>
                 </td>
                 <td>
                     <span style="margin: 10px;"><span style="color: #007bff;">Ksh {% widthratio item.price 1 item.qty %}</span> </span>
                 </td>
                 <td>
                 <div class="actions">
-                   <button class="update-product" id="update-product" data-product="{{product_id}}"><i class="action-icon ri-refresh-line" title="Update"></i></button>
-                   <button class="delete-product" id="delete-product" data-product="{{product_id}}" ><i class="action-icon ri-delete-bin-line" title="delete"></i></button> 
+                   <button class="delete-product" id="delete-product" data-product="{{product_id}}" ><i class="action-icon ri-delete-bin-line"></i></button> 
+                    <i class="action-icon ri-refresh-line" title="Refresh"></i>
                 </div>
                 </td>
             </tbody>
@@ -196,5 +194,3 @@
 </div>   
 </main>
 
-
-  {% endblock %}

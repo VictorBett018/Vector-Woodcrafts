@@ -14,9 +14,28 @@
           <p class="description">{{p.description|truncatechars:50}}</p>
           <div class="price-container">
             <p class="previous-price ">Ksh {{p.old_price}} </p>
-          <p>Ksh</p><p class="current-price" id="current-price-{{p.id}}">{{p.price}} </p>
+          <p>Ksh</p><p class="current-price current-price-{{p.id}}" id="current-price-{{p.id}}">{{p.price}} </p>
           </div>
           <button class="wishlist-btn"><i class="ri-heart-line"></i></button>
+          
+                <select style="display: none;" class="product-dimension-{{p.id}}" name="dimension" id="dimension">
+                    <option value="{{p.dim1}}">{{p.dim1}}</option>
+                    <option value="{{p.dim2}}">{{p.dim2}}</option>
+                </select>
+            
+                <select style="display: none;" class="product-color-{{p.id}}" name="color" id="finish">
+                    <option value="{{p.color1}}">{{p.color1}}</option>
+                    <option value="{{p.color2}}">{{p.color2}}</option>
+                    <option value="{{p.color3}}">{{p.color3}}</option>
+                    <option value="{{p.color4}}">{{p.color4}}</option>
+                </select>
+           
+                <select style="display: none;" class="product-woodtype-{{p.id}}" name="woodtype" id="woodtype">
+                    <option value="{{p.woodtype1}}">{{p.woodtype1}}</option>
+                    <option value="{{p.woodtype2}}">{{p.woodtype2}}</option>
+                    <option value="{{p.woodtype3}}">{{p.woodtype3}}</option>
+                    <option value="{{p.woodtype4}}">{{p.woodtype4}}</option>
+                </select>
           
             <input type="hidden" value="1" id="product-quantity" class="quantity-wanted-{{p.id}}">
             <input type="hidden" class="product-pid-{{p.id}}" value="{{p.pid}}">
@@ -24,7 +43,7 @@
             <input type="hidden" class="product-id-{{p.id}}" value="{{p.id}}" >
             <input type="hidden" class="product-title-{{p.id}}" value="{{p.title}}" >
                                                                                
-            <a href="{% url 'product_details' p.pid %}"><button class="cart-btn add-to-cart-btn" data-index="{{p.id}}"><i class="ri-shopping-cart-2-fill"></i></button></a>
+            <button class="cart-btn add-to-cart-btn" data-index="{{p.id}}"><i class="ri-shopping-cart-2-fill"></i></button>
           
    
           <button class="view-btn"><i class="ri-eye-line"></i></button>

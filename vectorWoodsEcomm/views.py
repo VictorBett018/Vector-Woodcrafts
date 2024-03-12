@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.template.loader import render_to_string
 from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address
 from taggit.models import Tag
 from django.shortcuts import get_object_or_404
@@ -156,5 +157,59 @@ def cart_view(request):
 
     else:
         messages.warning(request, 'Your cart is empty')
-        return redirect('index')
+        return redirect('products')
 
+def checkout_view(request):
+
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+
+
+        return render(request, 'checkout.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+
+def delete_item_from_cart(request):
+    product_id = str(request.GET['id'])
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+
+            cart_data = request.session['cart_data_obj']
+            del request.session['cart_data_obj'][product_id]
+            request.session['cart_data_obj'] = cart_data
+
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+
+    context = render_to_string("async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+
+    return JsonResponse ({"data":context, 'totalcartitems': len(request.session['cart_data_obj'])})
+
+
+def update_cart(request):
+    product_id = str(request.GET['id'])
+    product_qty = request.GET['qty']
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+        
+
+            cart_data = request.session['cart_data_obj']
+            cart_data [str(request.GET['id'])]['qty'] = product_qty
+            request.session['cart_data_obj'] = cart_data
+
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+
+    context = render_to_string("async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+
+    return JsonResponse ({"data":context, 'totalcartitems': len(request.session['cart_data_obj'])})
