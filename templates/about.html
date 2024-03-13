@@ -1,100 +1,138 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+	.about-container {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 20px;
+}
 
+.about-section {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  flex: 1;
+}
+
+.image img {
+  width: 500px;
+  height: 400;
+  border-radius: 6px;
+}
+
+.description {
+  flex: 1;
+  background-color: rgb(216, 216, 216);
+  margin-right: 30px;
+  height: 400px;
+  width: 500px;
+  padding-left: 20px;
+  border-radius: 6px;
+  
+}
+.description p,h1{
+	text-align: start;
+}
+
+.mission-vision-section {
+  margin-top: 50px;
+}
+
+.mission,
+.vision {
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  color: #666;
+}
+.banner-container{
+  position: relative;
+  text-align: center;
+}
+.centered img{
+	filter: blur(3px);
+  -webkit-filter: blur(1px);
+	position: relative;
+	max-width: 1300px;
+	width: 100%;
+	height: 150px;
+  object-fit: cover;
+  margin-bottom: 50px;
+
+}
+.centered h3{
+	position: absolute;
+  top:20px;
+  left: 85px;
+  font-size: 60px;
+  text-align: center;
+
+}
+@media screen and (max-width: 768px){
+	.about-section{
+		display: block;
+	}
+	.image img{
+		max-width: 450px;
+	}
+	.description{
+		max-width: 450px;
+	}
+}
+</style>
 <main >
-	<div class="about_container">
-		<h2>Our Story</h2>
-		<p>We founded XYZ Furniture with a passion for craftsmanship and design. Our journey began in [year], when [founder's name] set out to create high-quality furniture that combines elegance, comfort, and sustainability.</p>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>About Us</title>
+	</head>
+	<body>
+	  <div class="about-container">
 		
-		<h2>Our Team</h2>
-		<div class="team-member">
-			<div>
-			<img src="{% static 'img/profile-pic-1.jpg' %}" alt="John Doe">
-			<p><strong>John Doe</strong><br>Founder & CEO</p>
-			</div>
-	 
-	   <div>
-		<img src="{% static 'img/profile-pic-2.jpg' %}" alt="Jane Smith">
-		<p><strong>Jane Smith</strong><br>Head of Design</p>
-	   </div>
-
+		<div class="banner-container">
+		<div class="centered">
+			<img src="{% static 'img/banner.jpg' %}" alt="">
+			<h3>About Us</h3>
+		</div>	
 		</div>
-		
-		<h2>Our Philosophy</h2>
-		<p>At XYZ Furniture, we believe that great design should be accessible to everyone. That's why we focus on creating timeless pieces that elevate any space, while also being mindful of our environmental impact. We're committed to using sustainable materials and ethical manufacturing practices.</p>
-		
-
-		<section class="section__container testimonial__container" id="testimonial">
-			<h2 class="section__header">Testimonials</h2>
-			<!-- Slider main container -->
-			<div class="swiper">
-			  <!-- Additional required wrapper -->
-			  <div class="swiper-wrapper">
-				<!-- Slides -->
-				<div class="swiper-slide">
-				  <div class="testimonial__card">
-					<p>
-					  Working with them was an absolute pleasure! Their modern design
-					  expertise completely transformed my home into a contemporary
-					  haven. I now have a space that not only looks stunning but also
-					  feels incredibly comfortable. I couldn't be happier with the
-					  results
-					</p>
-					<img src="{% static 'img/profile-pic-1.jpg' %}" alt="testimonial" />
-					<h4>Sam William</h4>
-					<h5>CEO, Co-Founder</h5>
-				  </div>
-				</div>
-				<div class="swiper-slide">
-				  <div class="testimonial__card">
-					<p>
-					  I hired them to revamp our office space, and the results
-					  exceeded my expectations. Their innovative design concepts
-					  breathed new life into our workplace, making it both functional
-					  and stylish. The team's attention to detail and commitment to
-					  quality are truly commendable.
-					</p>
-					<img src="{% static 'img/profile-pic-2.jpg' %}" alt="testimonial" />
-					<h4>Michelle Anna</h4>
-					<h5>Office Renovator</h5>
-				  </div>
-				</div>
-				<div class="swiper-slide">
-				  <div class="testimonial__card">
-					<p>
-					  I had a vision of a minimalist-inspired home, and they brought
-					  it to life flawlessly. Their designers understood my aesthetic
-					  and incorporated sleek, clean lines, and a neutral color palette
-					  to create a serene oasis. I'm in love with my modern,
-					  clutter-free space!
-					</p>
-					<img src="{% static 'img/profile-pic-3.jpg' %}" alt="testimonial" />
-					<h4>John D'souza</h4>
-					<h5>Banker</h5>
-				  </div>
-				</div>
-				<div class="swiper-slide">
-				  <div class="testimonial__card">
-					<p>
-					  What sets them apart is their professionalism and efficiency.
-					  They made the entire design process hassle-free, from the
-					  initial consultation to the final installation. Their team
-					  handled everything, leaving me with a beautifully designed
-					  modern interior
-					</p>
-					<img src="{% static 'img/profile-pic-4.jpg' %}" alt="testimonial" />
-					<h4>David Laid</h4>
-					<h5>Businessman</h5>
-				  </div>
-				</div>
-			  </div>
-			  <!-- If we need pagination -->
-			  <div class="swiper-pagination"></div>
-			</div>
-		  </section>
-	  
-	</div>
+		<div class="about-section">
+			 <div class="description">
+			<h1 style="margin-bottom: 30px;">Who we Are</h1>
+			<p>
+				Vector Woodcrafts and Interior limited offers you the finest and affordable wood products for your interior décor. We specialize in the production of custom furniture pieces from pure solid wood or steel-wood composite.
+				We work hand-in-had with our clients through design stage to commissioning masterpiece products.
+			</p>
+		  </div>
+		  <div class="image">
+			<!-- Your image goes here -->
+			<img src="{% static 'img/About-us banner.jpg' %}" alt="Company Image">
+		  </div>
+		 
+		</div>
+		<div class="mission-vision-section">
+		  <div class="mission">
+			<h2>Our Mission</h2>
+			<p>We are dedicated to providing our clients with quality and affordable products for interior solutions while exceeding customer expectations.</p>
+		  </div>
+		  <div class="vision">
+			<h2>Our Vision</h2>
+			<p>We look forward to becoming the most preferred store providing standardized quality and unique wood products.</p>
+		  </div>
+		</div>
+	  </div>
+	</body>
+	</html>
+	
 </main>
 
 

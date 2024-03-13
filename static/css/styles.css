@@ -1,11 +1,11 @@
-/* Reset default browser styles */
+/* Reset default browser styles */                
 :root {
     --primary-color: #2f2f2f;
     --text-dark: #18181b;
     --text-light: #71717a;
     --white: #ffffff;
     --max-width: 1200px;
-    --header-font: Arial, sans-serif;
+    --header-font:"Titillium Web", sans-serif;
   }
   
   .section__container {
@@ -39,7 +39,7 @@
 
 /* Body styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Black bison', sans-serif;
     background-image: linear-gradient(
         to right, rgb(236, 235, 235), rgb(161, 159, 159)
     );}
@@ -414,21 +414,22 @@ header {
     margin-bottom: 0.5rem;
     padding: 5px 10px;
     font-size: 1.25rem;
-    border: 1px solid black;
+    border: none;
     background-color: transparent;
-    border-radius: 100%;
   }
   
   .choose__card h4 {
     margin-bottom: 1rem;
     font-size: 1rem;
+    text-align: center;
+    font-family: "Titillium Web", sans-serif;
     font-weight: 600;
-    font-family: var(--header-font);
     color: var(--text-dark);
   }
   
   .choose__card p {
-    color: var(--text-light);
+    color: black;
+    font-family: "Titillium Web", sans-serif;
   }
   
   .choose__image img {
