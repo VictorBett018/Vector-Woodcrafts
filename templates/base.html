@@ -17,6 +17,38 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     
     <style>
+.search-form button {
+  padding: 1px 2px;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  color: black;
+  background: none;
+  cursor: pointer;
+}
+.search-form {
+  width: 200px;
+  max-width: 350px;
+  margin-inline: auto;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid black;
+  border-radius: 5rem;
+}
+.search-form input{
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: black;
+  background-color: transparent;
+}
+.search-form input::placeholder {
+  color: black;
+}
         /* Dropdown Button */
         /* Cart Container */
     .cart-container {
@@ -87,9 +119,18 @@
         .dropdown > a i {
             margin-left: 5px;
         }
+        .nav__menu__btn {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--white);
+}
     
         /* Media Query for Responsive Design */
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 768px)
+         {
+          .nav__menu__btn {
+             display: block;
+                }
             .dropdown-menu {
                 position: static;
                 display: none;
@@ -173,8 +214,77 @@
     text-align: center;
   }
 }
+/* Add a media query for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .top-nav ul {
+    display: none; /* Hide the top menu by default on small screens */
+  }
 
-@media (width < 600px) {
+  .bottom-nav {
+    display: none; /* Hide the bottom navigation on small screens */
+  }
+
+  .cart-container {
+    display: inline-block; /* Display the cart icon */
+    margin-right: 15px; /* Add margin for spacing */
+  }
+
+  .cart-container a {
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .cart-container .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
+
+  .navigation {
+    text-align: center; /* Center align navigation items */
+  }
+
+  .search-form {
+    margin-bottom: 20px; /* Add margin at the bottom of the search form */
+  }
+
+  .logo {
+    text-align: center; /* Center align logo */
+    margin: 0 auto; /* Center logo horizontally */
+    margin-bottom: 20px; /* Add margin at the bottom of the logo */
+  }
+
+  .logo img {
+    height: 60px; /* Adjust logo height for smaller screens */
+  }
+
+  .top-nav li,
+  .bottom-nav li {
+    display: block; /* Display list items as block elements */
+    margin: 10px 0; /* Add margin between list items */
+  }
+
+  .top-nav a,
+  .bottom-nav a {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: none; /* Hide dropdown menu by default on small screens */
+  }
+
+  .navigation.active .top-nav ul {
+    display: block; /* Display the top menu when navigation is active */
+  }
+
+  .navigation.active .bottom-nav {
+    display: block; /* Display the bottom navigation when navigation is active */
+  }
+}
+
+
+/* @media (width < 600px) {
   nav {
     position: fixed;
     width: 100%;
@@ -231,7 +341,7 @@
   .footer__bar {
     flex-direction: column;
   }
-}
+} */
 .float{
 	position:fixed;
 	width:60px;
@@ -258,8 +368,10 @@
             <a href="{% url 'index' %}"><img src="{% static 'img/logo.svg' %}" alt="logo" height="100" ></a>
         </div>
         <div class="navigation" id="header-right-menu">
-          <span id="menu-icon" onClick="toggleMenu()"> <img src="{% static 'img/menu-svgrepo-com.svg' %}" alt=""></span>
-        <nav class="top-nav">
+          <div class="nav__menu__btn" id="menu-btn">
+            <span><i class="ri-menu-line"></i></span>
+          </div>        
+          <nav class="top-nav">
           
             <ul class="top-menu">
               <li>  <form class="search-form">
@@ -300,7 +412,7 @@
     </div>
     </header>
     <hr>
-<a style=" text-decoration: none; " href="https://api.whatsapp.com/send?phone=254757555778&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+<a style=" text-decoration: none; " href="https://api.whatsapp.com/send?phone=254757555778&text=Hello!%I%need%some%assistance." class="float" target="_blank">
   <i style="font-size: 53px; "  class="ri-whatsapp-line"></i>
 </a>
 

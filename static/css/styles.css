@@ -97,31 +97,109 @@ header {
   font-weight: bold;
   text-transform: uppercase;
 }
-
-/* Search form styles */
-.search-form {
-  display: flex;
-  align-items: center;
-  margin-right: 20px; /* Adjust margin to separate from navigation */
-}
-
-
-.search-form input {
-  width: auto; /* Allow input to expand */
-  padding: 8px;
-  border: 1px solid #333;
-  border-radius: 20px;
-  outline: none;
-}
-
 .search-form button {
-  font-size: 1.25rem;
-  border: none;
-  margin-left: 5px;
+  padding: 1px 2px;
+  font-size: 1rem;
   outline: none;
-  background-color: transparent;
+  border: none;
+  color: black;
+  background: none;
   cursor: pointer;
 }
+.search-form {
+  width: 200px;
+  max-width: 350px;
+  margin-inline: auto;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid black;
+  border-radius: 5rem;
+}
+.search-form input{
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: black;
+  background-color: transparent;
+}
+.search-form input::placeholder {
+  color: black;
+}
+        /* Dropdown Button */
+        /* Cart Container */
+    .cart-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Cart Icon */
+    .cart-icon {
+        font-size: 20px;
+        color: #333;
+    }
+
+    /* Badge */
+    .badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .dropdown > a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            position: relative;
+        }
+    
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background-color: #ddd;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* Dropdown Links */
+        .dropdown-menu li {
+            list-style: none;
+            text-align: start;
+        }
+    
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: black;
+        }
+    
+        /* Dropdown Hover Effect */
+        .dropdown:hover .dropdown-menu {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        /* Dropdown Icon */
+        .dropdown > a i {
+            margin-left: 5px;
+        }
+    
 
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
@@ -593,95 +671,8 @@ header {
     font-style: italic;
     color: var(--text-light);
   }
-  
-  /* Footer styles */
-.footer {
-  background-color: #424242;
-}
 
-.footer__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5rem;
-  align-items: center;
-  border-bottom: 1px solid var(--white);
-}
 
-.footer__content h4 {
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 2.5rem;
-  color: var(--white);
-}
-
-.footer__content p {
-  color: var(--white);
-}
-
-.footer__form form {
-  width: 100%;
-  max-width: 600px;
-  margin-inline: auto;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: var(--white);
-  border-radius: 30px;
-}
-
-.footer__form input {
-  width: 100%;
-  padding: 0 1rem;
-  outline: none;
-  border: none;
-  font-size: 1rem;
-}
-
-.footer__form button {
-  padding: 1rem 1.5rem;
-  outline: none;
-  border: none;
-  font-size: 1.2rem;
-  color: var(--white);
-  background-color: var(--primary-color);
-  border-radius: 30px;
-}
-
-.footer__bar {
-  padding-block: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.footer__logo h4 a {
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-family: var(--header-font);
-  color: var(--white);
-}
-
-.footer__logo p {
-  margin-top: 5px;
-  font-size: 0.8rem;
-  color: var(--white);
-}
-
-.footer__nav {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.footer__link a {
-  font-weight: 500;
-  color: var(--white);
-  white-space: nowrap;
-}
 
 @media (width < 1200px) {
   .offer__container {
