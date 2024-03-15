@@ -22,7 +22,7 @@ def index(request):
 
 def products_view(request):
 
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by("-id")
     products = Product.objects.all().order_by("-date")
 
     context = {
