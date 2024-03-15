@@ -468,6 +468,7 @@ header {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     align-items: center;
+    
   }
   
   .choose__container .choose__bg {
@@ -526,6 +527,7 @@ header {
       minmax(0, var(--max-width))
       minmax(0, 1fr);
     row-gap: 2rem;
+    margin: auto;
   }
   
   .offer__grid__top {
@@ -544,10 +546,12 @@ header {
   
   .offer__container img {
    
-    display: flex;
-    width: 100%;
+    margin-bottom: 1rem;
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    width: 100%;
   }
   
   .offer__content {

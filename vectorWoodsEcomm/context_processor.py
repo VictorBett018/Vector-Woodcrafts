@@ -2,7 +2,7 @@ from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder,
 
 
 def default(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by("-id")
     product = Product.objects.all()
 
     return {

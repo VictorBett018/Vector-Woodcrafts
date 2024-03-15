@@ -21,7 +21,17 @@
  
         <!-- Your main content goes here -->
     </main>
-    
+    <section style="margin: auto;" class="offer__container" id="offer">
+      <div class="offer__grid__top">
+        <!-- <div class="offer__content"> -->
+        {% for c in categories %}
+        <a style="text-align: center; text-decoration: none; font-weight: bold; color: black;" href="{% url 'category' c.cid %}"> <img src="{{c.image.url}}" alt="Category Image"/> {{c.title}} </a>
+          {% endfor %}
+          <!-- </div> -->
+
+      </div>
+    </section>
+
     <section class="section__container choose__container" id="choose">
       <!-- <img class="choose__bg" src="{% static 'img/dot-bg.png' %}" alt="bg" /> -->
       <div class="choose__content">
@@ -71,20 +81,7 @@
     </section>
     <!--end of choose us section-->
     
-    <section class="offer__container" id="offer">
-      <div class="offer__grid__top">
-        <div class="offer__content">
-            <h2 class="section__header">All Categories</h2>
-            <p class="section__subheader">
-              Explore all products categories
-            </p>
-            
-          </div>
-        {% for c in categories %}
-        <a style="text-align: center; text-decoration: none; font-weight: bold; color: black;" href="{% url 'category' c.cid %}"> <img src="{{c.image.url}}" alt="Category Image"/> {{c.title}} </a>
-          {% endfor %}
-      </div>
-    </section>
+    
     <!--end of offer section-->
     <!-- <section class="section__container craft__container" id="new-arrivals">
       <div class="craft__content">
