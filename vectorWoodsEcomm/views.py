@@ -91,6 +91,16 @@ def contact_view(request):
 def about_view(request):
     return render(request, 'about.html')
 
+def search_view(request):
+    query = request.GET['q']
+    products = Product.objects.filter(title__icontains = query, description__icontains = query).order_by("-date")
+    context = {
+        "products":products,
+        "query":query,
+    }
+    return render(request, 'search.html', context)
+
+
 def ajax_add_review(request, pid):
     product = Product.objects.get(pid = pid)
     user = request.user

@@ -52,6 +52,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between; /* Align items to the start and end */
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
 }
 
 /* Logo styles */

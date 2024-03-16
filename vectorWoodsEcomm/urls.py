@@ -11,6 +11,10 @@ urlpatterns = [
     path('product/<pid>/', views.product_detail_view, name='product_details'),
     path('category/<cid>/', views.category_view,name='category'),
 
+    #search
+    path('search/', views.search_view, name='search'),
+
+
     #Tags
     path("products/tag/<slug:tag_slug>/", views.tag_list, name='tags'),
     #add review

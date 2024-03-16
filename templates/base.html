@@ -20,6 +20,14 @@
 
     
     <style>
+header{
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+}
+main{
+  margin-top: 120px;
+}
 .search-form button {
   padding: 1px 2px;
   font-size: 1rem;
@@ -368,7 +376,7 @@
 <body style="font-family: 'Titillium Web', sans-serif;">
     <header>
         <div class="logo">
-            <a href="{% url 'index' %}"><img src="{% static 'img/logo.svg' %}" alt="logo" height="100" ></a>
+            <a href="{% url 'index' %}"><img src="{% static 'img/VECTOR WOODCRAFTS LOGO_Artboard 2.svg' %}" alt="logo" height="100" ></a>
         </div>
         <div class="navigation" id="header-right-menu">
           <div class="nav__menu__btn" id="menu-btn">
@@ -377,9 +385,9 @@
           <nav class="top-nav">
           
             <ul class="top-menu">
-              <li>  <form class="search-form">
-                <input type="text" placeholder="Search Funiture">
-                <button><i class="ri-search-line"></i></button>
+              <li>  <form method="get" action="{% url 'search' %}" class="search-form">
+                <input type="text" placeholder="Search Funiture" name="q">
+                <button type="submit"><i class="ri-search-line"></i></button>
             </form> </li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'sign-in' %}"><i class="cart-icon ri-account-circle-fill"></i> {{request.user.username}} </a></li>
@@ -406,10 +414,10 @@
                     </ul>
                   </li>
                 <li><a href="{% url 'products' %}">Shop</a></li>
+                <li><a href="{% url 'contact' %}">Contact us</a></li>
                 <li><a href="#">Downloads</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
     </div>
