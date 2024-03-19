@@ -12,7 +12,6 @@ header {
   top: 0; /* Position the navbar at the top of the page */
   width: 100%;
   z-index: 1;
-  padding: 10px;
 
 }
 .top-navigation{
@@ -25,11 +24,20 @@ header {
 
 /* Logo styles */
 .logo {
+  display: block;
   position: absolute;
   margin-right: auto; /* Pushes the logo to the left */
 }
 
 .logo img {
+  margin: 0; /* Remove default margin for h1 */
+}
+.logo-mobile {
+  display: none;
+  position: absolute;
+  margin-right: auto; /* Pushes the logo to the left */
+}
+.logo-mobile img {
   margin: 0; /* Remove default margin for h1 */
 }
 
@@ -185,14 +193,20 @@ header {
 
 /* Media queries for responsiveness */
 @media only screen and (max-width: 768px) {
-  .logo img{
-    margin-top: 30px;
-    height: 50px;
+  .logo{
+    display: none;
+  }
+  .logo-mobile{
+    position: absolute;
+    display: block;
+  }
+  .logo-mobile img{
+    height: 100px;
     width: auto;
   }
+
   .top-nav {
     flex-direction: column-reverse;
-    margin-bottom: 80px;
   }
   .top-nav .top-nav-links{
     display: flex;
@@ -205,7 +219,6 @@ header {
     border: none;
     cursor: pointer;
     font-size: 20px;
-    margin-bottom: 120px;
   }
 
   .top-nav-links {
@@ -252,6 +265,9 @@ header {
 <header>
   <div class="logo">
     <a href="{% url 'index' %}"><img src="{% static 'img/logo.svg' %}" alt="logo" height="100"></a>
+  </div>
+  <div class="logo-mobile">
+    <a href="{% url 'index' %}"><img src="{% static 'img/logo-mobile.svg' %}" alt="logo" ></a>
   </div>
   <div class="top-navigation">
     <nav class="top-nav">
