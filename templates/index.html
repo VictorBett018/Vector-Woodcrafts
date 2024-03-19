@@ -1,63 +1,112 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+  .image-grid {
+  margin: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.image {
+  width: calc(25% - 20px); /* Adjust as needed */
+  margin-bottom: 20px;
+  
+}
+.image a{
+  text-decoration: none;
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.image img {
+  width: auto;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.image-title {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 768px) {
+  .image {
+    width: calc(50% - 20px); /* Two images per row on small screens */
+  }
+  .image img{
+    height: 140px;
+    width: auto;
+  }
+}
+
+</style>
     <main >
         <img src="{% static 'img/3D-Furniture-Design-Services.jpg' %}" alt="" width="100%">
-    
-    <section style="margin: auto;" class="offer__container" id="offer">
-      <div class="offer__grid__top">
-        {% for c in categories %}
-        <a style="text-align: center; text-decoration: none; font-weight: bold; color: black;" href="{% url 'category' c.cid %}"> <img src="{{c.image.url}}" alt="Category Image"/> {{c.title}} </a>
+
+
+        <div class="image-grid">
+          {% for c in categories %}
+          <div class="image">
+            <a href="#">
+              <img src="{{c.image.url}}" alt="Image 1">
+              <div class="image-title">{{c.title}}</div>
+            </a>
+          </div>
           {% endfor %}
-      </div>
-    </section>
-    <section class="section__container choose__container" id="choose">
-      <img class="choose__bg" src="{% static 'img/dot-bg.png' %}" alt="bg" />
-      <div class="choose__content">
-        <h2 class="section__header">Why Choose Us</h2>
-        <p style="text-align: start;" class="section__subheader">
-          Experience Unmatched Creativity and Expertise in Interior Design.
-          Discover Why We're the Right Choice for Your Dream Space
-        </p>
-        <div class="choose__grid">
-          <div class="choose__card">
-            
-            <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-truck-line"></i></span> Fast & Free Shipping</h4>
+        </div>
+        <br>
+
+      <div class="choose-section">
+            <div class="choose-description"> 
+              <h2 style="text-align: center; font-size: 30px; margin-top: 30px;">Why Choose Us</h2>
+              <div class="choose">
+              <div class="choose-items">
+              <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-truck-line"></i></span> Fast & Free Shipping</h4>
             <p  style="text-align: start;">
               Elevate your interior design with our Fast & Free Shipping service
               without delay
             </p>
-          </div>
-          <div class="choose__card">
-            
+
             <h4 style="font-family: 'Titillium Web', sans-serif; font-weight: bold; text-align: center;"><span><i class="ri-shopping-bag-3-line"></i></span> Easy to Shop</h4>
             <p style="text-align: start;">
               Discover Effortless Elegance: Explore Our Easy-to-Shop Interior
               Design Solutions
             </p>
-          </div>
-          <div class="choose__card">
-            
+            </div>
+            <div class="choose-items">
             <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-customer-service-2-line"></i></span> 24/7 Support</h4>
             <p style="text-align: start;">
               Experience peace of mind knowing that our dedicated team is
               available round the clock
             </p>
-          </div>
-          <div class="choose__card">
-            
+         
             <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-loop-right-line"></i></span> Hassle Free Returns</h4>
             <p style="text-align: start;">
               We believe in the perfect match, and if it doesn't quite fit, we
               make returning items a breeze
             </p>
-          </div>
-        </div>
-      </div>
-      <div class="choose__image">
-        <img src="{% static 'img/craft-2.png' %}" alt="choose" />
-      </div>
-    </section>
+          
+
+            </div>  
+              </div>
+            
+
+
+
+         </div>
+         <div class="choose-image">
+         <img src="{% static 'img/craft-2.png' %}" alt="Company Image">
+         </div> 
+       </div>
+    
+       
+
     <section class="section__container blog_container" id="blog">
       <h2 class="section__header">Recent Blog</h2>
       <div class="blog__grid">

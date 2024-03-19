@@ -1,438 +1,308 @@
-
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navigation Bar</title>
 <style>
-    /* style.css */
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
-    
-    :root {
-      --dark-grey: #333333;
-      --medium-grey: #636363;
-      --light-grey: #eeeeee;
-      --ash: #f4f4f4;
-      --primary-color: #2b72fb;
-      --white: white;
-      --border: 1px solid var(--light-grey);
-      --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    }
-    
-    body {
-      font-family: inherit;
-      background-color: var(--white);
-      color: var(--dark-grey);
-      letter-spacing: -0.4px;
-    }
-    
-    ul {
-      list-style: none;
-    }
-    
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    
-    button {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      color: inherit;
-    }
-    
-    .btn {
-      display: block;
-      background-color: var(--primary-color);
-      color: var(--white);
-      text-align: center;
-      padding: 0.6rem 1.4rem;
-      font-size: 1rem;
-      font-weight: 500;
-      border-radius: 5px;
-    }
-    
-    .icon {
-      padding: 0.5rem;
-      background-color: var(--light-grey);
-      border-radius: 10px;
-    }
-    
-    .logo {
-      margin-right: 1.5rem;
-    }
-    
-    #nav-menu {
-      border-bottom: var(--border);
-    }
-    
-    .container1 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1600px;
-      margin: 0 auto;
-      column-gap: 2rem;
-      height: fit-content;
-      padding: 1.2rem 3rem;
-    }
-    
-    .menu {
-      position: relative;
-      background: var(--white);
-    }
-    
-    .menu-bar li:first-child .dropdown {
-      flex-direction: initial;
-      min-width: 480px;
-    }
-    
-    .menu-bar li:first-child ul:nth-child(1) {
-      border-right: var(--border);
-    }
-    
-    .menu-bar li:nth-child(n + 2) ul:nth-child(1) {
-      border-bottom: var(--border);
-    }
-    
-    .menu-bar .dropdown-link-title {
-      font-weight: 600;
-    }
-    
-    .menu-bar .nav-link {
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: -0.6px;
-      padding: 0.3rem;
-      min-width: 60px;
-      margin: 0 0.6rem;
-    }
-    
-    .menu-bar .nav-link:hover,
-    .dropdown-link:hover {
-      color: var(--primary-color);
-    }
-    
-    .nav-start,
-    .nav-end,
-    .menu-bar,
-    .right-container,
-    .right-container .search {
-      display: flex;
-      align-items: center;
-    }
-    
-    .dropdown {
-      display: flex;
-      flex-direction: column;
-      min-width: 230px;
-      background-color: var(--white);
-      border-radius: 10px;
-      position: absolute;
-      top: 36px;
-      z-index: 1;
-      visibility: hidden;
-      opacity: 0;
-      transform: scale(0.97) translateX(-5px);
-      transition: 0.1s ease-in-out;
-      box-shadow: var(--shadow);
-    }
-    
-    .dropdown.active {
-      visibility: visible;
-      opacity: 1;
-      transform: scale(1) translateX(5px);
-    }
-    
-    .dropdown ul {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.2rem;
-      font-size: 0.95rem;
-    }
-    
-    .dropdown-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.15rem;
-    }
-    
-    .dropdown-link {
-      display: flex;
-      gap: 0.5rem;
-      padding: 0.5rem 0;
-      border-radius: 7px;
-      transition: 0.1s ease-in-out;
-    }
-    
-    .dropdown-link p {
-      font-size: 0.8rem;
-      color: var(--medium-grey);
-    }
-    
-    .right-container {
-        margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      column-gap: 1rem;
-    }
-    
-    .right-container .search {
-      position: relative;
-    }
-    
-    
-    
-    .search input {
-      background-color: var(--ash);
-      border: none;
-      border-radius: 6px;
-      padding: 0.7rem;
-      padding-left: 2.4rem;
-      font-size: 15px;
-      width: 100%;
-      height: 35px;
-      border: var(--border);
-    }
-    
-    .search .bx-search {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      font-size: 1.3rem;
-      transform: translateY(-50%);
-      opacity: 0.6;
-    }
-    
-    #hamburger {
-      display: none;
-      padding: 0.1rem;
-      margin-left: 1rem;
-      font-size: 1.9rem;
-    }
-    
-    @media (max-width: 1100px) {
-      #hamburger {
-        display: block;
-      }
-    
-      .container {
-        padding: 1.2rem;
-      }
-    
-      .menu {
-        display: none;
-        position: absolute;
-        top: 87px;
-        left: 0;
-        width: 100vw;
-        z-index: 100;
-      }
-    
-      .menu-bar li:first-child ul:nth-child(1) {
-        border-right: none;
-        border-bottom: var(--border);
-      }
-    
-      .dropdown {
-        display: none;
-        min-width: 100%;
-        border: none !important;
-        border-radius: 5px;
-        position: static;
-        top: 0;
-        left: 0;
-        visibility: visible;
-        opacity: 1;
-        transform: none;
-        box-shadow: none;
-      }
-    
-      .menu.show,
-      .dropdown.active {
-        display: block;
-      }
-    
-      .dropdown ul {
-        padding-left: 0.3rem;
-      }
-    
-      .menu-bar {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        row-gap: 1rem;
-        padding: 1rem;
-      }
-    
-      .menu-bar .nav-link {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        font-weight: 600;
-        font-size: 1.2rem;
-        margin: 0;
-      }
-    
-      .menu-bar li:first-child .dropdown {
-        min-width: 100%;
-      }
-    
-      .menu-bar > li:not(:last-child) {
-        padding-bottom: 0.5rem;
-        border-bottom: var(--border);
-      }
-    }
-    
-    @media (max-width: 600px) {
-      .right-container {
-        display: none;
-      }
-    }
-</style>
-<header id="nav-menu" aria-label="navigation bar">
-          <div class="container1">
-            <div class="nav-start">
-              <a class="logo" href="{% url 'index' %}">
-                <img
-                  src="{% static 'img/home/logo.svg' %}"
-                  height="60"
-                  alt="Inc Logo"
-                />
-              </a>
-              <nav class="menu">
-                <ul class="menu-bar">
-                  <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                  <li><a class="nav-link" href="{% url 'products' %}">Shop</a></li>
-                  <li><a class="nav-link" href="/">Downloads</a></li>
-                  <li><a class="nav-link" href="/">Blog</a></li>
-                  <li><a class="nav-link" href="{% url 'about' %}">About</a></li>
-                  <li><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="nav-end">
-              <div class="right-container">
-                <form class="search" role="search">
-                  <input type="search" name="search" placeholder="Search" />
-                  <i class="bx bx-search" aria-hidden="true"></i>
-                </form>
-                <div class="desktop_cart">
-                  <div class="blockcart block-cart cart-preview tiva-toggle">
-                      <div class="header-cart tiva-toggle-btn">
-                          <span class="cart-products-count">{{ request.session.cart_data_obj|length }}</span>
-                          <a href="{% url 'cart' %}"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="dropdown-content">
-                          <div class="cart-content">
-                              <table>
-                                  <tbody>
-                                      <tr>
-                                          <td colspan="3" class="d-flex justify-content-center">
-                                              <div class="cart-button">
-                                                  <a href="{% url 'cart' %}" title="View Cart">View Cart</a>
-                                                  <a href="product-checkout.html" title="Checkout">Checkout</a>
-                                              </div>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+/* Header styles */
+header {
+  background-image: linear-gradient(to right, rgb(236, 235, 235), rgb(161, 159, 159));
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  padding: 10px;
 
-                {% if request.user.is_authenticated %}
-                <a href=""><i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                    {{request.user.username}}</a>
-                  <a href="{% url 'sign-out' %}"></i>
-                    Sign out </a>
-                {% else %}
-                <a href="{% url 'sign-in' %}"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                  Login</a>
-                  {% endif %}
-              </div>
-              
-              <button
-                id="hamburger"
-                aria-label="hamburger"
-                aria-haspopup="true"
-                aria-expanded="false">
-                <i class="bx bx-menu" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
+}
+.top-navigation{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+  padding-top: 20px;
+}
+
+/* Logo styles */
+.logo {
+  position: absolute;
+  margin-right: auto; /* Pushes the logo to the left */
+}
+
+.logo img {
+  margin: 0; /* Remove default margin for h1 */
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  margin-right: 20px;
+}
+
+.search-form button {
+  padding: 1px 2px;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  color: black;
+  background: none;
+  cursor: pointer;
+}
+
+.search-form {
+  width: 200px;
+  max-width: 350px;
+  margin-inline: auto;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid black;
+  border-radius: 5rem;
+}
+
+.search-form input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: black;
+  background-color: transparent;
+}
+
+.search-form input::placeholder {
+  color: black;
+}
+
+.top-nav-links {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.top-nav-links li {
+  margin: 0 30px;
+}
+.top-nav-links li a{
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
+
+.top-nav-links li:last-child {
+  margin-right: 15px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Bottom navigation styles */
+.bottom-nav {
+  color: black;
+  text-align: end;
+}
+
+.bottom-nav-links {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+}
+.bottom-nav-links li {
+  margin: 15px 20px;
+
+}
+.bottom-nav-links li a{
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  border-radius: 6px;
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+.dropdown-menu li a{
+  text-decoration: none;
+  text-transform: uppercase;
+  
+}
+
+/* Add this CSS to show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+     /* Cart Container */
+.cart-container {
+    position: relative;
+    display: inline-block;
+    }
+
+    /* Cart Icon */
+.cart-icon {
+    font-size: 20px;
+    color: black;
+    }
+
+    /* Badge */
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+/* Add this CSS to show dropdown on small screens */
+@media only screen and (max-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 768px) {
+  .logo img{
+    height: 70px;
+    width: auto;
+  }
+  .top-nav {
+    flex-direction: column-reverse;
+  }
+  .top-nav .top-nav-links{
+    display: flex;
+    
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+
+  .top-nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .top-nav-links li {
+    margin: 0 10px;
+    padding-bottom: 10px;
+  }
+
+  .top-nav-links li:last-child {
+    margin-bottom: 0;
+  }
+
+  .bottom-nav-links {
+    display: none;
+  }
+
+  .bottom-nav {
+    text-align: left;
+    width: fit-content;
+  }
+  .bottom-nav-links li {
+  margin: 0 20px;
+
+}
+
+  .bottom-nav.active .bottom-nav-links {
+    display: flex;
+    flex-direction: column;
+    
+  }
+}
+
+</style>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">                                
+</head>
+<body style="font-family: 'Titillium Web', sans-serif;">
+
+<header>
+  <div class="logo">
+    <a href="{% url 'index' %}"><img src="{% static 'img/logo.svg' %}" alt="logo" height="100"></a>
+  </div>
+  <div class="top-navigation">
+    <nav class="top-nav">
+      <div class="search-bar"> 
+        <form method="get" action="{% url 'search' %}" class="search-form">
+          <input type="text" placeholder="Search Furniture" name="q">
+          <button type="submit"><i class="ri-search-line"></i></button>
+        </form>
+      </div>
+      <ul class="top-nav-links">
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'sign-in' %}"><i class="cart-icon ri-account-circle-fill"></i> {{request.user.username}}</a></li>
+        <li><a href="{% url 'sign-out' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'sign-in' %}"><i class="cart-icon ri-account-circle-fill"></i> My Account</a></li>
+        {% endif %}
+        <li><div class="cart-container">
+          <a href="{% url 'cart' %}"><i class="cart-icon ri-shopping-cart-line"></i>
+            <div class="badge cart-products-count">{{ request.session.cart_data_obj|length }}</div></a>
+        </div></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu"><span><i class="ri-menu-line"></i></span></button> 
+  </div>
+
+<nav class="bottom-nav">
+  <ul class="bottom-nav-links">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li class="dropdown">
+      <a href="#">Categories <i class="ri-arrow-down-s-line"></i></a>
+      <ul class="dropdown-menu">
+        {% for c in categories %}
+        <li><a style="text-align: start;" href="{% url 'category' c.cid %}"> {{c.title}} </a></li>
+        {% endfor %}      
+      </ul>
+    </li>
+    <li><a href="{% url 'products' %}">Shop</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+    <li><a href="#">Downloads</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="#blog">Blog</a></li>
+  </ul>
+</nav>
 </header>
 <script>
-    // script.js
-    const dropdownBtn = document.querySelectorAll(".dropdown-btn");
-    const dropdown = document.querySelectorAll(".dropdown");
-    const hamburgerBtn = document.getElementById("hamburger");
-    const navMenu = document.querySelector(".menu");
-    const links = document.querySelectorAll(".dropdown a");
-    
-    function setAriaExpandedFalse() {
-      dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
-    }
-    
-    function closeDropdownMenu() {
-      dropdown.forEach((drop) => {
-        drop.classList.remove("active");
-        drop.addEventListener("click", (e) => e.stopPropagation());
-      });
-    }
-    
-    function toggleHamburger() {
-      navMenu.classList.toggle("show");
-    }
-    
-    dropdownBtn.forEach((btn) => {
-      btn.addEventListener("click", function (e) {
-        const dropdownIndex = e.currentTarget.dataset.dropdown;
-        const dropdownElement = document.getElementById(dropdownIndex);
-    
-        dropdownElement.classList.toggle("active");
-        dropdown.forEach((drop) => {
-          if (drop.id !== btn.dataset["dropdown"]) {
-            drop.classList.remove("active");
-          }
-        });
-        e.stopPropagation();
-        btn.setAttribute(
-          "aria-expanded",
-          btn.getAttribute("aria-expanded") === "false" ? "true" : "false"
-        );
-      });
-    });
-    
-    // close dropdown menu when the dropdown links are clicked
-    links.forEach((link) =>
-      link.addEventListener("click", () => {
-        closeDropdownMenu();
-        setAriaExpandedFalse();
-        toggleHamburger();
-      })
-    );
-    
-    // close dropdown menu when you click on the document body
-    document.documentElement.addEventListener("click", () => {
-      closeDropdownMenu();
-      setAriaExpandedFalse();
-    });
-    
-    // close dropdown when the escape key is pressed
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeDropdownMenu();
-        setAriaExpandedFalse();
-      }
-    });
-    
-    hamburgerBtn.addEventListener("click", toggleHamburger);
+  document.addEventListener("DOMContentLoaded", function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const bottomNav = document.querySelector('.bottom-nav');
+
+  menuToggle.addEventListener('click', function() {
+    bottomNav.classList.toggle('active');
+  });
+});
 </script>
+</body>
+</html>

@@ -1,95 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<style>
-	.about-container {
-  max-width: 1100px;
-  margin: 20px auto;
-  padding: 20px;
-}
 
-.about-section {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to new line on smaller screens */
-}
-
-.image {
-  flex: 1;
-}
-
-.image img {
-  width: 100%; /* Adjust image width to fill its container */
-  height: auto;
-  border-radius: 6px;
-}
-
-.description {
-  flex: 1;
-  background-color: rgb(216, 216, 216);
-  margin-right: 30px;
-  margin-bottom: 20px; /* Added margin-bottom for spacing */
-  padding: 20px;
-  border-radius: 6px;
-}
-
-.mission-vision-section {
-  margin-top: 50px;
-}
-
-.mission,
-.vision {
-  margin-bottom: 30px;
-}
-
-h2 {
-  color: #333;
-}
-
-p {
-  color: #666;
-}
-
-.banner-container {
-  position: relative;
-  text-align: center;
-}
-
-.centered img {
-  filter: blur(3px);
-  -webkit-filter: blur(1px);
-  position: relative;
-  max-width: 100%;
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  margin-bottom: 20px; /* Adjusted margin */
-}
-
-.centered h3 {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%); /* Center the text horizontally */
-  font-size: 40px; /* Adjusted font size for smaller screens */
-  text-align: center;
-}
-
-/* Media queries for responsiveness */
-
-@media screen and (max-width: 768px) {
-  .about-section {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-  }
-
-  .description,
-  .image {
-    width: 100%; /* Make both sections take full width on smaller screens */
-    margin-right: 0;
-  }
-}
-
-
-</style>
 <main>
 
 	  <div class="about-container">
@@ -101,7 +13,7 @@ p {
 		</div>	
 		</div>
 		<div class="about-section">
-			 <div class="description">
+			 <div class="about-description">
 			<h1 style="text-align: start;" style="margin-bottom: 30px;">Who we Are</h1>
 			<p style="text-align: start;">
 				Vector Woodcrafts and Interior limited offers you the finest and affordable wood products for your interior décor. We specialize in the production of custom furniture pieces from pure solid wood or steel-wood composite.
@@ -114,7 +26,7 @@ p {
       <h1 style="text-align: start;" style="margin-bottom: 30px;">Our Vision</h1>
 			<p style="text-align: start;">We look forward to becoming the most preferred store providing standardized quality and unique wood products.</p>
 		  </div>
-		  <div class="image">
+		  <div class="about-image">
 			<!-- Your image goes here -->
 			<img src="{% static 'img/about.jpg' %}" alt="Company Image">
 		  </div>
