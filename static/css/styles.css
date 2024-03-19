@@ -104,21 +104,13 @@ body {
 .form-box{
     margin-left: 100px;
     margin-top: 10px;
-    width: 350px;
+    width: 300px;
     height: fit-content;
     position: relative;
     background: transparent;
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-}
-.toggle-btn{
-    padding: 10px 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
 }
 #btn{
     top: 0;
@@ -188,10 +180,10 @@ body {
     text-decoration: none;
 }
 #login{
-    left: 50px;
+  left: 10px;
 }
 #signup{
-    left: 50px;
+    left: 10px;
 }
 
 
