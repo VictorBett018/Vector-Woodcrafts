@@ -1,12 +1,13 @@
 {% load static %}
 {% include 'social_icons.html' %}
+
+
 {% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
     <!-- <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/> -->
     <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
@@ -14,15 +15,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">                                
 
-
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <meta name="google-site-verification" content="aquRm_YFWJDc5exmY508wib71qFSIHLfkHHTqCxJDc4" />
-
-    
+    {% block title %}{% endblock %}
 </head>
 <body style="font-family: 'Titillium Web', sans-serif;">
-<hr>
+    <hr>
 <a style=" text-decoration: none; " href="https://api.whatsapp.com/send?phone=254757555778&text=Hello there!" class="float" target="_blank">
   <i style="font-size: 53px; "  class="ri-whatsapp-line"></i>
 </a>
@@ -34,16 +33,6 @@
   {% include 'footer.html' %}
   
      </body>
-     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-  const menuBtn = document.getElementById('menu-btn');
-  const bottomNav = document.getElementById('bottom-nav');
-
-  menuBtn.addEventListener('click', function () {
-    bottomNav.classList.toggle('active');
-  });
-});
-     </script>
      <script src="https://unpkg.com/scrollreveal"></script>
      <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

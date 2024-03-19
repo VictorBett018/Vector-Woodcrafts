@@ -1,34 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<title>Login</title>
 
-<main style="height: 700px;">
-    {% if form.errors %}
-<div style="width: fit-content; margin-left: 280px;" class="alert alert-danger">
-    <strong>{{form.errors}}</strong>
-</div>
 
-{% endif %}
-    <div  class="hero">
-       <div style="height: 650px;"  class="form-box">
-           <h2 style="text-align: center;">Login</h2>
-              <div class="social-reg">
-               <img src="{% static 'img/icons8-facebook.svg' %}" alt="">
-               <img src="{% static 'img/icons8-instagram.svg' %}" alt="">
-              </div>   
+
+<!-- main content -->
+<main style="height: 600px;">
+   <div  class="hero">
+      <div style="height: 500px;margin-top: 50px;" class="form-box">
+        <h2 style="text-align: center;">Login</h2>
+             <div class="social-reg">
+              <img src="{% static 'img/icons8-facebook.svg' %}" alt="">
+              <img src="{% static 'img/icons8-instagram.svg' %}" alt="">
+             </div>   
+         
+      <form id="login" class="input-group" method="post" action="">
+       {% csrf_token %}
+          <input type="email" name="email" class="input-field" placeholder="Enter email" required>
+          <input type="password" name="password" class="input-field" placeholder="Enter password" required>
+          <p class="p-formlog">Dont have an account? <a href="{% url 'sign-up' %}">Sign up</a></p>
+          <p class="p-formlog"><a href="http://">Forgotten password?</a></p>
           
-              <form id="login" class="input-group" method="post" action="">
-               {% csrf_token %}
-                  <input type="email" name="email" class="input-field" placeholder="Enter email" required>
-                  <input type="password" name="password" class="input-field" placeholder="Enter password" required>
-                  <p class="p-formlog">Dont have an account? <a href="{% url 'sign-up' %}">Sign up</a></p>
-                  <p class="p-formlog"><a href="http://">Forgotten password?</a></p>
-                  
-                  <button type="submit" class="submit-btn">Login </button>
-              </form>
-       </div>
+          <button type="submit" class="submit-btn">Login </button>
 
-   </div>
-       <div class="hero-img" style="height: 600px;"> <img style="display: block; margin-left: auto;" src="{% static 'img/furniturestore-shop-pic1.webp' %}"  alt=""></div>
+      </form>
+      </div>
+
+  </div>
+  <div class="hero-img">
+          <img style="display: block;margin-top: 100px; margin-left: auto;" src="{% static 'img/furniturestore-shop-pic1.webp' %}"  alt="">
+
+  </div>
 </main>
-{% endblock %}
+   {% endblock %}

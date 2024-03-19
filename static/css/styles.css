@@ -35,7 +35,9 @@
   body {
     scroll-behavior: smooth;
   }
-  
+  main{
+    margin-top: 150px;
+  }
 
 /* Body styles */
 body {
@@ -96,7 +98,7 @@ body {
     height: fit-content;
     width: 100%;
     background-position: center;
-    /* background-size: cover; */
+    background-size: cover;
     position: absolute;
 }
 .form-box{
@@ -480,7 +482,7 @@ p {
   display: none;
   position: absolute;
   z-index: 1;
-  background-color: #fff;
+  background-color: rgb(216, 216, 216);
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -493,7 +495,6 @@ p {
 
 .dropdown-menu li a {
   display: block;
-  padding: 10px 20px;
   text-decoration: none;
   color: #333;
 }
@@ -610,5 +611,20 @@ p {
 .choose {
   display: flex;
 }
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
 
-
+.my-float{
+	margin-top:16px;
+}

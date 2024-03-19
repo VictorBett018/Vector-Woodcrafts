@@ -9,9 +9,6 @@
   .hero-img {
     display: none;
   }
-  .login-hero-img img{
-   display: none;
-  }
  }
 
   @media screen and (max-width: 768px) {
@@ -38,6 +35,19 @@
     }
     .choose-image{
       display: none;
+    }
+   
+  }
+  @media (width < 900px){
+    .blog__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+  @media (width < 600px){
+    .blog__grid {
+      grid-template-columns: repeat(1, 1fr);
+      row-gap: 2rem;
     }
   }
   
