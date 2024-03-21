@@ -16,8 +16,8 @@
           <p class="description">{{p.description|truncatechars:50}}</p>
           <div class="price-container">
             <p class="previous-price">Ksh {{p.old_price}} </p>
-          <p class="current-price">ksh {{p.price}} </p>
-          </div>
+            <p>Ksh</p><p class="current-price current-price-{{p.id}}" id="current-price-{{p.id}}">{{p.price}} </p>
+        </div>
           <button class="wishlist-btn"><i class="ri-heart-line"></i></button>
 
           <select style="display: none;" class="product-dimension-{{p.id}}" name="dimension" id="dimension">

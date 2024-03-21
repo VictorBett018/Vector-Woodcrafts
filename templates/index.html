@@ -54,7 +54,7 @@
         <div class="image-grid">
           {% for c in categories %}
           <div class="image">
-            <a href="#">
+            <a href="{% url 'category' c.cid %}">
               <img src="{{c.image.url}}" alt="Image 1">
               <div class="image-title">{{c.title}}</div>
             </a>
