@@ -14,12 +14,13 @@
   @media screen and (max-width: 768px) {
     .about-section {
       flex-direction: column; /* Stack items vertically on smaller screens */
+      margin: auto;
     }
   
     .description,
     .about-image {
       width: 100%; /* Make both sections take full width on smaller screens */
-      margin-right: 0;
+      margin: auto;
     }
   }
   @media screen and (max-width: 768px) {
