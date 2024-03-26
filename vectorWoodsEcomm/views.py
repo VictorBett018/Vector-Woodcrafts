@@ -6,6 +6,9 @@ from django.shortcuts import get_object_or_404
 from vectorWoodsEcomm.forms import ProductReviewForm
 from django.http import JsonResponse
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -24,10 +27,15 @@ def products_view(request):
 
     categories = Category.objects.all().order_by("-id")
     products = Product.objects.all().order_by("-date")
+    paginator = Paginator(products, 8)  
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
         "categories" : categories ,
         "products" : products,
+        'page_obj': page_obj,
         
     }
 
@@ -86,7 +94,31 @@ def tag_list(request, tag_slug=None):
     return render(request, 'tag.html', context)
 
 def contact_view(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        subject = request.POST.get('subject')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Send email
+        send_mail(
+            subject,
+            f'Name: {name}\nEmail: {email}\nMessage: {message}',
+            email,  # sender
+            ['victorbetb1998@gmail.com'],  # recipients
+            fail_silently=False,
+        )
+
+        # Redirect after form submission
+        return HttpResponseRedirect('thankyou')  # Redirect to a 'thank you' page
+    else:
+        return render(request, 'contact.html')  # Render the contact form template
+
+
+
+
+def thankyou_view(request):
+    return render(request, 'thankyou.html')
 
 def about_view(request):
     return render(request, 'about.html')

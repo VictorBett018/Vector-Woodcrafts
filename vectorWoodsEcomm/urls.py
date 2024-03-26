@@ -6,6 +6,7 @@ from vectorWoodsEcomm import views
 urlpatterns = [
     path('', views.index,name='index'),
     path('contact/', views.contact_view, name='contact'),
+    path('thankyou/', views.thankyou_view, name='thankyou'),
     path('about/', views.about_view, name='about'),
     path('products', views.products_view,name='products'),
     path('product/<pid>/', views.product_detail_view, name='product_details'),

@@ -24,8 +24,8 @@
 
             <div class="main-container">
                 <h3 style="text-align: center;"> Get in Touch</h3>
-                <form id="contact-form">
-                
+                <form method="post" id="contact-form">
+                    {% csrf_token %}
                     <label>Name</label>
                     <input class="input-field" type="text" name="name">
       
@@ -42,21 +42,15 @@
                 </form>
         
       </div>
-      <div style="display: block; justify-content: flex-start; margin-left:10%  ; margin-top: 100px;"  class="contact_text">
-       
-        
-        
+      <div style="display: block; justify-content: flex-start; margin-left:5%  ; margin-top: 100px;"  class="contact_text">       
         <div  style="display: flex; " class="contact-content">
             <i style="font-size: 60px;color: #007bff; margin-right: 20px;" class="ri-mail-line"></i>
             <div>
                  <h3 style="color: #007bff;">Email:</h3>
             <a style="text-decoration: none; color: black;" href="mailto:sales@vectorwoodcrafts.co.ke">sales@vectorwoodcrafts.co.ke</a>
-            </div>
-           
+            </div>           
         </div>
-        <br>
-
-        
+        <br> 
         <div style="display: flex;" class="contact-content">
             <i style="font-size: 60px;color: #007bff; margin-right: 20px;" class="ri-map-pin-line"></i>
             <div>

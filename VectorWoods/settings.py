@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0+x85d0$j^7nzr#fb1*#wyf1!=$g36k1e!v!d5mw#85++n+qq#
 DEBUG = True
 
 ALLOWED_HOSTS = ['vectorwoodcrafts.co.ke','localhost']
-# ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -143,6 +143,12 @@ JAZZMIN_SETTINGS = {
     'copyright' : "vectorwoodcrafts.co.ke",
 }
 AUTH_USER_MODEL = 'userauths.User'
-
-
 LOGOUT_REDIRECT_URL = 'index'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # or the port your SMTP server uses
+EMAIL_USE_TLS = True  # or False if your SMTP server doesn't use TLS
+EMAIL_HOST_USER = 'victorbetb1998@gmail.com'
+EMAIL_HOST_PASSWORD = '0703686150'
+DEFAULT_FROM_EMAIL = 'bettofficial010@gmail.com'  # This will be the 'from' email address
