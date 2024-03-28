@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Category/{{category.title}} - Woodcrafts and Interiors{% endblock %}
 {% block content %}
-<title>Category/{{category.title}}</title>
-
-
 <main>
     <br>
-            <h2 style="text-align: center;">-----{{ category.title }}-------</h2>
-
+    <h2 style="text-align: center;">-----{{ category.title }}-------</h2>
     <div class="container">
     {% for p in products %}
         <div class="product">
@@ -49,8 +46,6 @@
             <button class="view-btn"><i class="ri-eye-line"></i></button>
         </div>
         {% endfor %}
-    </div>
-    
+    </div>    
 </main>
-
 {% endblock %}

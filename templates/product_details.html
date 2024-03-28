@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Shop/{{product.title}} - Vector Woodcrafts and Interiors {% endblock %}
 {% block content %}
-<title>Shop/{{product.title}}</title>
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -316,8 +315,7 @@
       <button class="view-btn"><i class="ri-eye-line"></i></button>
     </div>
     {% endfor %}
- </div>
-  
+ </div> 
 </section>
 </div>   
 <script>
