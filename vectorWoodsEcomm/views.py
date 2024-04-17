@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.template.loader import render_to_string
-from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address
+from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,BlogPost
 from taggit.models import Tag
 from django.shortcuts import get_object_or_404
 from vectorWoodsEcomm.forms import ProductReviewForm
@@ -15,10 +15,12 @@ from django.core.paginator import Paginator
 def index(request):
     categories = Category.objects.all().order_by("-id")
     products = Product.objects.filter(featured=True)
+    blog_posts = BlogPost.objects.all()
 
     context = {
             "categories" : categories,
-            "products":products
+            "products":products,
+            "blog_posts":blog_posts,
     }
     return render(request, 'index.html', context)
 
@@ -255,3 +257,17 @@ def update_cart(request):
     context = render_to_string("async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
 
     return JsonResponse ({"data":context, 'totalcartitems': len(request.session['cart_data_obj'])})
+def blog_view(request):
+    blog_posts = BlogPost.objects.all()
+    context = {
+        'blog_posts': blog_posts
+    }
+    return render(request, 'blog.html', context)
+
+def blog_detail_view(request, bid):
+    blog = BlogPost.objects.get(bid=bid)
+
+    context = {
+        'blog': blog
+    }
+    return render(request, 'blog_details.html', context)

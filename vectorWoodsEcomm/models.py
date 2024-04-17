@@ -60,9 +60,9 @@ class Product(models.Model):
     color3 = models.CharField(max_length=100, null = True, default="Gray")
     color4 = models.CharField(max_length=100, null = True, default="Black")
     woodtype1 = models.CharField(max_length=100, null = True, default="Mahogany")
-    woodtype2 = models.CharField(max_length=100, null = True, default="Oak")
-    woodtype3 = models.CharField(max_length=100, null = True, default="Maple")
-    woodtype4 = models.CharField(max_length=100, null = True, default="Cherry")
+    woodtype2 = models.CharField(max_length=100, null = True, default="Mango")
+    woodtype3 = models.CharField(max_length=100, null = True, default="Teak")
+    woodtype4 = models.CharField(max_length=100, null = True, default="Cypress")
 
     class Meta:
         verbose_name_plural = "Products"
@@ -102,8 +102,8 @@ class CartOrderItems(models.Model):
     item = models.CharField(max_length=200)
     img = models.CharField(max_length=200)
     qty = models.IntegerField(default=0)
-    price = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
-    total = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
+    price = models.DecimalField(max_digits=999999, decimal_places=2,)
+    total = models.DecimalField(max_digits=999999, decimal_places=2,)
     
     class Meta:
         verbose_name_plural = "Cart Order Items"
@@ -150,3 +150,20 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Address"
+        
+
+class BlogPost(models.Model):
+    bid = ShortUUIDField(unique=True,length = 10, max_length = 20, alphabet = "abcdefghijk123456789")
+    title = models.CharField(max_length=200)
+    introduction = models.TextField()
+    body_t1 = models.CharField(max_length=200, null=True)
+    body_t2 = models.CharField(max_length=200, null=True)
+    body_p1 = models.TextField(null=True)
+    body_p2 = models.TextField(null=True)
+    conclusion_title = models.CharField(max_length=200,null=True, default="Conclusion")
+    conclusion = models.TextField(null=True)
+    image = models.ImageField(upload_to='blog_images/')
+    published_date = models.DateField()
+
+    def __str__(self):
+        return self.title

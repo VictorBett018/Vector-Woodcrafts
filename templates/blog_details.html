@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Vector Woodcrafts and Interiors - Blog{% endblock %}
+{% block content %}
+
+<main>
+        <style>
+            .container {
+                max-width: 1200px;
+                margin: auto;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            p {
+                margin-bottom: 20px;
+                text-align: start;
+            }
+            .intro {
+                font-style: italic;
+            }
+            .section-title {
+                margin-top: 40px;
+                margin-bottom: 10px;
+                font-size: 24px;
+            }
+            .conclusion {
+                font-weight: bold;
+                text-align: start;
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+            .blog-img {
+                max-width: 100%;
+                height: auto;
+                /* display: block; */
+                margin: 20px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{blog.title}}</h1>
+            <img class="blog-img" src="{{blog.image.url}}" alt="Woodworking" />
+            <p class="intro">{{blog.introduction}}</p>            
+            <h2 class="section-title">{{blog.body_t1}}</h2>
+            <p>{{blog.body_p1}}</p>
+            <h2 class="section-title">{{blog.body_t2}}</h2>
+            <p>{{blog.body_p2}}</p>            
+            <h2 class="section-title">{{blog.conclusion_title}}</h2>
+            <p class="conclusion">{{blog.conclusion}}</p>
+        </div>
+</main>
+
+{% endblock %}

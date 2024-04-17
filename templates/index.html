@@ -110,27 +110,21 @@
     
        
 
-    <section class="section__container blog_container" id="blog">
-      <h2 class="section__header">Recent Blog</h2>
-      <div class="blog__grid">
-        <div class="blog__card">
-          <img src="{% static 'img/blog-1.jpg' %}" alt="blog" />
-          <h4>Mastering Modern Minimalism</h4>
-          <p><span>by</span> DesignSavvySoul <span>on</span> Jan 18th, 2024</p>
-        </div>
-        <div class="blog__card">
-          <img src="{% static 'img/blog-2.jpg' %}" alt="blog" />
-          <h4>The Fusion of Tech and Design</h4>
-          <p>
-            <span>by</span> ChicNestInteriors <span>on</span> Nov 10th, 2024
-          </p>
-        </div>
-        <div class="blog__card">
-          <img src="{% static 'img/blog-3.jpg' %}" alt="blog" />
-          <h4>Eco-Friendly Modern Interiors</h4>
-          <p><span>by</span> HomeStyleHarmony <span>on</span> Feb 25th, 2023</p>
-        </div>
-      </div>
-    </section>
+       <section class="section__container blog_container" id="blog">
+        <h2 class="section__header">Our Blog</h2>
+        <div class="blog__grid">
+            {% for blog in blog_posts %}
+          <div class="blog__card">
+            <img src="{{blog.image.url}}" alt="blog" />
+            <h4 style="text-align: start;">{{blog.title}}</h4>
+            <p style="text-align: start;">{{blog.published_date}}</p>
+            <p style="text-align: start;">
+                {{blog.body_p2|truncatechars:150}}
+            </p>
+            <a style="text-decoration: none;" href="{% url 'blog_details' blog.bid %}"><button class="btn">Read more</button></a>
+          </div>
+          {% endfor %}
+        </div>   
+      </section>
   </main>
    {% endblock %}
