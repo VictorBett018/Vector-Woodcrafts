@@ -5,51 +5,262 @@
 
 <main>
         <style>
-            .container {
-                max-width: 1200px;
+            .blog-container {
+                max-width: 1000px;
                 margin: auto;
                 padding: 20px;
+            }
+            .con{
+                margin-bottom: 10px;
+                margin-left: 20px;
             }
             h1 {
                 text-align: center;
                 margin-bottom: 20px;
             }
             p {
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 text-align: start;
+                color: #000;
+                font-size: 1rem;
             }
             .intro {
                 font-style: italic;
             }
             .section-title {
-                margin-top: 40px;
+                /* margin-top: 40px; */
                 margin-bottom: 10px;
                 font-size: 24px;
             }
             .conclusion {
                 font-weight: bold;
                 text-align: start;
-                margin-top: 40px;
-                margin-bottom: 40px;
+                /* margin-top: 40px; */
+                /* margin-bottom: 40px; */
             }
             .blog-img {
                 max-width: 100%;
                 height: auto;
-                /* display: block; */
+                display: block;
                 margin: 20px auto;
             }
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="blog-container">
             <h1>{{blog.title}}</h1>
             <img class="blog-img" src="{{blog.image.url}}" alt="Woodworking" />
-            <p class="intro">{{blog.introduction}}</p>            
-            <h2 class="section-title">{{blog.body_t1}}</h2>
-            <p>{{blog.body_p1}}</p>
-            <h2 class="section-title">{{blog.body_t2}}</h2>
-            <p>{{blog.body_p2}}</p>            
+
+            <p class="intro">{{blog.introduction}}</p>
+
+            {% if blog.heading1 %}            
+            <h2 class="section-title">{{blog.heading1}}</h2>
+            {% endif %}
+            {% if blog.para1 %}
+            <p>{{blog.para1}}</p>
+            {% endif %}
+            <div class="con">
+                {% if blog.subheading1%}
+                <h3>{{blog.subheading1}}</h3>
+                {% endif %} <br>
+
+                <ul style="align-items: start;">
+                {% if blog.list11 %}
+                <li>                
+                    {{blog.list11}} 
+                </li>
+                {% endif %}
+                
+                {% if blog.list12 %}
+                <li>                
+                    {{blog.list12}} 
+                </li>
+                {% endif %}
+                {% if blog.list13 %}
+                <li>                
+                    {{blog.list13}} 
+                </li>
+                {% endif %}
+                {% if blog.list14 %}
+                <li>                
+                    {{blog.list14}} 
+                </li>
+                {% endif %}
+
+                {% if blog.list15 %}
+                <li>                
+                    {{blog.list15}} 
+                </li>
+                {% endif %}
+            </ul></div>
+
+
+            {% if blog.heading2 %}
+            <h2 class="section-title">{{blog.heading2}}</h2>
+            {% endif %}
+            {% if blog.para2 %}
+            <p>{{blog.para2}}</p>
+            {% endif %}
+            <div class="con">
+                {% if blog.subheading2%}
+                <h3>{{blog.subheading2}}</h3>
+                {% endif %} <br>
+
+                <ul style="align-items: start;">
+                {% if blog.list21 %}
+                <li>                
+                    {{blog.list21}} 
+                </li>
+                {% endif %}
+                
+                {% if blog.list22 %}
+                <li>                
+                    {{blog.list22}} 
+                </li>
+                {% endif %}
+                {% if blog.list23 %}
+                <li>                
+                    {{blog.list23}} 
+                </li>
+                {% endif %}
+                {% if blog.list24 %}
+                <li>                
+                    {{blog.list24}} 
+                </li>
+                {% endif %}
+
+                {% if blog.list25 %}
+                <li>                
+                    {{blog.list25}} 
+                </li>
+                {% endif %}
+            </ul></div>
+
+            {% if blog.heading3 %}
+            <h2 class="section-title">{{blog.heading3}}</h2>
+            {% endif %} 
+            {% if blog.para3 %}
+            <p>{{blog.para3}}</p>
+            {% endif %}
+            <div class="con">
+                {% if blog.subheading3%}
+                <h3>{{blog.subheading3}}</h3>
+                {% endif %} <br>
+
+                <ul style="align-items: start;">
+                {% if blog.list31 %}
+                <li>                
+                    {{blog.list31}} 
+                </li>
+                {% endif %}
+                
+                {% if blog.list32 %}
+                <li>                
+                    {{blog.list32}} 
+                </li>
+                {% endif %}
+                {% if blog.list33 %}
+                <li>                
+                    {{blog.list33}} 
+                </li>
+                {% endif %}
+                {% if blog.list34 %}
+                <li>                
+                    {{blog.list34}} 
+                </li>
+                {% endif %}
+
+                {% if blog.list35 %}
+                <li>                
+                    {{blog.list35}} 
+                </li>
+                {% endif %}
+            </ul></div>
+
+            {% if blog.heading4 %}
+            <h2 class="section-title">{{blog.heading4}}</h2>
+            {% endif %}
+            {% if blog.para4 %}
+            <p>{{blog.para4}}</p>
+            {% endif %}
+            <div class="con">
+                {% if blog.subheading4%}
+                <h3>{{blog.subheading4}}</h3>
+                {% endif %} <br>
+
+                <ul style="align-items: start;">
+                {% if blog.list41 %}
+                <li>                
+                    {{blog.list41}} 
+                </li>
+                {% endif %}
+                
+                {% if blog.list42 %}
+                <li>                
+                    {{blog.list42}} 
+                </li>
+                {% endif %}
+                {% if blog.list43 %}
+                <li>                
+                    {{blog.list43}} 
+                </li>
+                {% endif %}
+                {% if blog.list44 %}
+                <li>                
+                    {{blog.list44}} 
+                </li>
+                {% endif %}
+
+                {% if blog.list45 %}
+                <li>                
+                    {{blog.list45}} 
+                </li>
+                {% endif %}
+            </ul></div>
+
+            {% if blog.heading5 %}
+            <h2 class="section-title">{{blog.heading5}}</h2>
+            {% endif %} 
+             {% if blog.para5 %}
+            <p>{{blog.para5}}</p>
+            {% endif %}
+            <div class="con">
+                {% if blog.subheading5%}
+                <h3>{{blog.subheading5}}</h3>
+                {% endif %} <br>
+
+                <ul style="align-items: start;">
+                {% if blog.list51 %}
+                <li>                
+                    {{blog.list51}} 
+                </li>
+                {% endif %}
+                
+                {% if blog.list52 %}
+                <li>                
+                    {{blog.list52}} 
+                </li>
+                {% endif %}
+                {% if blog.list53 %}
+                <li>                
+                    {{blog.list53}} 
+                </li>
+                {% endif %}
+                {% if blog.list54 %}
+                <li>                
+                    {{blog.list54}} 
+                </li>
+                {% endif %}
+
+                {% if blog.list55 %}
+                <li>                
+                    {{blog.list55}} 
+                </li>
+                {% endif %}
+            </ul></div>            
+            {% if blog.conclusion_title %}
             <h2 class="section-title">{{blog.conclusion_title}}</h2>
+            {% endif %}
             <p class="conclusion">{{blog.conclusion}}</p>
         </div>
 </main>

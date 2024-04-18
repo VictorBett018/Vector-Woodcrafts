@@ -13,7 +13,7 @@
         <h4 style="text-align: start;">{{blog.title}}</h4>
         <p style="text-align: start;">{{blog.published_date}}</p>
         <p style="text-align: start;">
-            {{blog.body_p2|truncatechars:150}}
+            {{blog.introduction|truncatechars:150}}
         </p>
         <a style="text-decoration: none;" href="{% url 'blog_details' blog.bid %}"><button class="btn">Read more</button></a>
       </div>
