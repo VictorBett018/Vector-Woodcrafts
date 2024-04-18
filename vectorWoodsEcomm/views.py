@@ -125,6 +125,9 @@ def thankyou_view(request):
 def about_view(request):
     return render(request, 'about.html')
 
+def faqs_view(request):
+    return render(request, 'faqs.html')
+
 def search_view(request):
     query = request.GET['q']
     products = Product.objects.filter(title__icontains = query, description__icontains = query).order_by("-date")
