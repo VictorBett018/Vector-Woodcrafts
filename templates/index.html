@@ -70,29 +70,32 @@
               <h2 style="text-align: center; font-size: 30px; margin-top: 30px;">Why Choose Us</h2>
               <div class="choose">
               <div class="choose-items">
-              <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-truck-line"></i></span> Fast & Free Shipping</h4>
-            <p  style="text-align: start;">
+            <h4 style="font-family: 'Titillium Web', sans-serif; font-weight: bold; text-align: center;"><span><i class="ri-shopping-bag-3-line"></i></span> Order Custom Made Items </h4>
+            <div style="display: flex;justify-content: space-between; ">
+              <img style="margin-right: 15px;" src="{% static 'img/1.png' %}" height="80" alt="">
+
+              <p style="text-align: start; ;">
+                We turn your ideas into reality with our custom-made products.
+              </p>
+            </div>
+            
+             <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-truck-line"></i></span> Fast & Free Shipping</h4>
+            <p  style="text-align: start; margin-top: 10px;">
               Elevate your interior design with our Fast & Free Shipping service
               without delay
-            </p>
-
-            <h4 style="font-family: 'Titillium Web', sans-serif; font-weight: bold; text-align: center;"><span><i class="ri-shopping-bag-3-line"></i></span> Easy to Shop</h4>
-            <p style="text-align: start;">
-              Discover Effortless Elegance: Explore Our Easy-to-Shop Interior
-              Design Solutions
             </p>
             </div>
             <div class="choose-items">
             <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-customer-service-2-line"></i></span> 24/7 Support</h4>
-            <p style="text-align: start;">
+            <p style="text-align: start; margin-top: 10px;">
               Experience peace of mind knowing that our dedicated team is
               available round the clock
             </p>
-         
-            <h4 style="font-family: 'Titillium Web', sans-serif;font-weight: bold; text-align: center;"><span><i class="ri-loop-right-line"></i></span> Hassle Free Returns</h4>
-            <p style="text-align: start;">
-              We believe in the perfect match, and if it doesn't quite fit, we
-              make returning items a breeze
+            <h4 style="font-family: 'Titillium Web', sans-serif; font-weight: bold; text-align: center;">
+            <span><i class="ri-shopping-cart-line"></i></span> Easy To Shop </h4>
+            <p style="text-align: start; margin-top: 10px;">
+              Discover Effortless Elegance: Explore Our Easy-to-Shop Interior
+              Design Solutions
             </p>
           
 
@@ -119,7 +122,7 @@
             <h4 style="text-align: start;">{{blog.title}}</h4>
             <p style="text-align: start;">{{blog.published_date}}</p>
             <p style="text-align: start;">
-                {{blog.body_p2|truncatechars:150}}
+                {{blog.introduction|truncatechars:150}}
             </p>
             <a style="text-decoration: none;" href="{% url 'blog_details' blog.bid %}"><button class="btn">Read more</button></a>
           </div>
