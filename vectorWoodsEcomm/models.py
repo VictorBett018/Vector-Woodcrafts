@@ -143,15 +143,6 @@ class Wishlist(models.Model):
     def __str__(self):
         return self.product.title
 
-class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
-    address = models.CharField(max_length=100, null=True)
-    status = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name_plural = "Address"
-        
-
 class BlogPost(models.Model):
     bid = ShortUUIDField(unique=True,length = 10, max_length = 20, alphabet = "abcdefghijk123456789")
     title = models.CharField(max_length=200)

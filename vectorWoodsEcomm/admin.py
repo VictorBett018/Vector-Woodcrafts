@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,BlogPost
+from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, BlogPost
 
 # Register your models here.
 class ProductImagesAdmin(admin.TabularInline):
@@ -24,8 +24,6 @@ class ProductReviewAdmin(admin.ModelAdmin):
 class WishlistAdmin(admin.ModelAdmin):
     list_display = ['user', 'product', 'date']
 
-class AddressAdmin(admin.ModelAdmin):
-    list_display = ['user', 'address', 'status']
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ['title', 'published_date', 'image']
@@ -36,7 +34,6 @@ admin.site.register(CartOrder, CartOrderAdmin)
 admin.site.register(CartOrderItems, CartOrderItemsAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(Wishlist, WishlistAdmin)
-admin.site.register(Address, AddressAdmin)
 admin.site.register(BlogPost, BlogPostAdmin)
 
 

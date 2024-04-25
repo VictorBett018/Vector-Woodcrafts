@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.template.loader import render_to_string
-from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,BlogPost
+from vectorWoodsEcomm.models import Product, Category, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist,BlogPost
 from taggit.models import Tag
 from django.shortcuts import get_object_or_404
 from vectorWoodsEcomm.forms import ProductReviewForm

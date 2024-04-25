@@ -4,13 +4,18 @@ from userauths.models import User
 
 
 class UserRegisterForm(UserCreationForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field", "placeholder": "Enter firstname"} ))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field", "placeholder": "Enter lastname"} ))
-    username = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field", "placeholder": "Enter username"} ))
-    email = forms.CharField(widget=forms.EmailInput(attrs={"class":"input-field","placeholder": "Enter email"}))
-    phone_no = forms.CharField(widget=forms.TextInput(attrs={"class":"input-field","placeholder": "Enter phone no"}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field","placeholder": "Enter password"}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field","placeholder": "Confirm password"}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    username = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    email = forms.CharField(widget=forms.EmailInput(attrs={"class":"input-field"}))
+    phone_no = forms.CharField(widget=forms.TextInput(attrs={"class":"input-field"}))
+    address = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    city = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    postal_code = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    appartment = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field"}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field"}))
+
 
 
     class Meta:

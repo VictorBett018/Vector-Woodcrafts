@@ -8,7 +8,11 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100)
     phone_no = models.CharField(max_length=15, null= True)
-
+    address = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=100, null=True)
+    postal_code = models.CharField(max_length=100, null=True)
+    appartment = models.CharField(max_length=200, null=True)
+    
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
 
