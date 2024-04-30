@@ -107,7 +107,7 @@ def contact_view(request):
             subject,
             f'Name: {name}\nEmail: {email}\nMessage: {message}',
             email,  # sender
-            ['victorbetb1998@gmail.com'],  # recipients
+            ['sales@vectorwoodcrafts.co.ke'],  # recipients
             fail_silently=False,
         )
 
@@ -207,15 +207,13 @@ def cart_view(request):
         return redirect('products')
 
 def checkout_view(request):
-
+    
     cart_total_amount = 0
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
             vat = cart_total_amount * .16
             total = cart_total_amount + vat
-
-
         return render(request, 'checkout.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
 
 def delete_item_from_cart(request):

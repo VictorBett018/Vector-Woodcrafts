@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.generic import RedirectView
 from vectorWoodsEcomm import views
 urlpatterns = [
     path('', views.index,name='index'),
@@ -22,6 +22,8 @@ urlpatterns = [
     path('delete-from-cart/', views.delete_item_from_cart, name = 'delete-from-cart'),
     path('update-cart/', views.update_cart, name = 'update-cart'),
     path('checkout/', views.checkout_view, name = 'checkout'),
+
+    path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.svg')),
 
 
 
