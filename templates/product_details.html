@@ -271,7 +271,7 @@
     
 <section>
     <h2>Related Products</h2>
-<div style="display: flex; justify-content: center;">
+<div class="container" style="display: flex; justify-content: center;">
     {% for p in products %}
     <div class="product">
           <a href="{% url 'product_details' p.pid %}"><img src="{{p.image.url}}" alt="Product Image"></a>   
