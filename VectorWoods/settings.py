@@ -146,7 +146,7 @@ AUTH_USER_MODEL = 'userauths.User'
 LOGOUT_REDIRECT_URL = 'index'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.vectorwoodcrafts.co.ke'
+EMAIL_HOST = 'sales@vectorwoodcrafts.co.ke'
 EMAIL_PORT = 465  # or the port your SMTP server uses
 EMAIL_USE_TLS = True  # or False if your SMTP server doesn't use TLS
 EMAIL_HOST_USER = 'sales@vectorwoodcrafts.co.ke'

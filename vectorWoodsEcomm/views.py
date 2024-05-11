@@ -193,6 +193,8 @@ def add_to_cart(request):
 
 def cart_view(request):
     cart_total_amount = 0
+    vat = 0
+    total = 0
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
@@ -216,6 +218,34 @@ def checkout_view(request):
             total = cart_total_amount + vat
         return render(request, 'checkout.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
 
+def order_success_view(request):
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+
+        #creating order object
+        order =  CartOrder.objects.create(
+            user = request.user,
+            price=total
+        )
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+            vat = cart_total_amount * .16
+            total = cart_total_amount + vat
+            cart_order_items = CartOrderItems.objects.create(
+                order=order,
+                invoice_no="INVOICE_NO-" + str(order.id),
+                item=item['title'],
+                img=item['image'],
+                qty=item['qty'],
+                price=item['price'],
+                total= float(item['qty']) * float(item['price'])
+            )      
+    return render(request, 'order-success.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+
 def delete_item_from_cart(request):
     product_id = str(request.GET['id'])
     if 'cart_data_obj' in request.session:
@@ -226,15 +256,17 @@ def delete_item_from_cart(request):
             request.session['cart_data_obj'] = cart_data
 
     cart_total_amount = 0
+    vat = 0
+    total = 0
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
-            vat = cart_total_amount * .16
+            vat = cart_total_amount * 0.16
             total = cart_total_amount + vat
 
-    context = render_to_string("async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+    context = render_to_string("async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
 
-    return JsonResponse ({"data":context, 'totalcartitems': len(request.session['cart_data_obj'])})
+    return JsonResponse ({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
 
 
 def update_cart(request):
@@ -249,6 +281,8 @@ def update_cart(request):
             request.session['cart_data_obj'] = cart_data
 
     cart_total_amount = 0
+    vat = 0
+    total = 0
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])

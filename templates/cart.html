@@ -5,7 +5,7 @@
 
 <style>
     /* Your existing styles */
-    .cart-container {
+    .cart-page-container {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -15,6 +15,7 @@
     .cart-products {
         flex-grow: 1;
         margin-right: 20px;
+        margin-top: 30px;
     }
 
     .cart-summary {
@@ -98,7 +99,7 @@
 
     /* Responsive styles */
     @media only screen and (max-width: 768px) {
-        .cart-container {
+        .cart-page-container {
             flex-direction: column;
             align-items: center;
             margin: 10px;
@@ -118,24 +119,25 @@
         }
 
         .quantity-input {
-            width: 40px;
+            width: 30px;
         }
     }
 </style>
 
 <main id="cart-list">
- <div class="cart-container">
+ <div class="cart-page-container">
     <div class="cart-products">
         <h2>You have {{totalcartitems}} item(s) in your Cart</h2>
+        {% if totalcartitems %}
         <table class="cart-table">
             <thead>
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Finish</th>
+                    <!-- <th>Finish</th>
                     <th>Dimension</th>
-                    <th>Woodtype</th>
+                    <th>Woodtype</th> -->
                     <th>Quantity</th>
                     <th>Subtotal</th>
                     <th>Actions</th>
@@ -151,13 +153,13 @@
                     </div>
                 </td>
                 <td>
-                    <div class="product-name"><a href="">{{item.title}}</a> </div>
+                    <div class="product-name"><a href="{% url 'product_details' item.pid %}">{{item.title}}</a> </div>
                 </td>
                 <td>
                     <div class="product-price">Ksh {{item.price}}</div>   
                 </td>
                 <td>
-                    <span style="margin: 10px;">{{item.color}} </span>
+                    <!-- <span style="margin: 10px;">{{item.color}} </span>
                 </td>
                 <td>
                     <span style="margin: 10px;">{{item.dimension}} </span> 
@@ -165,7 +167,7 @@
                 <td>
                     <span style="margin: 10px;">{{item.woodtype}} </span> 
                 </td>
-                <td>
+                <td> -->
                 <span ><input style="margin: 10px; width: 50px; height: 30px;" type="number" class="product-qty-{{product_id}}" value="{{item.qty}}"> </span>
                 </td>
                 <td>
@@ -180,6 +182,9 @@
             </tbody>
             {% endfor %}
         </table>
+        {% else %}
+        <h2>Your cart is empty</h2>
+        {% endif %}
         
     </div>
     <div class="cart-summary">
@@ -192,7 +197,14 @@
             <p><strong>Total:</strong> Ksh {{total|floatformat:2}}</p>
             <hr>
         </div>
-        <a style="text-decoration: none;" href="{% url 'checkout' %}"><button class="checkout-btn">Proceed to Checkout</button></a>
+        {% if totalcartitems %}
+        {% if user.is_authenticated %}
+    <a style="text-decoration: none;" href="{% url 'checkout' %}"><button class="checkout-btn">Proceed to Checkout</button></a>
+{% else %}
+    <a style="text-decoration: none;" href="{% url 'sign-in' %}"><button class="checkout-btn">Login to Proceed</button></a>
+{% endif %}
+        {% endif %}
+
     </div>
 </div>   
 </main>

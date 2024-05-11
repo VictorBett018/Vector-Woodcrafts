@@ -2,7 +2,7 @@
 
 <style>
     /* Your existing styles */
-    .cart-container {
+    .cart-page-container {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -95,7 +95,7 @@
 
     /* Responsive styles */
     @media only screen and (max-width: 768px) {
-        .cart-container {
+        .cart-page-container {
             flex-direction: column;
             align-items: center;
             margin: 10px;
@@ -121,7 +121,7 @@
 </style>
 
 <main id="cart-list">
- <div class="cart-container">
+ <div class="cart-page-container">
     <div class="cart-products">
         <h2>You have {{totalcartitems}} item(s) in your Cart</h2>
         <table class="cart-table">

@@ -16,8 +16,8 @@
        {% csrf_token %}
           <input type="email" name="email" class="input-field" placeholder="Enter email" required>
           <input type="password" name="password" class="input-field" placeholder="Enter password" required>
-          <p class="p-formlog">Dont have an account? <a href="{% url 'sign-up' %}">Sign up</a></p>
-          <p class="p-formlog"><a href="http://">Forgotten password?</a></p>
+          <p class="p-formlog">Dont have an account? <a style="text-decoration: none;" href="{% url 'sign-up' %}">Sign up</a></p>
+          <p class="p-formlog"><a style="text-decoration: none;" href="http://">Forgotten password?</a></p>
           
           <button type="submit" class="submit-btn">Login </button>
 

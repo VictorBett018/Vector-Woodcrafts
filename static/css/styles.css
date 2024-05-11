@@ -221,28 +221,6 @@ body {
     color: var(--text-light);
   }
 
-
-
-@media (width < 1200px) {
-  .offer__container {
-    row-gap: 1rem;
-  }
-
-  .offer__grid__top,
-  .offer__grid__bottom {
-    gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .offer__grid__top img:first-child,
-  .offer__grid__bottom img:first-child {
-    display: none;
-  }
-
-  .craft__container {
-    gap: 1rem;
-  }
-}
 /*css for products page*/
 .container {
     display: flex;
@@ -284,19 +262,19 @@ body {
 }
 
   
-  .wishlist-btn, .cart-btn, .view-btn {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .wishlist-btn:hover, .cart-btn:hover, .view-btn:hover {
-    background-color: #ff6105;
-  }
+.wishlist-btn, .cart-btn, .view-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wishlist-btn:hover, .cart-btn:hover, .view-btn:hover {
+  background-color: #ff6105;
+}
 
 /*contact us styles*/
 .contact_container {
@@ -405,63 +383,7 @@ p {
   font-size: 16px;
   margin-bottom: 20px;
 }
-.team-member {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  
-}
-.team-member img {
-  max-width: 200px;
-  margin-inline: auto;
-  margin-bottom: 1rem;
-  border-radius: 100%;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 
-}
-.testimonial__container .section__header {
-  text-align: center;
-}
-
-.swiper {
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-  width: 100%;
-}
-
-.testimonial__card {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-.testimonial__card p {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-
-}
-
-.testimonial__card img {
-  max-width: 60px;
-  margin-inline: auto;
-  margin-bottom: 1rem;
-  border-radius: 100%;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.testimonial__card h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.testimonial__card h5 {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-light);
-}
  /* Dropdown Button */
  .dropdown > a {
   display: block;
@@ -503,7 +425,8 @@ p {
 }
 .about-container {
   max-width: 1200px;
-  margin: 20px auto;
+  width: 100%;
+ 
   padding: 20px;
 }
 
@@ -517,7 +440,7 @@ p {
 }
 
 .about-image img {
-  width: 100%; /* Adjust image width to fill its container */
+  width: 100%;
   height: auto;
   border-radius: 6px;
 }

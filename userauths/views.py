@@ -12,8 +12,6 @@ def register_view(request):
     
     if request.method == "POST":
         form = UserRegisterForm(request.POST or None)
-
-        print("user registerd")
         if form.is_valid():
             new_user = form.save()
             username = form.cleaned_data.get("username")
@@ -67,3 +65,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+     

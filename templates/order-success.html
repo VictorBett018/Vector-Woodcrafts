@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Order Completed{% endblock %}
+{% block content %}
+<style>
+  .tick-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+  padding-bottom:20px ;
+}
+
+.tick-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tick-icon svg {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  animation: tickAnimation 1s ease forwards;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+.btn2 {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        align-self: center;
+        
+    }
+
+@keyframes tickAnimation {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+</style>
+<main style="margin-top: 50px;">
+	<div class="tick-container">
+    <h2>Thank you for shopping at Vector Woodcrafts</h2>
+        <div class="tick-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <p>Order Placed Successfully!</p>
+        <button class="btn2">
+          <a style="text-decoration: none; font-weight: bold; color: #fff;" href="{% url 'products' %}">Go back</a>
+        </button>
+      </div>
+</main>
+
+
+{% endblock %}

@@ -93,7 +93,7 @@ class CartOrder(models.Model):
     product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="processing")
 
     class Meta:
-        verbose_name_plural = "Product images"
+        verbose_name_plural = "Orders"
 
 class CartOrderItems(models.Model):
     order = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
