@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 
 
+
 # Create your views here.
 def index(request):
     categories = Category.objects.all().order_by("-id")
@@ -112,7 +113,7 @@ def contact_view(request):
         )
 
         # Redirect after form submission
-        return HttpResponseRedirect('thankyou')  # Redirect to a 'thank you' page
+        return redirect('thankyou')  # Redirect to a 'thank you' page
     else:
         return render(request, 'contact.html')  # Render the contact form template
 
@@ -243,8 +244,35 @@ def order_success_view(request):
                 qty=item['qty'],
                 price=item['price'],
                 total= float(item['qty']) * float(item['price'])
-            )      
-    return render(request, 'order-success.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
+            ) 
+
+        
+    if 'cart_data_obj' in request.session:
+        del request.session['cart_data_obj']
+
+        # Send order confirmation email
+    user = request.user
+    email = request.user.email
+    email_subject = 'Order Confirmation'
+    email_message = render_to_string('order_confirmation_email.html', {'order': order,'user':user})
+
+    # Send email
+    send_mail(
+        email_subject,
+        email_message,
+        'sales@vectorwoodcrafts.co.ke',  
+        [email],
+        fail_silently=False,
+    )
+
+        
+
+    return render(request, 'order-success.html')
+
+
+
+
+
 
 def delete_item_from_cart(request):
     product_id = str(request.GET['id'])
