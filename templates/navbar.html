@@ -283,7 +283,7 @@ header {
       <ul class="top-nav-links">
         {% if user.is_authenticated %}
         <li><a href="{% url 'sign-in' %}"><i class="cart-icon ri-account-circle-fill"></i> {{request.user.username}}</a></li>
-        <li><a href="{% url 'sign-out' %}">Logout</a></li>
+        <li><a href="{% url 'sign-out' %}"><i class="ri-logout-box-r-fill"></i></a></li>
         {% else %}
         <li><a href="{% url 'sign-in' %}"><i class="cart-icon ri-account-circle-fill"></i> My Account</a></li>
         {% endif %}
