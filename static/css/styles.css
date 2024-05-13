@@ -11,7 +11,7 @@
   .section__container {
     max-width: var(--max-width);
     margin: auto;
-    padding: 4rem 1rem;
+    padding: 5rem 1rem;
   }
 * {
     margin: 0;
