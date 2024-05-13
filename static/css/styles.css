@@ -5,14 +5,14 @@
     --text-light: #71717a;
     --white: #ffffff;
     --max-width: 1200px;
-    --header-font:"Titillium Web", sans-serif;
+    /* --header-font:"Titillium Web", sans-serif; */
   }
   
-  /* .section__container {
+  .section__container {
     max-width: var(--max-width);
     margin: auto;
     padding: 4rem 1rem;
-  } */
+  }
 * {
     margin: 0;
     padding: 0;
@@ -34,6 +34,7 @@
   html,
   body {
     scroll-behavior: smooth;
+
   }
   main{
     margin-top: 100px;
