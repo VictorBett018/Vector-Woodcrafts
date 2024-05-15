@@ -1,4 +1,18 @@
+{% autoescape off %}
+
 Hi {{ user.first_name }},
 This is an order confirmation email. Order details below.
-Order total: KES {{ order.price }}
+
+Shipping & Billing address
+{{user.first_name}} {{user.last_name}}
+{{user.phone_no}}  
+{{request.user.address}}
+{{user.city}}            
+{{user.postal_code}}             
+{{user.appartment}}                         
+
+Your order requires payment before it can be completed.
+
+Outstanding balance of your order: KES {{ order.price|floatformat:0 }}
 Date placed: {{order.order_date}}
+{% endautoescape %}

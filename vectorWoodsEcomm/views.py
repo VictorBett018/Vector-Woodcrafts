@@ -9,6 +9,21 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.core.mail import EmailMessage
+from reportlab.lib.units import inch
+from django.conf import settings
+import os
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from django.conf import settings
+from datetime import datetime
+
+
+
 
 
 
@@ -219,19 +234,86 @@ def checkout_view(request):
             total = cart_total_amount + vat
         return render(request, 'checkout.html' , {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount': cart_total_amount, 'vat': vat, 'total':total })
 
+
+
+
+
+
+def generate_invoice_pdf(order):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
+
+    # Create PDF
+    p = canvas.Canvas(response, pagesize=letter)
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    # Add company logo
+    logo_path = os.path.join(settings.BASE_DIR, 'static/img//logo.png')
+    p.drawImage(logo_path, 0.2*inch, 10*inch, width=1.6*inch, height=0.75*inch)
+
+    # Add invoice details
+    p.drawString(500, 645, "Invoice#" + str(order.id))
+    p.drawString(500, 630, current_date)
+    p.setFillColorRGB(0.4, 0.1, 0)
+    p.setFont('Helvetica-Bold', 36)
+    p.drawString(160, 735, "VECTOR WOODCRAFTS") 
+    p.setFillColorRGB(0, 0, 0)
+    p.setFont('Helvetica-Bold', 16)
+    p.drawString(20, 675, "INVOICE TO:")
+    p.setFont('Helvetica', 12)
+    p.drawString(20, 660, "Name: " + order.user.first_name + ' ' + order.user.last_name)
+    p.drawString(20, 645, "Phone No: " + order.user.phone_no)
+    p.drawString(20, 630, "Email: " + order.user.email)
+    p.drawString(20, 615, "Delivery address: " + order.user.address + ' , ' + order.user.city)
+
+
+    # Add table for item details
+    data = [["Cart items", "Quantity", "Price", "Sub-total"]]
+    for item in order.cartorderitems_set.all():
+        data.append([item.item, item.qty,'Ksh' + ' ' + str(item.price),'Ksh' + ' ' + str(item.total)])
+
+    # Define table style
+    style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+                        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                        ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+
+    # Create table object
+    t = Table(data)
+    t.setStyle(style)
+
+    # Calculate table width and height
+    width, height = letter
+    table_width = width - 3 * inch  # Adjusting for margins
+    table_height = height - 6 * inch  # Adjusting for logo and text above table
+
+    # Position table on the canvas
+    t.wrapOn(p, table_width, table_height)
+    t.drawOn(p, 0.3*inch, 7.2*inch)  # Adjust position as needed
+
+    p.showPage()
+    p.save()
+
+    return response
+
 def order_success_view(request):
     cart_total_amount = 0
+    order = None
+
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
             vat = cart_total_amount * .16
             total = cart_total_amount + vat
 
-        #creating order object
+        # Creating order object
         order =  CartOrder.objects.create(
-            user = request.user,
+            user=request.user,
             price=total
         )
+
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
             vat = cart_total_amount * .16
@@ -243,33 +325,32 @@ def order_success_view(request):
                 img=item['image'],
                 qty=item['qty'],
                 price=item['price'],
-                total= float(item['qty']) * float(item['price'])
+                total=float(item['qty']) * float(item['price'])
             ) 
 
-        
     if 'cart_data_obj' in request.session:
         del request.session['cart_data_obj']
 
-        # Send order confirmation email
+    # Generate invoice PDF
+    invoice_pdf = generate_invoice_pdf(order)
+
+    # Send order confirmation email with invoice PDF attached
     user = request.user
     email = request.user.email
-    email_subject = 'Order Confirmation'
-    email_message = render_to_string('order_confirmation_email.html', {'order': order,'user':user})
+    email_subject = 'Your Vector Woodcrafts Order Confirmation - Order No #' + str(order.id)
+    email_html = render_to_string('order_confirmation_email.html', {'order': order, 'user': user}, request=request)
 
-    # Send email
-    send_mail(
+    # Send email with PDF attachment
+    email = EmailMessage(
         email_subject,
-        email_message,
-        'sales@vectorwoodcrafts.co.ke',  
+        email_html,
+        'sales@vectorwoodcrafts.co.ke',
         [email],
-        fail_silently=False,
     )
-
-        
+    email.attach('invoice.pdf', invoice_pdf.getvalue(), 'application/pdf')
+    email.send()
 
     return render(request, 'order-success.html')
-
-
 
 
 
