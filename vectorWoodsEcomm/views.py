@@ -247,7 +247,7 @@ def generate_invoice_pdf(order):
     p = canvas.Canvas(response, pagesize=letter)
     current_date = datetime.now().strftime("%Y-%m-%d")
     # Add company logo
-    logo_path = os.path.join(settings.BASE_DIR, 'static/img/logo.png')
+    logo_path = os.path.join(settings.BASE_DIR, 'staticfiles/img/logo.png')
     p.drawImage(logo_path, 0.2*inch, 10*inch, width=1.6*inch, height=0.75*inch)
 
     # Add invoice details
