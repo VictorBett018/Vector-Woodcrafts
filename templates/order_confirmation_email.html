@@ -1,9 +1,9 @@
-{% autoescape off %}
+{% autoescape on %}
 
 Hi {{ user.first_name }},
 This is an order confirmation email. Order details below.
 
-Shipping & Billing address
+<h1>Shipping & Billing address</h1>  
 {{user.first_name}} {{user.last_name}}
 {{user.phone_no}}  
 {{request.user.address}}

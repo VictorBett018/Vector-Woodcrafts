@@ -87,7 +87,9 @@ class ProductImages(models.Model):
 
 class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=999999, decimal_places=2, default="99.99")
+    price = models.DecimalField(max_digits=999999, decimal_places=2)
+    vat = models.DecimalField(max_digits=999999, decimal_places=2,null=True)
+    subtotal = models.DecimalField(max_digits=999999, decimal_places=2,null=True)
     paid_status = models.BooleanField(default=False)
     order_date = models.DateField(auto_now_add=True)
     product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="processing")

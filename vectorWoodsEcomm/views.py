@@ -19,13 +19,12 @@ import os
 from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
-from django.conf import settings
+from svglib.svglib import svg2rlg
 from datetime import datetime
-
-
-
-
-
+from bs4 import BeautifulSoup
+from PIL import Image
+from reportlab.lib.utils import ImageReader
+from reportlab.graphics import renderPDF
 
 # Create your views here.
 def index(request):
@@ -236,62 +235,128 @@ def checkout_view(request):
 
 
 
-
-
-
 def generate_invoice_pdf(order):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
     # Create PDF
     p = canvas.Canvas(response, pagesize=letter)
+
+    # p.saveState()
+    # p.translate(0, 0)
+    # p.rotate(55)
+    # p.setFillAlpha(0.4)
+    # logo_path = os.path.join(settings.BASE_DIR, 'static/img/logo.png')
+    # p.drawImage(logo_path, 4*inch, -1.5*inch, width=8*inch, height=4*inch)
+    # p.restoreState()
+    
+    p.saveState()
+    p.setFillColorCMYK(0, 0, 0, 0.05)  # Set transparency
+    p.setFont('Helvetica-Bold', 22)
+    p.rotate(45)
+
+    text = "VECTOR WOODCRAFTS"
+    text_width = p.stringWidth(text, 'Helvetica-Bold', 12)
+    x_start = -letter[1]  # Start from the leftmost side (rotated canvas)
+    y_start = -letter[0]  # Start from the bottom (rotated canvas)
+
+    for x in range(int(x_start), int(letter[0] * 2), int(text_width * 2)):  # Adjust spacing as needed
+        for y in range(int(y_start), int(letter[1] * 1.5), 50):  # Adjust spacing as needed
+            p.drawString(x, y, text)
+
+    p.restoreState()
+
     current_date = datetime.now().strftime("%Y-%m-%d")
+
     # Add company logo
-    # logo_path = os.path.join(settings.BASE_DIR, 'staticfiles/img/logo.png')
-    # p.drawImage(logo_path, 0.2*inch, 10*inch, width=1.6*inch, height=0.75*inch)
+    # logo_path = os.path.join(settings.BASE_DIR, 'static/img/logo.png')
+    # logo = Image.open(logo_path)
+    # rotated_logo = logo.rotate(0, expand=True)
+    # rotated_logo_reader = ImageReader(rotated_logo)
+    # p.drawImage(rotated_logo_reader, 0.2*inch, 10.1*inch, width=1.6*inch, height=0.75*inch)
 
     # Add invoice details
-    p.drawString(500, 645, "Invoice#" + str(order.id))
-    p.drawString(500, 630, current_date)
+    p.drawString(500, 670, "Invoice#" + str(order.id))
+    p.drawString(500, 655, current_date)
     p.setFillColorRGB(0.4, 0.1, 0)
     p.setFont('Helvetica-Bold', 36)
-    p.drawString(160, 735, "VECTOR WOODCRAFTS") 
+    p.drawString(160, 745, "VECTOR WOODCRAFTS")
+    p.setFillColorRGB(0, 0, 0)
+    p.setFont('Helvetica', 10)
+    p.drawString(200, 730, "sales@vectorwoodcrafts.co.ke || 0712555577 ||16 Butere Rd, Industrial Area")
     p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica-Bold', 16)
-    p.drawString(20, 675, "INVOICE TO:")
+    p.drawString(20, 685, "INVOICE TO:")
     p.setFont('Helvetica', 12)
-    p.drawString(20, 660, "Name: " + order.user.first_name + ' ' + order.user.last_name)
-    p.drawString(20, 645, "Phone No: " + order.user.phone_no)
-    p.drawString(20, 630, "Email: " + order.user.email)
-    p.drawString(20, 615, "Delivery address: " + order.user.address + ' , ' + order.user.city)
+    p.drawString(20, 670, "Name: " + order.user.first_name + ' ' + order.user.last_name)
+    p.drawString(20, 655, "Phone No: " + order.user.phone_no)
+    p.drawString(20, 640, "Email: " + order.user.email)
+    p.drawString(20, 625, "Delivery address: " + order.user.address + ' , ' + order.user.city)
 
+    # Define header row
+    header_data = [["Cart items", "Quantity", "Unit price", "Sub-total"]]
+    
+    # Define table style for the header
+    header_style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+    ])
+
+    # Create header table object
+    header_table = Table(header_data, colWidths=[2.5*inch, 1*inch, 1.5*inch, 1.5*inch])  # Adjust width here
+    header_table.setStyle(header_style)
+    
+    # Calculate header table height
+    header_table_width, header_table_height = header_table.wrap(0, 0)
+
+    # Position header table
+    header_table.drawOn(p, 0.3 * inch,560)
 
     # Add table for item details
-    data = [["Cart items", "Quantity", "Price", "Sub-total"]]
+    data = []
     for item in order.cartorderitems_set.all():
-        data.append([item.item, item.qty,'Ksh' + ' ' + str(item.price),'Ksh' + ' ' + str(item.total)])
+        data.append([item.item, item.qty, 'Ksh' + ' ' + str(item.price), 'Ksh' + ' ' + str(item.total)])
 
-    # Define table style
-    style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.gray),
-                        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                        ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+    # Define table style for the data
+    style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, -1), colors.beige),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+    ])
 
-    # Create table object
-    t = Table(data)
+    # Define column widths for the data table
+    col_widths = [2.5*inch, 1*inch, 1.5*inch, 1.5*inch]  # Adjust widths as needed
+
+    # Create table object for the data
+    t = Table(data, colWidths=col_widths)  # Pass column widths here
     t.setStyle(style)
 
-    # Calculate table width and height
-    width, height = letter
-    table_width = width - 3 * inch  # Adjusting for margins
-    table_height = height - 6 * inch  # Adjusting for logo and text above table
+    # Calculate table height
+    table_height = t.wrap(0, 0)[1]
 
     # Position table on the canvas
-    t.wrapOn(p, table_width, table_height)
-    t.drawOn(p, 0.3*inch, 7.2*inch)  # Adjust position as needed
+    t.drawOn(p, 0.3 * inch, 560 - table_height)  # No need to specify width here
+
+    # Add totals below the header table, to the bottom right
+    p.setFont('Helvetica-Bold', 10)
+    totals_y = 590 - table_height - 50  # Adjust position below the last data row
+    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y, "Subtotal: Ksh " + str(order.subtotal))
+    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y - 15, "VAT (16%): Ksh " + str(order.vat))
+    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y - 30, "Total: Ksh " + str(order.price))
+    p.setFillColorRGB(0.4, 0.1, 0)
+    p.setFont('Helvetica-Bold', 16)
+    p.drawString(20, 90, "TERMS AND CONDITIONS" )
+    p.setFillColorRGB(0, 0, 0)
+    p.setFont('Helvetica', 12)
+    p.drawString(20, 75, "Your payment is due two weeks on order placement.")
+    p.drawString(20, 60, "Failure to pay within two weeks, your order will be cancelled.")
+    # p.setStrokeColor('black')
+    # p.setLineWidth(2)
+    # p.line(8,1*inch,8*inch,1*inch)
 
     p.showPage()
     p.save()
@@ -305,12 +370,14 @@ def order_success_view(request):
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
-            vat = cart_total_amount * .16
-            total = cart_total_amount + vat
+            vat = int(cart_total_amount * .16)
+            total = int(cart_total_amount + vat)
 
         # Creating order object
         order =  CartOrder.objects.create(
             user=request.user,
+            subtotal=cart_total_amount,
+            vat=vat,
             price=total
         )
 
@@ -335,17 +402,21 @@ def order_success_view(request):
     invoice_pdf = generate_invoice_pdf(order)
 
     # Send order confirmation email with invoice PDF attached
-    user = request.user
-    email = request.user.email
-    email_subject = 'Your Vector Woodcrafts Order Confirmation - Order No #' + str(order.id)
-    email_html = render_to_string('order_confirmation_email.html', {'order': order, 'user': user}, request=request)
+    # Render the email template (assuming 'order_confirmation_email.html' exists)
+    email_html = render_to_string('order_confirmation_email.html', {'order': order, 'user': request.user}, request=request)
 
-    # Send email with PDF attachment
+    # Extract text content from the HTML
+    soup = BeautifulSoup(email_html, 'html.parser')
+    email_text = soup.get_text()
+    recipient_email = request.user.email
+
+    # Create the email
+    email_subject = f'Your Vector Woodcrafts Order Confirmation - Order No #{order.id}'
     email = EmailMessage(
         email_subject,
-        email_html,
+        email_text,
         'sales@vectorwoodcrafts.co.ke',
-        [email],
+        [recipient_email],
     )
     email.attach('invoice.pdf', invoice_pdf.getvalue(), 'application/pdf')
     email.send()
