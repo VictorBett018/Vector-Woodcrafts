@@ -283,7 +283,6 @@ def generate_invoice_pdf(order):
     p.drawString(160, 745, "VECTOR WOODCRAFTS")
     p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica', 10)
-    p.drawString(200, 730, "sales@vectorwoodcrafts.co.ke || 0712555577 ||16 Butere Rd, Industrial Area")
     p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica-Bold', 16)
     p.drawString(20, 685, "INVOICE TO:")
@@ -293,70 +292,76 @@ def generate_invoice_pdf(order):
     p.drawString(20, 640, "Email: " + order.user.email)
     p.drawString(20, 625, "Delivery address: " + order.user.address + ' , ' + order.user.city)
 
-    # Define header row
-    header_data = [["Cart items", "Quantity", "Unit price", "Sub-total"]]
-    
+    # Define header data with Serial Number
+    header_data = [["S.No", "Cart Items", "Quantity", "Unit Price", "Sub-total"]]
+
     # Define table style for the header
     header_style = TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+    ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+    ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+    ('GRID', (0, 0), (-1, -1), 1, colors.black)
     ])
 
     # Create header table object
-    header_table = Table(header_data, colWidths=[2.5*inch, 1*inch, 1.5*inch, 1.5*inch])  # Adjust width here
+    header_table = Table(header_data, colWidths=[0.5*inch, 2.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
     header_table.setStyle(header_style)
-    
+
     # Calculate header table height
     header_table_width, header_table_height = header_table.wrap(0, 0)
 
     # Position header table
-    header_table.drawOn(p, 0.3 * inch,560)
+    header_table.drawOn(p, 0.3 * inch, 560)
 
-    # Add table for item details
+    # Add table for item details with serial number
     data = []
+    counter = 1
     for item in order.cartorderitems_set.all():
-        data.append([item.item, item.qty, 'Ksh' + ' ' + str(item.price), 'Ksh' + ' ' + str(item.total)])
+        data.append([counter, item.item, item.qty, 'Ksh ' + str(item.price), 'Ksh ' + str(item.total)])
+        counter += 1
 
     # Define table style for the data
     style = TableStyle([
-        ('BACKGROUND', (0, 0), (-1, -1), colors.beige),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+    ('BACKGROUND', (0, 0), (-1, -1), colors.beige),
+    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    ('GRID', (0, 0), (-1, -1), 1, colors.black)
     ])
 
-    # Define column widths for the data table
-    col_widths = [2.5*inch, 1*inch, 1.5*inch, 1.5*inch]  # Adjust widths as needed
+    # Define column widths for the data table including Serial Number column
+    col_widths = [0.5*inch, 2.5*inch, 1.5*inch, 1.5*inch, 1.5*inch]
 
     # Create table object for the data
-    t = Table(data, colWidths=col_widths)  # Pass column widths here
+    t = Table(data, colWidths=col_widths)
     t.setStyle(style)
 
     # Calculate table height
     table_height = t.wrap(0, 0)[1]
 
     # Position table on the canvas
-    t.drawOn(p, 0.3 * inch, 560 - table_height)  # No need to specify width here
+    t.drawOn(p, 0.3 * inch, 560 - table_height)
 
     # Add totals below the header table, to the bottom right
     p.setFont('Helvetica-Bold', 10)
     totals_y = 590 - table_height - 50  # Adjust position below the last data row
-    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y, "Subtotal: Ksh " + str(order.subtotal))
-    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y - 15, "VAT (16%): Ksh " + str(order.vat))
-    p.drawString(0.3 * inch + sum(col_widths) - 100, totals_y - 30, "Total: Ksh " + str(order.price))
+    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y,"Sub-total:"            " Ksh "   + str(order.subtotal))
+    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y - 15,  "VAT (16%):"            " Ksh " + str(order.vat))
+    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y - 30, "Total:"            " Ksh " + str(order.price))
     p.setFillColorRGB(0.4, 0.1, 0)
     p.setFont('Helvetica-Bold', 16)
-    p.drawString(20, 90, "TERMS AND CONDITIONS" )
+    p.drawString(20, 190, "TERMS AND CONDITIONS" )
     p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica', 12)
-    p.drawString(20, 75, "Your payment is due two weeks on order placement.")
-    p.drawString(20, 60, "Failure to pay within two weeks, your order will be cancelled.")
-    # p.setStrokeColor('black')
-    # p.setLineWidth(2)
-    # p.line(8,1*inch,8*inch,1*inch)
+    p.drawString(20, 175, "Your payment is due two weeks on order placement.")
+    p.drawString(20, 160, "Failure to pay within two weeks, your order will be cancelled.")
+
+    p.setFillColor('black')
+    p.setFont('Helvetica', 12)
+    p.drawString(20, 60, "+254 712 555 577")
+    p.drawString(20, 45, "sales@vectorwoodcrafts.co.ke")
+    p.drawString(20, 30, "www.vectorwoodcrafts.co.ke")
+    p.drawString(20, 15, "Butere road No. 16, Industrial Area")
 
     p.showPage()
     p.save()
