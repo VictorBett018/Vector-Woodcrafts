@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" hs-webfonts="true" href="https://fonts.googleapis.com/css?family=Lato|Lato:i,b,bi">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      body {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          font-family: 'Lato', sans-serif;
+          font-size: 18px;
+          background-color: #F5F8FA;
+      }
+      h1 {
+          font-size: 24px;
+          margin: 0;
+      }
+      h2 {
+          font-size: 18px;
+          font-weight: 900;
+          margin: 0;
+      }
+      p {
+          font-weight: 100;
+          /* margin: 5px 0; */
+      }
+      #email {
+          margin: auto;
+          width: 100%;
+          max-width: 800px;
+          background-color: #fff;
+      }
+      .content {
+          padding: 5px 30px 10px 60px;
+      }
+      @media screen and (max-width: 600px) {
+        #email {
+          margin: auto;
+          width: 100%;
+          max-width: 600px;
+          background-color: #fff;
+      }
+          h1 {
+              font-size: 20px;
+          }
+          h2 {
+              font-size: 14px;
+          }
+          .content {
+              padding: 10px 20px 20px 0;
+          }
+      }
+    </style>
+</head>
+<body>
+<div id="email">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td bgcolor="#572B0D" align="center" style="color: white;">
+                <h1> Thanks for your order!</h1>
+            </td>
+        </tr>
+    </table>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="10px" class="content">
+        <tr>
+            <td>
+                <h2>Billing & Shipping address</h2>  
+                <p><strong>{{user.first_name}} {{user.last_name}}</strong> </p>
+                <p>{{user.phone_no}}</p>  
+                <p>{{request.user.address}}</p>
+                <p>{{user.city}}</p>            
+                <p>{{user.postal_code}}</p>             
+                <p>{{user.appartment}}</p> 
+                <hr>
+                <h2><i class="ri-error-warning-line"></i>Your order requires payment before it can be completed. Details on how to pay are shown below.</h2>
+                <p>Once you have provided payment, your order will be complete.</p>
+                <p>Outstanding balance of your order: <strong>Ksh {{ order.price|floatformat:0 }}</strong> </p>
+                <p>Date placed: <strong>{{order.order_date}}</strong> </p>
+                <hr>
+                <h2>How to make payment</h2>
+                <p>1. Go to the <strong>M-Pesa</strong>  menu on your phone.</p>
+                <p>2. Select <strong>Lipa na M-PESA.</strong> </p>
+                <p>3. Select <strong>Buy Goods and Services.</strong> </p>
+                <p>4. Enter Till Number <strong>123456.</strong></p>
+                <p>5. Enter the <strong>Amount</strong> indicated in the outstanding order balance.</p>
+                <p>6. Enter your <strong>M-PESA pin.</strong> </p>
+                <hr>
+                <h2>The attached invoice shows all the details of your order.</h2>
+                <br>
+                <h2>Vector Woodcrafts and Interiors</h2>
+                
+                <a href="https://vectorwoodcrafts.co.ke/">https://vectorwoodcrafts.co.ke/</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

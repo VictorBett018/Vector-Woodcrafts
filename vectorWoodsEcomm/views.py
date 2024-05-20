@@ -403,23 +403,25 @@ def order_success_view(request):
 
     # Send order confirmation email with invoice PDF attached
     # Render the email template (assuming 'order_confirmation_email.html' exists)
-    email_html = render_to_string('order_confirmation_email.html', {'order': order, 'user': request.user}, request=request)
+
+    #email_html = render_to_string('order_confirmation_email.html', {'order': order, 'user': request.user}, request=request)
 
     # Extract text content from the HTML
-    soup = BeautifulSoup(email_html, 'html.parser')
-    email_text = soup.get_text()
-    recipient_email = request.user.email
+    user = request.user
+    subject = 'Your Vector Woodcrafts Order Confirmation - Order No #' + str(order.id)
+    from_email = settings.EMAIL_HOST_USER
+    to_email = order.user.email
 
-    # Create the email
-    email_subject = f'Your Vector Woodcrafts Order Confirmation - Order No #{order.id}'
-    email = EmailMessage(
-        email_subject,
-        email_text,
-        'sales@vectorwoodcrafts.co.ke',
-        [recipient_email],
-    )
-    email.attach('invoice.pdf', invoice_pdf.getvalue(), 'application/pdf')
-    email.send()
+    # Load and render the template with context
+    html_content = render_to_string('email_template.html', {'order': order,'user' : user})
+
+    # Create the email message
+    msg = EmailMessage(subject, html_content, from_email, [to_email])
+    msg.content_subtype = 'html'  # Main content is now text/html
+    msg.attach('invoice.pdf', invoice_pdf.getvalue(), 'application/pdf')
+    msg.send()
+    
+    
 
     return render(request, 'order-success.html')
 
