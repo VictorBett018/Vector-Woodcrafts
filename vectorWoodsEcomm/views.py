@@ -276,8 +276,9 @@ def generate_invoice_pdf(order):
     # p.drawImage(rotated_logo_reader, 0.2*inch, 10.1*inch, width=1.6*inch, height=0.75*inch)
 
     # Add invoice details
-    p.drawString(500, 670, "Invoice#" + str(order.id))
-    p.drawString(500, 655, current_date)
+    p.drawString(450, 670, "Invoice#" + str(order.id))
+    p.drawString(450, 655, current_date)
+    p.drawString(450, 640, "Our PIN: P052302647W")
     p.setFillColorRGB(0.4, 0.1, 0)
     p.setFont('Helvetica-Bold', 36)
     p.drawString(160, 745, "VECTOR WOODCRAFTS")
@@ -345,16 +346,24 @@ def generate_invoice_pdf(order):
     # Add totals below the header table, to the bottom right
     p.setFont('Helvetica-Bold', 10)
     totals_y = 590 - table_height - 50  # Adjust position below the last data row
-    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y,"Sub-total:"            " Ksh "   + str(order.subtotal))
-    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y - 15,  "VAT (16%):"            " Ksh " + str(order.vat))
-    p.drawString(0.3 * inch + sum(col_widths) - 200, totals_y - 30, "Total:"            " Ksh " + str(order.price))
-    p.setFillColorRGB(0.4, 0.1, 0)
+    p.drawString(0.3 * inch + sum(col_widths) - 190, totals_y,"Sub-total:")
+    p.drawString(0.3 * inch + sum(col_widths) - 85, totals_y, " Ksh " + str(order.subtotal))
+    p.drawString(0.3 * inch + sum(col_widths) - 190, totals_y - 15,  "VAT (16%):")
+    p.drawString(0.3 * inch + sum(col_widths) - 85, totals_y - 15, " Ksh " + str(order.vat))
+    p.drawString(0.3 * inch + sum(col_widths) - 190, totals_y - 30, "Total:")
+    p.drawString(0.3 * inch + sum(col_widths) - 85, totals_y - 30, " Ksh " + str(order.price))
+
+    p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica-Bold', 16)
-    p.drawString(20, 190, "TERMS AND CONDITIONS" )
+    p.drawString(20, 255, "TERMS AND CONDITIONS" )
     p.setFillColorRGB(0, 0, 0)
     p.setFont('Helvetica', 12)
-    p.drawString(20, 175, "Your payment is due two weeks on order placement.")
-    p.drawString(20, 160, "Failure to pay within two weeks, your order will be cancelled.")
+    p.drawString(20, 235, "Terms of payment: 50% downpayment, 50% before delivery.")
+    p.drawString(20, 220, "Delivery Lead Time: 3 Weeks")
+    p.drawString(20, 205, "Price Validity: 2 Weeks.")
+    p.drawString(20, 190, "Notice must be given to us of any goods not received within 24hrs of dispatch unless otherwise.")
+    p.drawString(20, 175, "Any shortage or damage must be notified to us within 48 hours of receipt of goods.")
+    p.drawString(20, 160, "Should you have any enquiries concerning delivery, please contact us.")
 
     p.setFillColor('black')
     p.setFont('Helvetica', 12)
@@ -375,14 +384,16 @@ def order_success_view(request):
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
-            vat = int(cart_total_amount * .16)
-            total = int(cart_total_amount + vat)
+            formatted_cart_total_amount = "{:.2f}".format(cart_total_amount)
+            vat = (cart_total_amount * 0.16)
+            formatted_vat = "{:.2f}".format(vat)
+            total = (cart_total_amount + vat)
 
         # Creating order object
         order =  CartOrder.objects.create(
             user=request.user,
-            subtotal=cart_total_amount,
-            vat=vat,
+            subtotal=formatted_cart_total_amount,
+            vat=formatted_vat,
             price=total
         )
 
