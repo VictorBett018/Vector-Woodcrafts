@@ -11,7 +11,7 @@ class UserRegisterForm(UserCreationForm):
     phone_no = forms.CharField(widget=forms.TextInput(attrs={"class":"input-field"}))
     address = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
     city = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
-    company = forms.CharField(widget=forms.TextInput(attrs={ "class":"input-field"} ))
+    company = forms.CharField(required=False,widget=forms.TextInput(attrs={ "class":"input-field"} ))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field"}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"input-field"}))
 
