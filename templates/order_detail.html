@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}My profile{% endblock %}
+{% block title %}order #{{order.id}}{% endblock %}
 {% block content %}
 
 <style>
@@ -72,7 +72,7 @@ th {
                 <tr>
                     <th>Product Descreption </th>
                     <th>Product Image</th>
-                    <th>Quantity</th>
+                    <th>Qty</th>
                     <th>Unit Price</th>
                     <th>Total</th>
                 </tr>
