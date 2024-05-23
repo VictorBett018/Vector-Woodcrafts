@@ -11,6 +11,7 @@ urlpatterns = [
     path('faqs/', views.faqs_view, name='faqs'),
     path('products', views.products_view,name='products'),
     path('product/<pid>/', views.product_detail_view, name='product_details'),
+    path('profile/', views.profile_view, name='profile'),
     path('category/<cid>/', views.category_view,name='category'),
     path('search/', views.search_view, name='search'),
     path('blog/', views.blog_view, name='blog'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('update-cart/', views.update_cart, name = 'update-cart'),
     path('checkout/', views.checkout_view, name = 'checkout'),
     path('order-success/', views.order_success_view, name='order-success'),
+    path('profile/order/<int:id>', views.order_detail_view, name='order-detail'),
 
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.svg')),
 

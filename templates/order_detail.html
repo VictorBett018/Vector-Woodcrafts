@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+
+<style>
+    .ord-container {
+    width: 90%;
+    margin: 0 auto;
+    background-image: linear-gradient(
+        to right, rgb(236, 235, 235), rgb(161, 159, 159)
+    );
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 1200px;
+    margin-top: 140px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.p-image{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .ord-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+</style>
+<main>
+    <div class="ord-container">
+    <section class="items">
+        <h2>Order #{{order.id}} Items</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Descreption </th>
+                    <th>Product Image</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in order_items %}
+                <tr>
+                    <td><ul style="list-style: none;">
+                        <li> <strong>Name:</strong>  {{o.item}}</li>
+                        <li><strong>Finish:</strong> {{o.color}}</li>
+                        <li><strong>Woodtype:</strong> {{o.woodtype}}</li>
+                        <li><strong>Dimension:</strong> {{o.dimension}}</li>
+                    </ul></td>
+                    <td><a style="text-decoration: none;" href=""><img class="p-image" src="{{ o.image }}" alt="" ></a></td>
+                    
+                    <td>{{o.qty}}</td>
+                    <td>Ksh {{o.price}}</td>
+                    <td>Ksh {{o.total}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    </div>
+</main>
+{% endblock %}

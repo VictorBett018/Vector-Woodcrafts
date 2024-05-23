@@ -65,19 +65,16 @@
             }
         }
     </style>
-
-
-    {% if form.errors %}
-<div style="width: fit-content; margin-left: 280px;" class="alert alert-danger">
-    <strong>{{form.errors}}</strong>
-</div>
-
-{% endif %}
-<!-- <div  class="hero">
-</div> -->
 <div class="signup-container">
     <form class="signup-form" id="signup" method="post">
         <h2>Create Account</h2>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
         {% csrf_token %}
         <div style="display: flex; justify-content: space-between;" class="form-group">
             <div>

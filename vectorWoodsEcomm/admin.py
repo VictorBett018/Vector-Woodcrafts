@@ -13,11 +13,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image']
 
 class CartOrderAdmin(admin.ModelAdmin):
-    list_editable= ['product_status']
+    list_editable= ['product_status','paid_status']
     list_display = ['user', 'price', 'paid_status', 'order_date', 'product_status']
 
 class CartOrderItemsAdmin(admin.ModelAdmin):
-    list_display = ['order', 'invoice_no', 'item', 'img', 'qty', 'price' ,'total']
+    list_display = ['order', 'invoice_no', 'item', 'image', 'qty', 'price' ,'total']
 
 class ProductReviewAdmin(admin.ModelAdmin):
     list_display = ['user', 'product', 'review', 'rating']

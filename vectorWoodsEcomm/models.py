@@ -8,9 +8,14 @@ from taggit.managers import TaggableManager
 
 
 STATUS_CHOICE = (
-    ("processing", "Processing"),
-    ("shipped", "Shipped"),
-    ("delivered", "Delivered"),
+    ("Processing", "Processing"),
+    ("Shipped", "Shipped"),
+    ("Delivered", "Delivered"),
+)
+PAID_STATUS = (
+    ("Paid", "Paid"),
+    ("Unpaid", "Unpaid"),
+    ("Partially Paid", "Partially Paid"),
 )
 
 
@@ -61,7 +66,7 @@ class Product(models.Model):
     color4 = models.CharField(max_length=100, null = True, default="Black")
     woodtype1 = models.CharField(max_length=100, null = True, default="Mahogany")
     woodtype2 = models.CharField(max_length=100, null = True, default="Mango")
-    woodtype3 = models.CharField(max_length=100, null = True, default="Teak")
+    woodtype3 = models.CharField(max_length=100, null = True, default="Mvule")
     woodtype4 = models.CharField(max_length=100, null = True, default="Cypress")
 
     class Meta:
@@ -90,9 +95,9 @@ class CartOrder(models.Model):
     price = models.DecimalField(max_digits=999999, decimal_places=2)
     vat = models.DecimalField(max_digits=999999, decimal_places=2,null=True)
     subtotal = models.DecimalField(max_digits=999999, decimal_places=2,null=True)
-    paid_status = models.BooleanField(default=False)
+    paid_status = models.CharField(choices=PAID_STATUS,max_length=100, default="Unpaid")
     order_date = models.DateField(auto_now_add=True)
-    product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="processing")
+    product_status = models.CharField(choices=STATUS_CHOICE,max_length=30, default="Processing")
 
     class Meta:
         verbose_name_plural = "Orders"
@@ -102,8 +107,11 @@ class CartOrderItems(models.Model):
     product_status = models.CharField(max_length=200)
     invoice_no = models.CharField(max_length=200)
     item = models.CharField(max_length=200)
-    img = models.CharField(max_length=200)
+    image = models.URLField(max_length=255)
     qty = models.IntegerField(default=0)
+    color = models.CharField(max_length=200,null=True)
+    woodtype = models.CharField(max_length=200,null=True)
+    dimension = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=999999, decimal_places=2,)
     total = models.DecimalField(max_digits=999999, decimal_places=2,)
     
@@ -111,7 +119,7 @@ class CartOrderItems(models.Model):
         verbose_name_plural = "Cart Order Items"
 
     def order_img(self):
-        return mark_safe('<img src="/media/%s" width ="50" heght ="50" />' % (self.image))
+        return mark_safe('<img src="/media/%s" width ="50" heght ="50" />' % (self.image.url))
 
 
 

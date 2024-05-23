@@ -25,6 +25,10 @@ from bs4 import BeautifulSoup
 from PIL import Image
 from reportlab.lib.utils import ImageReader
 from reportlab.graphics import renderPDF
+from django.contrib.auth.decorators import login_required
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
+
 
 # Create your views here.
 def index(request):
@@ -316,11 +320,20 @@ def generate_invoice_pdf(order):
     # Position header table
     header_table.drawOn(p, 0.3 * inch, 560)
 
-    # Add table for item details with serial number
     data = []
+    
     counter = 1
     for item in order.cartorderitems_set.all():
-        data.append([counter, item.item, item.qty, 'Ksh ' + str(item.price), 'Ksh ' + str(item.total)])
+        styles = getSampleStyleSheet()
+        normal_style = styles['Normal']
+        item_text = Paragraph('Name: ' + item.item, normal_style)
+        color_text = Paragraph('Finish: ' + item.color, normal_style)
+        woodtype_text = Paragraph('Woodtype: ' + item.woodtype, normal_style)
+        dimension_text = Paragraph('Dimension: ' + item.dimension, normal_style)
+
+        combined_text = [item_text,woodtype_text,dimension_text,color_text]
+
+        data.append([counter, combined_text, item.qty, 'Ksh ' + str(item.price), 'Ksh ' + str(item.total)])
         counter += 1
 
     # Define table style for the data
@@ -405,11 +418,16 @@ def order_success_view(request):
                 order=order,
                 invoice_no="INVOICE_NO-" + str(order.id),
                 item=item['title'],
-                img=item['image'],
+                image=item['image'],
+                color=item['color'],
+                woodtype=item['woodtype'],
+                dimension=item['dimension'],
                 qty=item['qty'],
                 price=item['price'],
                 total=float(item['qty']) * float(item['price'])
             ) 
+
+        order.save()
 
     if 'cart_data_obj' in request.session:
         del request.session['cart_data_obj']
@@ -504,3 +522,21 @@ def blog_detail_view(request, bid):
         'blog': blog
     }
     return render(request, 'blog_details.html', context)
+
+@login_required(login_url="userauths/sign-in/")
+def profile_view(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by("-id")
+    context ={
+        "orders":orders,
+    }
+    return render(request, 'profile.html', context)
+
+def order_detail_view(request,id):
+    order = CartOrder.objects.get(user=request.user,id=id)
+    order_items = CartOrderItems.objects.filter(order=order)
+    context ={
+        "order_items":order_items,
+        "order":order
+    }
+    return render(request, 'order_detail.html', context)
+

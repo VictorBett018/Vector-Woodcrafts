@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+
+<style>
+.profile-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    background-image: linear-gradient(
+        to right, rgb(236, 235, 235), rgb(161, 159, 159)
+    );
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* border: 1px solid #ddd; */
+}
+p,h2{
+    text-align: start;
+}
+section {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .profile-container {
+        width: 100%;
+        padding: 10px;
+    }
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+</style>
+<main style="margin-top: 50px;">
+    <div class="profile-container">
+        <!-- <nav class="nav-bar">
+            <ul>
+                <li><a href="#profile">Profile Information</a></li>
+                <li><a href="#orders">Order History</a></li>
+                <li><a href="#settings">Account Settings</a></li>
+            </ul>
+        </nav> -->
+
+        <section id="profile">
+            <h2>Profile Information</h2>
+            <p><strong>Name:</strong> {{request.user.first_name}} {{request.user.last_name}}</p>
+            <p><strong>Email:</strong> {{request.user.email}}</p>
+            <p><strong>Phone:</strong> {{request.user.phone_no}}</p>
+            <p><strong>Address:</strong> {{request.user.address}}, {{request.user.city}}</p>
+            {% if request.user.company %}
+            <p><strong>Company:</strong> {{request.user.company}}</p>
+            {% endif %}
+        </section>
+
+        <section id="orders">
+            <h2>Order History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Payment Status</th>
+                        <th>Order Status</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in orders %}
+                    <tr>
+                        <td> <i> <a style="text-decoration: none;" href="{% url 'order-detail' o.id %}"> Order #{{o.id}} </a></i></td>
+                        <td>{{o.order_date}}</td>
+                        <td>{{o.paid_status}}</td>
+                        <td>{{o.product_status}}</td>
+                        <td>Ksh {{o.price}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section id="settings">
+            <h2>Account Settings</h2>
+            <p>Update Profile info</p>
+            <a style="text-decoration: none;" href="{% url 'change_password' %}">Change password</a>
+            
+        </section>
+
+    </div>
+</main>
+{% endblock %}
