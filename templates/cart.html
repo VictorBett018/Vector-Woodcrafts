@@ -115,100 +115,131 @@
     }
 
     .cart-table {
-        font-size: 14px;
-        display: block;
-        overflow-x: auto;
+        display: none; /* Hide the table on small screens */
     }
 
-    .cart-table thead {
-        display: none;
-    }
-
-    .cart-table tr {
+    .cart-item-container {
         display: flex;
         flex-direction: column;
-        margin-bottom: 10px;
+    }
+
+    .cart-item {
+        display: flex;
+        flex-direction: column;
         border: 1px solid #ddd;
         border-radius: 5px;
+        margin-bottom: 20px;
         padding: 10px;
+        background-color: #f9f9f9;
     }
 
-    .cart-table td {
+    .cart-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .cart-item .product-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .cart-item .product-price,
+    .cart-item .product-subtotal {
+        color: #007bff;
+        margin-bottom: 5px;
+    }
+
+    .cart-item .quantity-input {
+        width: 30px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .cart-item .actions {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 5px 0;
-    }
-
-    .quantity-input {
-        width: 30px;
     }
 }
 </style>
 
 <main id="cart-list">
- <div class="cart-page-container">
-    <div class="cart-products">
-        <h2>You have {{totalcartitems}} item(s) in your Cart</h2>
-        {% if totalcartitems %}
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <!-- <th>Finish</th>
-                    <th>Dimension</th>
-                    <th>Woodtype</th> -->
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            {% for product_id, item in cart_data.items %} 
-
-            <tbody>
-                
-                <td>
-                    <div class="cart-item">
-                        <img src="{{item.image}}" alt="Product Image">
+    <div class="cart-page-container">
+        <div class="cart-products">
+            <h2>You have {{totalcartitems}} item(s) in your Cart</h2>
+            {% if totalcartitems %}
+            
+            <!-- Table layout for larger screens -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for product_id, item in cart_data.items %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="cart-item">
+                                <img src="{{item.image}}" alt="Product Image">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="product-name"><a href="{% url 'product_details' item.pid %}">{{item.title}}</a></div>
+                        </td>
+                        <td>
+                            <div class="product-price">Ksh {{item.price}}</div>
+                        </td>
+                        <td>
+                            <input type="number" class="quantity-input product-qty-{{product_id}}" value="{{item.qty}}" min="1">
+                        </td>
+                        <td>
+                            <div class="product-subtotal">Ksh {% widthratio item.price 1 item.qty %}</div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button class="update-product" id="update-product" data-product="{{product_id}}">
+                                    <i class="action-icon ri-refresh-line" title="Update"></i>
+                                </button>
+                                <button class="delete-product" id="delete-product" data-product="{{product_id}}">
+                                    <i class="action-icon ri-delete-bin-line" title="Delete"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+            
+            <!-- Vertical list layout for smaller screens -->
+            <div class="cart-item-container">
+                {% for product_id, item in cart_data.items %}
+                <div class="cart-item">
+                    <img src="{{item.image}}" alt="Product Image">
+                    <div class="product-name"><a href="{% url 'product_details' item.pid %}">{{item.title}}</a></div>
+                    <div class="product-price">Ksh {{item.price}}</div>
+                    <input type="number" class="quantity-input product-qty-{{product_id}}" value="{{item.qty}}" min="1">
+                    <div class="product-subtotal">Subtotal: Ksh {% widthratio item.price 1 item.qty %}</div>
+                    <div class="actions">
+                        <button class="update-product" id="update-product" data-product="{{product_id}}">
+                            <i class="action-icon ri-refresh-line" title="Update"></i>
+                        </button>
+                        <button class="delete-product" id="delete-product" data-product="{{product_id}}">
+                            <i class="action-icon ri-delete-bin-line" title="Delete"></i>
+                        </button>
                     </div>
-                </td>
-                <td>
-                    <div class="product-name"><a href="{% url 'product_details' item.pid %}">{{item.title}}</a> </div>
-                </td>
-                <td>
-                    <div class="product-price">Ksh {{item.price}}</div>   
-                </td>
-                <td>
-                    <!-- <span style="margin: 10px;">{{item.color}} </span>
-                </td>
-                <td>
-                    <span style="margin: 10px;">{{item.dimension}} </span> 
-                </td>
-                <td>
-                    <span style="margin: 10px;">{{item.woodtype}} </span> 
-                </td>
-                <td> -->
-                <span ><input style="margin: 10px; width: 50px; height: 30px;" type="number" class="product-qty-{{product_id}}" value="{{item.qty}}" min="1"> </span>
-                </td>
-                <td>
-                    <span style="margin: 10px;"><span style="color: #007bff;">Ksh {% widthratio item.price 1 item.qty %}</span> </span>
-                </td>
-                <td>
-                <div class="actions">
-                   <button class="update-product" id="update-product" data-product="{{product_id}}"><i class="action-icon ri-refresh-line" title="Update"></i></button>
-                   <button class="delete-product" id="delete-product" data-product="{{product_id}}" ><i class="action-icon ri-delete-bin-line" title="delete"></i></button> 
                 </div>
-                </td>
-            </tbody>
-            {% endfor %}
-        </table>
-        {% else %}
+                {% endfor %}
+            </div>
+            {% else %}
         <h2>Your cart is empty</h2>
         {% endif %}
-        
-    </div>
+        </div>
     <div class="cart-summary">
         <h2>Cart Summary</h2>
         <div class="summary-details">
