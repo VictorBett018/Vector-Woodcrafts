@@ -11,6 +11,9 @@
     align-items: flex-start;
     margin: 20px;
 }
+.cart-page-container1{
+    display: none;
+}
 
 .cart-products {
     flex-grow: 1;
@@ -100,7 +103,7 @@
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
-    .cart-page-container {
+    .cart-page-container1 {
         flex-direction: column;
         align-items: center;
         margin: 10px;
@@ -126,7 +129,7 @@
 
     .cart-item {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         border: 1px solid #ddd;
         border-radius: 5px;
         margin-bottom: 20px;
@@ -135,7 +138,7 @@
     }
 
     .cart-item img {
-        width: 100%;
+        width: 50%;
         height: auto;
         margin-bottom: 10px;
     }
@@ -159,7 +162,7 @@
 
     .cart-item .actions {
         display: flex;
-        justify-content: space-between;
+        
     }
 }
 
@@ -219,12 +222,16 @@
             </table>
             
             <!-- Vertical list layout for smaller screens -->
-            <div class="cart-item-container">
+            <div class="cart-item-container1">
                 {% for product_id, item in cart_data.items %}
                 <div class="cart-item">
+                    <div>
                     <img src="{{item.image}}" alt="Product Image">
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
                     <div class="product-name"><a href="{% url 'product_details' item.pid %}">{{item.title}}</a></div>
                     <div class="product-price">Ksh {{item.price}}</div>
+                    <label for="quantity-input">Qty</label>
                     <input type="number" class="quantity-input product-qty-{{product_id}}" value="{{item.qty}}" min="1">
                     <div class="product-subtotal">Subtotal: Ksh {% widthratio item.price 1 item.qty %}</div>
                     <div class="actions">
@@ -234,6 +241,7 @@
                         <button class="delete-product" id="delete-product" data-product="{{product_id}}">
                             <i class="action-icon ri-delete-bin-line" title="Delete"></i>
                         </button>
+                    </div>
                     </div>
                 </div>
                 {% endfor %}
